@@ -1,0 +1,12 @@
+/build/
+
+/dist/
+
+/docs/arquivados/
+
+*.class
+
+*.jar
+
+*.7z
+

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/*fonte utilizada nos paragrafos*/
+@font-face
+{
+    font-family: 'robot';
+    src: url("../fonts/RobotoSlab-VariableFont_wght.ttf");
+}
+
+.frame-sections
+{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.frame-sections h1
+{
+    font-size: 2em;
+}
+
+.frame-sections h3
+{
+    font-size: 1.2em;
+}
+
+
+
+.frame-sections p
+{
+    line-height: 1.5em;
+    text-align: justify;
+    font-family: robot;
+    font-size: 1em;
+    padding-bottom: 0.6em;
+
+}
+
+span.filename
+{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+span.java-method
+{
+    font-weight: bolder;
+}
+
+
+.frame-sections a, a:visited
+{
+    text-decoration: none;
+    color: royalblue;
+ 
+}
+
+.frame-sections ul
+{
+    margin-left: 3em;
+}
+
+.frame-sections li
+{
+    padding: 0.5em;
+}
+
+.frame-sections code
+{
+    font-size: 1.2em;
+}
+
+
+
+a.nav-button, a.nav-button:visited
+{
+    display: block;
+    background-color:rgb(141, 135, 135);
+    color: white;
+    padding: 15px 32px;
+    margin-right: 10px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav-button-prev
+{
+    float: left;
+}
+
+.nav-button-next
+{
+    float: right;
+}
+
+
+footer
+{
+    clear: both;
+}
+
+

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+
+div.javacode
+{
+    float: left;
+    padding: 0;
+}
+
+div.javacode pre
+{
+    float: left;
+    margin: 0;
+    padding: 0;
+    border: solid 1px;
+    width: 630px;
+    background-color: rgb(229, 235, 252);
+    overflow-x: scroll;
+}
+
+div.javacode pre, code
+{
+    margin:0;
+    padding:0;
+}
+
+div.javacode code
+{
+    position: relative;
+    left: -55px;
+}
+
+div.javacode div.linenumber
+{
+    float: left;
+    margin: 0;
+    padding: 0px 0px 0px 1px;
+    border-top: solid 1px black;
+    background-color: rgb(206, 206, 206);
+    color: black;
+    font-size: 13px;
+    font-family: 'Courier New', Courier, monospace;
+    
+}
+
+.xw52fz_literalstring
+{
+    color: hotpink;
+}
+
+.xw52fz_reserved
+{
+    color: blue;
+}
+
+.xw52fz_constant
+{
+    color: cadetblue;
+}
+
+.xw52fz_literalchar
+{
+    color: red;
+}
+
+.xw52fz_function
+{
+    color: olive;
+    font-style: italic;
+}
+
+.xw52fz_comment
+{
+    color: slategrey;
+}
+
+.xw52fz_classname
+{
+    font-weight: bolder;
+}
+
+div.comment
+{
+    position: relative;
+    left: 10px;
+}
+
+div.comment::first-line
+{
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bolder;
+    color: red;
+}
+
+
+div.comment p
+{
+    padding: 5px;
+    text-align: justify;
+}
+
+

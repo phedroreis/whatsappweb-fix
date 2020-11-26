@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/frames.css"/>
+  <title>Introdução</title>
+</head>
+
+<body>
+  <section id="top" class="frame-sections">
+    <h1>Introdução</h1>
+
+    <h2>Motivação do Projeto</h2>
+    <p>
+        O projeto surgiu de uma solicitação do 'Gabarito', administrador do fórum <a class="linkp" href="https://clubecetico.org/" target="_blank">Clube Ceticismo</a>, para resolver o problema de páginas salvas do WhatsApp Web que não exibiam offline o mesmo aspecto de quando carregadas em modo online.
+    </p>
+
+    <h2>Identificação do Problema</h2>    
+    <p>
+        Especificamente, as figuras de emojis introduzidas pelos usuários nas conversas não eram exibidas quando a versão offline de uma destas páginas (previamente salva em disco) era aberta no navegador.
+    </p>
+    <p>
+        Verificou-se que estas figuras eram carregadas utilizando-se uma técnica conhecida como <a class="linkp" href="https://www.w3schools.com/css/css_image_sprites.asp" target="_blank"><i>image sprites</i></a>, que consiste em juntar vários arquivos de imagens em um único e depois exibir cada figura em particular deste arquivo como <a href="https://www.w3schools.com/css/css_background_image.asp" target="_blank"><i>background-image</i></a> de algum elemento da página.
+    </p>
+    <p>
+        No caso das páginas do WhatsApp Web a figura do emoji inserida pelo usuário é carregada como um <i>background-image</i> de um tipo específico de tag exemplificada abaixo.
+    </p>
+    <code>
+        &lt;img src="d5fceb6532643d0d84ffe09c40c481ecdf59e15a.gif" alt="🤷‍♂️" draggable="false" style="background-position: -60px -40px;" class="b92 emoji wa _3Whw5"&gt;
+    </code>
+    <p>
+        O arquivo <span class="filename">"d5fceb6532643d0d84ffe09c40c481ecdf59e15a.gif"</span> é uma figura de 1 pixel que serve para criar o box onde a figura de um emoji no <i>image sprites</i> poderá ser carregada como <i>background-image</i> deste box. A posição exata deste emoji no <i>image sprites</i> é referenciada pelo atributo <code>style="background-position: -60px -40px;"</code> e o emoji cuja imagem deve ser exibida aparece no valor do atributo alt:
+        <code>alt="🤷‍♂️"</code>.
+    </p>
+    <p>
+        Por alguma razão, quando uma página destas é salva usando-se a opção de salvar do navegador, a cópia offline não é capaz de carregar o emoji como o <i>background-image</i> desse tipo de tag exemplificado acima.
+    </p>
+    <p>
+        Talvez porque a referência ao arquivo de <i>image sprites</i> não seja editada corretamente quando códigos <abbr title="javascript">JS</abbr> ou <abbr title="Cascading Style Sheets">CSS</abbr> são salvos, talvez porque este próprio arquivo não esteja sendo salvo, ou por qualquer outra falha que não foi exatamente identificada.
+    </p>
+
+    <h2>Solução</h2>
+    <p>
+        Uma aplicação Java capaz de editar os arquivos HTML salvos, alterando cada uma das tags do tipo da exemplificado acima. Trocando-a por uma tag <b>img</b> que simplesmente insere a imagem do emoji correspondente especificado no atributo <b>alt</b> da tag a ser editada.
+    </p>
+    <p>
+        Mas onde encontrar os arquivos com as imagens de todos estes emojis e como fazer para identificar o arquivo correto para cada tipo de emoji?
+    </p>
+    <p>
+        Arquivos de imagem de emojis (no mesmo estilo das utilizadas pelo WhatsApp) puderam ser obtidos na página <a class="linkp" href="https://emojipedia.org/whatsapp/2.19.352" target="_blank">https://emojipedia.org/whatsapp/2.19.352</a>
+    </p>
+    <p>
+        E estes são nomeados utilizando-se o nome oficial do emoji seguido de uma string de codepoints em hexadecimal que são os códigos <abbr title="Unique, Universal, and Uniform character enCoding">UNICODE</abbr> que <a class="linkp" href="https://www.w3schools.com/charsets/ref_emoji.asp" target="_blank">codificam o emoji</a> deste arquivo. 
+    </p>
+    <p>
+        Alguns exemplos de nomes destes arquivos são listados abaixo:
+    </p>
+    <ul>
+        <li>
+            <span class="filename">adult_1f9d1.png</span>
+        </li>
+        <li>
+            <span class="filename">adult_emoji-modifier-fitzpatrick-type-6_1f9d1-1f3ff_1f3ff.png</span>
+
+        </li> 
+        <li>
+            <span class="filename">blonde-woman-type-1-2_1f471-1f3fb-200d-2640-fe0f.png</span>
+        </li>
+      </ul>
+      <p>
+          Portanto a ideia é criar duas classes Java:
+      </p>
+      <p>
+          - Uma para converter estes nomes de arquivos para apenas a string de codepoints que define o emoji cuja imagem está neste mesmo arquivo. 
+      </p>
+      <p>
+          - E outra capaz de receber a string UTF-8 que identifica o emoji no atributo <b>alt</b> da tag, e convertê-la para string de codepoints igual ao nome do arquivo PNG com a imagem deste emoji.
+      </p>
+      <p>Por exemplo:</p>
+      <p>
+          O arquivo <span class="filename">"flag-for-brazil_1f1e7-1f1f7.png"</span> seria renomeado para <span class="filename">"1f1e7-1f1f7.png"</span>
+      </p>
+      <p>
+          Mas a tag na página HTML que tenta inserir o emoji da nossa bandeira conterá um atributo <b>alt</b> como este: <code>alt="🇧🇷"</code>
+      </p>
+      <p>
+          Se o valor deste atributo (que é uma string codificada em UTF-8) puder ser convertido também para "1f1e7-1f1f7", que passou a ser o nome do arquivo PNG com a imagem da bandeira do Brasil, será possível carregar a figura do emoji correspondente editando a tag.      
+      </p>
+      <p>
+          Trocando a tag original para:
+      </p>
+      <code>
+        &lt;img src="1f1e7-1f1f7.png" width="34px" height="34px"&gt;
+      </code>
+      <p>
+          Já que através do atributo <b>alt</b> de uma tag o programa vai localizar o arquivo PNG referente ao emoji que a tag está tentando exibir na página.
+      </p>
+
+      <footer>
+        <hr>
+
+        <a href="#top" target="frame" class="nav-button nav-button-prev">Anterior</a>
+
+        <a href="estrutura-de-pacotes.html" target="frame" class="nav-button nav-button-next">Próxima</a>
+      </footer>
+
+  </section>
+</body>
+</html>
