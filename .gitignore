@@ -4,9 +4,13 @@
 
 /docs/arquivados/
 
+/png/
+
 *.class
 
 *.jar
 
 *.7z
+
+whatsapp-emojis.html
 

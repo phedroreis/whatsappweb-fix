@@ -1,4 +1,4 @@
-package br.com.hkp.whatsappwebfix.normalize;
+package br.com.hkp.whatsappwebfix.util;
 
 /**
  * @since 26 de novembro de 2020 v1.0
