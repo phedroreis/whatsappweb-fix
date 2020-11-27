@@ -17,9 +17,19 @@
     font-size: 2em;
 }
 
+.frame-sections h2
+{
+    font-size: 1.6em;
+}
+
 .frame-sections h3
 {
     font-size: 1.2em;
+}
+
+.frame-sections h4
+{
+    font-size: 1em;
 }
 
 
@@ -63,9 +73,9 @@ span.java-method
     padding: 0.5em;
 }
 
-.frame-sections code
+code.htmlcode
 {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 
@@ -94,10 +104,30 @@ a.nav-button, a.nav-button:visited
     float: right;
 }
 
+dl.deflist-default
+{
+  margin:0;
+  padding: 5px;
+  border: solid 2px;
+}
+
+dl.deflist-default dt
+{
+  margin-top: 5px;
+  margin-bottom: 3px;
+  font-weight: bolder;
+}
+
+dl.deflist-default dd
+{
+  margin-bottom: 3px;
+  padding:0;
+}
+
 
 footer
 {
-    clear: both;
+  clear: both;
 }
 
 

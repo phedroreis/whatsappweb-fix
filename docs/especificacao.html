@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/frames.css"/>
+    <link rel="stylesheet" href="css/javacode.css"/>
+    <title>Especificação</title>
+</head>
+<body>
+    <section class="frame-sections">
+      <h1>Especificação</h1>
+
+      <p>
+        As classes do projeto serão distribuídas em 5 pacotes:
+      </p>
+      <dl class="deflist-default">
+        <dt>whatsappwebfix</dt>
+        <dd>
+          Contém a classe WhatsAppFix que faz o trabalho de corrigir os arquivos HTML originalmente salvos
+        </dd>
+        <dt>whatsappwebfix.util</dt>
+        <dd>
+          Classes utilitárias com função de preparação
+        </dd> 
+        <dt>whatsappwebfix.apps</dt>
+        <dd>
+          Classes executáveis do projeto
+        </dd>
+        <dt>whatsappwebfix.global</dt>
+        <dd>
+          Classes para constantes e definições gerais que possam ser acessadas por qualquer outra classe do projeto
+        </dd> 
+        <dt>whatsappwebfix.gui</dt>
+        <dd>
+          Classes para as interfaces gráficas dos programas
+        </dd>
+      </dl>
+
+      <h2>Pacote whatsappwebfix</h2>
+
+      <h4>Classe WhatsAppFix</h4>
+
+      <p>
+        Esta classe deve ser a encarregada de ler o arquivo de uma página WhatsApp salva e produzir uma cópia desse arquivo onde os emojis inseridos pelo usuário apareçam renderizados.
+      </p>
+
+      <h2>Pacote util</h2>
+
+      <h4>Classe Normalizer</h4>
+
+      <p>
+        Como um exemplo, tomemos o emoji 🇧🇷 que é codificado pelos seguintes UNICODES: U+1F1E7 U+1F1F7. Para renderizar este emoji uma página do WhatsApp Web o faria por intermédio de uma tag como esta abaixo:
+      </p>
+
+      <code class="htmlcode">
+        &lt;img src="d5fceb6532643d0d84ffe09c40c481ecdf59e15a.gif" alt="🇧🇷" draggable="false" style="background-position: -60px -40px;" class="b92 emoji wa _3Whw5"&gt;
+      </code>
+
+      <p>
+        Mas como este código não funciona offline, a ideia é gerar um novo arquivo - cópia do original - onde esta tag seria trocada por:
+      </p>
+      <code class="htmlcode">
+        &lt;img src="1f1e7-1f1f7.png" alt="🇧🇷" width="20px" height="20px"&gt;
+      </code>
+      <p>
+        Assim esta última tag renderizará o emoji desde que o arquivo <span class="filename">1f1e7-1f1f7.png</span> exista e contenha a figura do emoji da bandeira do Brasil.
+      </p>
+      <p>
+        O programa teria que fazer esse tipo de conversão para qualquer tag como esta exemplificada acima.
+      </p>
+      <p>
+        Portanto é necessário que o programa seja capaz de converter 🇧🇷 na string 1f1e7-1f1f7. Converter qualquer emoji codificado em UTF-8 em seus respectivos codepoints escritos em hexadecimal e separados por um tracinho (-).
+      </p>
+      <p>
+        Mas também é preciso que possa converter o nome do arquivo <span class="filename">flag-brazil_1f1e7-1f1f7.png</span> em <span class="filename">1f1e7-1f1f7.png</span>. E fazer o mesmo com qualquer nome de arquivo PNG baixado da Emojipedia: extrair os codepoints que aparecem como sufixos nestes nomes de arquivos e normalizar para o mesmo padrão usado na conversão de emojis UTF-8 para sequências de codepoints em hexa.
+      </p>
+      <p>
+        Ou seja, o algoritmo que vai converter UTF-8 emojis em strings de codepoints deve produzir <b>exatamente</b> o mesmo resultado que o algoritmo que vai normalizar os nomes dos arquivos obtidos na Emojipedia.
+      </p>
+      <p>
+        Para tanto é necessário observar em detalhe que padrão é utilizado para codificar emojis em UTF-8. E também observar cuidadosamente o padrão utilizado pela Emojipedia para nomear os arquivos com figuras de emojis.
+      </p>
+      <p>
+        No caso dos emojis codificados como caracteres há duas particularidades que precisam ser levadas em consideração:
+      </p>
+      <ol>
+        <li>
+          Podem fazer parte da string os chamados LOW SURROGATE BYTES, que servem apenas para decodificar os caracteres mas não fazem parte dos caracteres de definição do emoji
+        </li>
+        <li>
+           O caractere UNICODE U+FE0F pode ou não fazer parte da definição do emoji aparecendo como o último caractere da string. Mas esse caractere pode ser omitido e mesmo assim o emoji é corretamente interpretado por um editor de textos.
+        </li>
+      </ol>
+      <p>
+        A consequência do item 1 para os nossos propósitos neste projeto é que LOW SURROGATE BYTES nunca constam nas strings de codepoints que são os sufixos dos nomes dos arquivos que serão baixados da Emojipedia.
+      </p>
+      <p>
+        Portanto o algoritmo de conversão de string UTF-8 para string codepoint deve simplesmente desprezar qualquer LOW SURROGATE BYTE.
+      </p>
+      <p>
+        Já a consequência do item 2 é que para um determinado emoji, o caractere U+FE0F pode estar presente na string UTF-8 mas não nome do arquivo. Ou pode estar presente no nome do arquivo mas não na string UTF-8. Ou pode estar ausente em ambos ou presente em ambos. E isto é imprevisível.
+      </p>
+      <p>
+        Portanto os algoritmos de normalização do programa irão eliminar códigos U+FE0F sempre que ocorrerem. Seja em strings UTF-8, seja como parte de nomes de arquivos.
+      </p>
+      <p>
+        Também há uma particularidade em como o Emojipedia nomeia estes arquivos... A parte do sufixo com os codepoints inicia sempre com um underscore e os diferentes codepoints são separados entre si por um tracinho. No entanto, por algum motivo, às vezes um codepoint está repetido nesta string. Mas quando esta repetição ocorre ele é separado do anterior não por um tracinho, mas por um underscore.
+      </p>
+      <p>
+        Este padrão também deve ser detectado pelo algoritmo para poder eliminar estes codepoints supérfluos.
+      </p>
+      <p>
+        E esta é fundamentalmente a ideia do processo de normalização aplicada nos dois métodos da classe Normalizer do pacote util. 
+      </p>
+
+      <div class="javacode" style="width:650px;">
+
+        <div class="linenumber">
+        00</br>01</br>02</br>03</br>04</br>05</br>06</br>07</br>08</br>09</br>10</br>11</br>12</br>13</br>14</br>15</br>16</br>17</br>18</br>19</br>20</br>21</br>22</br>23</br>24</br>25</br>26</br>27</br>28</br>29</br>30</br>31</br>32</br>33</br>34</br>35</br>36</br>37</br>38</br>39</br>
+        </div>
+        <pre><code>
+        <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_function">utf8ToCodepoints</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> utf8Emoji)
+        {
+            <span class="xw52fz_classname">StringBuilder</span> codePoints = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">StringBuilder</span>(64);
+        
+            <span class="xw52fz_comment">/*
+            Le caractere por caractere UTF-8 e os converte para codepoint
+            */</span>        
+            <span class="xw52fz_reserved">for</span> (<span class="xw52fz_reserved">int</span> position = 0; position &lt; utf8Emoji.<span class="xw52fz_function">length</span>(); position++)
+            {
+                <span class="xw52fz_reserved">char</span> c = utf8Emoji.<span class="xw52fz_function">charAt</span>(position);
+        
+                <span class="xw52fz_comment">/*
+                VARIATION SELECTOR-16 e LOW SURROGATES caracteres nao sao inclusos
+                na representacao normalizada do emoji
+                */</span>
+                <span class="xw52fz_reserved">if</span> ((c == '\ufe0f') || (<span class="xw52fz_classname">Character</span>.<span class="xw52fz_function">isLowSurrogate</span>(c))) <span class="xw52fz_reserved">continue</span>;
+        
+                <span class="xw52fz_comment">/*
+                Obtem o codepoint do UTF-8, converte para hexadecimal e insere na
+                string que serah retornada pelo metodo
+                */</span>            
+                codePoints.<span class="xw52fz_function">append</span>
+                (
+                    <span class="xw52fz_classname">String</span>.<span class="xw52fz_function">format</span>
+                    (
+                        position == 0 ? <span class="xw52fz_literalstring">"%x"</span> : <span class="xw52fz_literalstring">"-%x"</span>, 
+                        <span class="xw52fz_classname">Character</span>.<span class="xw52fz_function">codePointAt</span>(utf8Emoji, position)
+                    )
+                );
+        
+            }<span class="xw52fz_comment">//for
+        </span>
+        
+            <span class="xw52fz_reserved">return</span> codePoints.<span class="xw52fz_function">toString</span>();
+        
+        }<span class="xw52fz_comment">//utf8ToCodepoints()
+        </span>
+        </code></pre>
+      </div>
+
+      <div class="comment">
+        <p>utf8ToCodepoints()</p>
+        <p>
+          O método que converte strings UTF-8 para strings de codepoints.
+        </p>
+        <p>
+          Na linha 03 o objeto <span class="xw52fz_classname">StringBuilder</span> codePoints é criado para armazenar a string de codepoints. E o loop da linha 08 lê a string UTF-8 caractere por caractere e a cada iteração os atribui à variável c na linha 10.
+        </p>
+        <p>
+          A linha 16 testa se c é um LOW SURROGATE BYTE ou um UNICODE U+FE0F. Se sim, como estes caracteres devem ser desprezados, o loop pula direto para a próxima iteração.
+        </p>
+        <p>
+          Mas se c não é LOW SURROGATE ou U+FE0F, seu código UNICODE é obtido,  convertido para uma string com este valor em hexadecimal, e essa string é então concatenada ao objeto codePoints.
+        </p>
+        <p>
+          Ao fim do loop o conteúdo de codePoints é convertido em String pela chamada de <span class="xw52fz_function">toString()</span> e esse valor retornado para o chamador do método.
+        </p>
+      </div>
+
+      
+
+      <div class="javacode" style="width:650px;">
+
+        <div class="linenumber">
+        00</br>01</br>02</br>03</br>04</br>05</br>06</br>07</br>08</br>09</br>10</br>11</br>12</br>13</br>14</br>15</br>16</br>17</br>18</br>19</br>20</br>21</br>22</br>23</br>24</br>25</br>26</br>27</br>28</br>29</br>30</br>
+        </div>
+        <pre><code>
+            <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_function">filenameToCodepoints</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> filename)
+            {
+                            
+                <span class="xw52fz_comment">/*
+                Extrai do nome do arquivo a parte que eh o nome do emoji
+                */</span>
+                <span class="xw52fz_classname">String</span> emojiName = filename.<span class="xw52fz_function">replaceFirst</span>(<span class="xw52fz_literalstring">"_[0-9a-f_\\-]+\\.png"</span>, <span class="xw52fz_literalstring">""</span>);
+        
+                <span class="xw52fz_comment">/*
+                Deleta do nome do arquivo:
+                
+                - A parte que eh nome do emoji
+                - Qualquer codepoint repetido precedido por _
+                - Qualquer codepoint VARIATION SELECTOR
+                - A extensao .png
+                
+                Sobra apenas a string de codepoints que define o emoji
+                */</span>
+                <span class="xw52fz_reserved">return</span>
+                (
+                    filename.<span class="xw52fz_function">replaceFirst</span>(emojiName + <span class="xw52fz_literalstring">"_"</span>, <span class="xw52fz_literalstring">""</span>).
+                    <span class="xw52fz_function">replaceAll</span>(<span class="xw52fz_literalstring">"_[0-9a-f]+"</span>,<span class="xw52fz_literalstring">""</span>).
+                    <span class="xw52fz_function">replaceAll</span>(<span class="xw52fz_literalstring">"-fe0f"</span>,<span class="xw52fz_literalstring">""</span>).
+                    <span class="xw52fz_function">replace</span>(<span class="xw52fz_literalstring">".png"</span>, <span class="xw52fz_literalstring">""</span>)
+                );
+                
+            }<span class="xw52fz_comment">//filenameToCodepoints()
+        </span>
+        </code></pre>
+      </div>
+
+      <div class="comment">
+        <p>
+          filenameToCodepoints()
+        </p>
+        <p>
+          Converte o nome de um arquivo PNG para string de codepoints.
+        </p>
+        <p>
+          Na linha 07, a expressão regular é usada para deletar o sufixo com os codepoints do nome do arquivo. Então o que sobra e é atribuído ao objeto emojiName é apenas a string com o nome oficial do emoji por extenso.
+        </p>
+        <p>
+          Mas se a intenção é exatamente obter estes codepoints, então por que uma expressão regular para deletar essa parte do nome do arquivo?
+        </p>
+        <p>
+          Não deveria ser o contrário? Uma expressão regular para deletar <b>TUDO QUE NÂO FOSSE CODEPOINT</b> no nome do arquivo?
+        </p>
+        <p>Sim, mas é muito difícil criar uma regex para deletar apenas o nome do emoji. Porque este nome pode ter qualquer caractere, incluindo os mesmos caracteres que ocorrem no sufixo com os códigos em hexadecimal. Esta regex iria acabar incluindo na localização também parte do sufixo ou todo o sufixo.
+        </p>
+        <p>
+          Portanto o truque aqui é deletar inicialmente o sufixo e atribuir o nome do emoji à variável emojiName.
+        </p>
+        <p>
+          Em seguida emojiName é deletado do nome do arquivo e o que sobra é justamente o sufixo que queremos!
+        </p>
+        <p>
+          Deste sufixo ainda será deletado, se houver, qualquer codepoint repetido (duplicado), qualquer codepoint VARIATION SELECTOR e também a extensão .png do arquivo. Retornando apenas a string de codepoints que define o emoji cuja figura se obtém ao abrir este mesmo arquivo.
+        </p>
+      </div>
+       
+
+    </section>
+
+    <footer>
+
+        <br/><hr/>
+
+        <a href="introducao.html" target="frame" class="nav-button nav-button-prev">Anterior</a>
+
+        <a href="frame.html" target="frame" class="nav-button nav-button-next">Próxima</a>
+
+    </footer>
+    
+    
+</body>
+</html>
