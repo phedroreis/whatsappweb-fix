@@ -1,6 +1,6 @@
-# Esse script compila o projeto show-emojis e cria os JARs executáveis.
+# Esse script compila o projeto whatsappweb-fix e cria os JARs executáveis.
 # 
-# Autor: "Pedro Reis" 1 de novembro de 2020
+# Autor: "Pedro Reis" 29 de novembro de 2020
 #
 #!bin/bash  
 
@@ -44,6 +44,7 @@ echo ""
 
 jar cfm Normalize.jar Normalize.txt br/com/hkp/whatsappwebfix/*.class br/com/hkp/whatsappwebfix/apps/*.class br/com/hkp/whatsappwebfix/global/*.class  br/com/hkp/whatsappwebfix/util/*.class br/com/hkp/whatsappwebfix/gui/*.class
 
+jar cfm Fix.jar Fix.txt br/com/hkp/whatsappwebfix/*.class br/com/hkp/whatsappwebfix/apps/*.class br/com/hkp/whatsappwebfix/global/*.class  br/com/hkp/whatsappwebfix/util/*.class br/com/hkp/whatsappwebfix/gui/*.class
  
 jar cfm GetPngs.jar GetPngs.txt br/com/hkp/whatsappwebfix/apps/*.class br/com/hkp/whatsappwebfix/global/*.class br/com/hkp/whatsappwebfix/util/*.class br/com/hkp/whatsappwebfix/gui/*.class
 

@@ -1,0 +1,2 @@
+Main-Class: br.com.hkp.whatsappwebfix.apps.Fix
+Name: br/com/hkp/whatsappwebfix/apps/Fix.class
