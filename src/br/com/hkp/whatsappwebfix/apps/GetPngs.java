@@ -1,7 +1,8 @@
 
 package br.com.hkp.whatsappwebfix.apps;
 
-import static br.com.hkp.whatsappwebfix.util.DownloadPngs.downloadPngs;
+import br.com.hkp.whatsappwebfix.util.DownloadPngs;
+import java.io.File;
 import java.io.IOException;
 
 /*****************************************************************************
@@ -26,9 +27,19 @@ public class GetPngs
      */
     public static void main(String[] args)
     {
+        DownloadPngs downloadPngs = new DownloadPngs();
+        
+         /*
+        Obtem o diretorio onde estao os arquivo PNG cujos nomes serao
+        normalizados
+        */
+        File file = downloadPngs.getFile();
+                
+        if (file == null) System.exit(0);
+        
         try
         {
-            downloadPngs();
+            downloadPngs.downloadPngs(file);
         }
         catch (IOException ex)
         {

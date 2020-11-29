@@ -1,16 +1,13 @@
 package br.com.hkp.whatsappwebfix.util;
 
-import java.io.BufferedReader;
+import br.com.hkp.whatsappwebfix.global.Global;
+import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -20,12 +17,52 @@ import java.util.regex.Pattern;
  * @version 1.0
  * @author "Pedro Reis"
  ****************************************************************************/
-public class DownloadPngs
+public final class DownloadPngs
 {
+    ProgressFrame frame;
+    
+    /*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public DownloadPngs()
+    {
+        Global.fileChooserSettings("Localize o arquivo whatsapp-emojis.html");
+        
+        frame = new ProgressFrame("Baixando...");
+    }//construtor
+        
+    /*[01]---------------------------------------------------------------------
+       
+    -------------------------------------------------------------------------*/
+    /**
+     * Obtem o diretorio onde estao os arquivos PNG com as imagens dos emojis.
+     * 
+     * @return O diretorio
+     */
+    public File getFile()
+    {
+        JFileChooser fc = new JFileChooser();
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "HTML", "html");
+        
+        fc.setFileFilter(filter);
+   
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int res = fc.showOpenDialog(null);
+
+        if(res == JFileChooser.APPROVE_OPTION)
+            return fc.getSelectedFile();
+        else
+            return null;
+        
+    }//getFile()
+    
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private static void download(final Matcher m, final String toDelete) 
+    private void downloadAll(final Matcher m, final String toDelete) 
         throws IOException
     {
         int count = 0;
@@ -34,23 +71,14 @@ public class DownloadPngs
         {
             String url = m.group().replace(toDelete, "");
             
-            String filename = 
-                url.substring(url.lastIndexOf('/') + 1, url.length());
+            FileTools.downloadUrl(url, "png");
             
-            URL download = new URL(url);
-            
-            ReadableByteChannel rbc = 
-                Channels.newChannel(download.openStream());
-            FileOutputStream fos = new FileOutputStream("png/" + filename);
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-            fos.close();
-            
-            System.out.printf("%04d - %s\n", ++count, filename);
+            frame.println(String.format("%04d - %s\n", ++count, url));
         }
         
         System.out.println("");
         
-    }//download()
+    }//downloadAll()
     
     /*[02]---------------------------------------------------------------------
     
@@ -58,23 +86,12 @@ public class DownloadPngs
     /**
      * Baixa os arquivos listados na pagina de WhatsApp emojis da Emojipedia.
      * 
+     * @param emojipediaFile
      * @throws IOException Em caso de erro de IO
      */
-    public static void downloadPngs() throws IOException
+    public void downloadPngs(final File emojipediaFile) throws IOException
     {
-        /*------------------------------------------------------------------
-        Le o arquivo whatsapp-emojis.html para um array de chars e ao final
-        converte este array para String
-        ------------------------------------------------------------------*/
-               
-        File emojipediaFile = new File("whatsapp-emojis.html");
-        
-        if (!emojipediaFile.exists()) 
-        {
-            System.err.println("Faltando arquivo whatsapp-emojis.html");
-            System.exit(1);
-        }
-        
+      
         File downloaDir = new File("png");
         
         if (!downloaDir.exists())
@@ -84,28 +101,12 @@ public class DownloadPngs
                 System.err.println("Erro ao criar pasta /png");
                 System.exit(1);
             }
-        }
-        
-        
-        int length = (int)emojipediaFile.length();
-        
-        char[] buffer = new char[length];
-        
-        BufferedReader bf =
-            new BufferedReader
-            (
-                new FileReader(emojipediaFile, StandardCharsets.UTF_8),
-                length
-            );
-        
-        bf.read(buffer);
-        
-        bf.close();
-       
-        String contentFile = String.valueOf(buffer);
-        
+        } 
+                       
+        String contentFile = FileTools.readTextFile(emojipediaFile);
+             
       /*---------------------------------------------------------------------*/
-        
+        frame.setVisible(true);
         
         /*
         regex para localizar nomes de arquivos PNG no atributo srcset
@@ -114,7 +115,7 @@ public class DownloadPngs
         
         Matcher m = srcSet.matcher(contentFile);
         
-        download(m, " srcset=\"");//baixa todos os arquivos que regex localizar
+        downloadAll(m, " srcset=\"");//baixa os arquivos que regex localizar
         
         /*
         regex para localizar nomes de arquivos PNG no atributo data-src
@@ -123,7 +124,13 @@ public class DownloadPngs
         
         m = dataSrc.matcher(contentFile);
         
-        download(m, "data-src=\"" );//baixa todos os arqs. que regex localizar
+        downloadAll(m, "data-src=\"" );//baixa os arqs. que regex localizar
+        
+        frame.setTitle("");
+        
+        frame.println("Arquivos baixados para a pasta png");
+               
+        java.awt.Toolkit.getDefaultToolkit().beep();
    
     }//downloadPngs()
     

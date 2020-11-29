@@ -1,0 +1,2 @@
+Main-Class: br.com.hkp.whatsappwebfix.apps.GetPngs
+Name: br/com/hkp/whatsappwebfix/apps/GetPngs.class

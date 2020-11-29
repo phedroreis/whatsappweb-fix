@@ -1,10 +1,15 @@
 package br.com.hkp.whatsappwebfix.util;
 
-/**
+/******************************************************************************
+ * Fornece os metodos para converter de UTF-8 string para codepoint string. E
+ * para converter o nome original do arquivo baixado da Emojipedia em uma 
+ * string de codepoints referente a figura do emoji contida no respectivo 
+ * arquivo PNG
+ * 
  * @since 26 de novembro de 2020 v1.0
  * @version 1.0
  * @author "Pedro Reis"
- */
+ *****************************************************************************/
 public final class Normalizer
 {
     /*[01]---------------------------------------------------------------------

@@ -1,0 +1,2 @@
+Main-Class: br.com.hkp.whatsappwebfix.apps.Normalize
+Name: br/com/hkp/whatsappwebfix/apps/Normalize.class
