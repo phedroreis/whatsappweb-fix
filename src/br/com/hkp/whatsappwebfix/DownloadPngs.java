@@ -1,13 +1,11 @@
-package br.com.hkp.whatsappwebfix.util;
+package br.com.hkp.whatsappwebfix;
 
-import br.com.hkp.whatsappwebfix.global.Global;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
+import br.com.hkp.whatsappwebfix.util.FileTools;
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -19,46 +17,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  ****************************************************************************/
 public final class DownloadPngs
 {
-    ProgressFrame frame;
+    private final ProgressFrame frame;
     
     /*[00]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Construtor da classe
+     */
     public DownloadPngs()
     {
-        Global.fileChooserSettings("Localize o arquivo whatsapp-emojis.html");
-        
-        frame = new ProgressFrame("Baixando...");
+        frame = new ProgressFrame("Baixando...", 800, 450);
     }//construtor
-        
-    /*[01]---------------------------------------------------------------------
-       
-    -------------------------------------------------------------------------*/
-    /**
-     * Obtem o diretorio onde estao os arquivos PNG com as imagens dos emojis.
-     * 
-     * @return O diretorio
-     */
-    public File getFile()
-    {
-        JFileChooser fc = new JFileChooser();
-        
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-        "HTML", "html");
-        
-        fc.setFileFilter(filter);
    
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-        int res = fc.showOpenDialog(null);
-
-        if(res == JFileChooser.APPROVE_OPTION)
-            return fc.getSelectedFile();
-        else
-            return null;
-        
-    }//getFile()
-    
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
@@ -106,6 +77,7 @@ public final class DownloadPngs
         String contentFile = FileTools.readTextFile(emojipediaFile);
              
       /*---------------------------------------------------------------------*/
+            
         frame.setVisible(true);
         
         /*

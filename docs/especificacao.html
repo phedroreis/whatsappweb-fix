@@ -99,7 +99,7 @@
         Portanto o algoritmo de conversão de string UTF-8 para string codepoint deve simplesmente desprezar qualquer LOW SURROGATE BYTE.
       </p>
       <p>
-        Já a consequência do item 2 é que para um determinado emoji, o caractere U+FE0F pode estar presente na string UTF-8 mas não nome do arquivo. Ou pode estar presente no nome do arquivo mas não na string UTF-8. Ou pode estar ausente em ambos ou presente em ambos. E isto é imprevisível.
+        Já a consequência do item 2 é que para um determinado emoji, o caractere U+FE0F pode estar presente na string UTF-8 mas não no nome do arquivo. Ou pode estar presente no nome do arquivo mas não na string UTF-8. Ou pode estar ausente em ambos ou presente em ambos. E isto é imprevisível.
       </p>
       <p>
         Portanto os algoritmos de normalização do programa irão eliminar códigos U+FE0F sempre que ocorrerem. Seja em strings UTF-8, seja como parte de nomes de arquivos.

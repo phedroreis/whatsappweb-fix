@@ -1,6 +1,5 @@
 package br.com.hkp.whatsappwebfix;
 
-import br.com.hkp.whatsappwebfix.global.Global;
 import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import static br.com.hkp.whatsappwebfix.util.Normalizer.filenameToCodepoints;
@@ -118,9 +117,15 @@ import javax.swing.JFileChooser;
 
 public final class NormalizeFilenames
 {
-    
+    /*
+    Para gravar o arquivo de log do processo
+    */
     private PrintWriter printWriter;
     
+    /*-------------------------------------------------------------------------
+    O arquivo de log eh no formato HTML. HEAD e FOOTER sao gravadas 
+    respectivamente no inicio e no final desse arquivo
+    -------------------------------------------------------------------------*/
     private static final String STYLE =
 "  <style>\n" +
 "    th\n" +
@@ -160,21 +165,7 @@ public final class NormalizeFilenames
 "</body>\n" +
 "</html>";
     
-    
-    /*[00]---------------------------------------------------------------------
-        
-    -------------------------------------------------------------------------*/
-    /**
-     * Configura o objeto FileChooser para exibir os textos em Portugues.
-     */
-    public NormalizeFilenames()
-    {
-        Global.fileChooserSettings
-        (
-            "Selecione o Diret\u00f3rio com os Arquivos de Imagens de Emojis"
-        );
-   
-    }//construtor
+    /*-----------------------------------------------------------------------*/
     
     /*[01]---------------------------------------------------------------------
        
@@ -193,7 +184,6 @@ public final class NormalizeFilenames
         int res = fc.showOpenDialog(null);
 
         if(res == JFileChooser.APPROVE_OPTION)
-       
             return fc.getSelectedFile();
         else
             return null;
@@ -212,7 +202,8 @@ public final class NormalizeFilenames
      */
     public void normalize(final File dir) throws FileNotFoundException
     {
-        ProgressFrame normalizeFrame = new ProgressFrame("Normalizando...");
+        ProgressFrame normalizeFrame = 
+            new ProgressFrame("Normalizando...", 700, 450);
         
         File[] fileList = dir.listFiles(new EmojiFileFilter());
         
@@ -269,11 +260,11 @@ public final class NormalizeFilenames
             O arquivo eh renomeado fazendo com que seja movido para o diretorio
             recem criado
             ------------------------------------------------------------------*/
-            File newName = new File(newDirName + "/" + normalizedFilename);
+            File newName = new File(newDirName + '/' + normalizedFilename);
             
             normalizeFrame.println
             (
-                filename + " \u21e8 " + EMOJIS_DIRNAME + "/" + newName.getName() 
+                filename + " \u21e8 " + EMOJIS_DIRNAME + '/' + newName.getName() 
             );
         
                         

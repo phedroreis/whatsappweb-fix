@@ -8,7 +8,7 @@ import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
  * Cria copias de paginas HTML WhatsApp Web com os emojis renderizados.
@@ -19,73 +19,82 @@ import javax.swing.JFileChooser;
  *****************************************************************************/
 public final class Fix
 {
+    /*[01]---------------------------------------------------------------------
+         Corrige todos os arquivos HTML encontrados no diretorio dir
+    -------------------------------------------------------------------------*/
+    private static void fixAll(File dir) throws IOException
+    {
+        ProgressFrame frame = 
+            new ProgressFrame("Gerando arquivos corrigidos...", 700, 450);
+
+        File[] listFiles = dir.listFiles(new HtmlFilter());
+
+        frame.setVisible(true);
+
+        if (listFiles.length == 0)
+        {
+            frame.setTitle("Arquivos n\u00e3o encontrados");
+            frame.setSize(375, 120);
+            frame.println
+            (
+                "\n\n             Nenhum novo arquivo HTML encontrado!"
+            );
+
+            return;
+        }
+
+        frame.setProgressBarVisible(listFiles.length);
+
+        int barValue = 0;
+
+        for (File file: listFiles)
+        {
+            WhatsAppEditor w = new WhatsAppEditor(file);
+            
+            w.createNewFile();
+      
+            frame.println(file.getName());
+
+            frame.setProgressBarValue(++barValue);
+
+        }//for
+
+        frame.println("FIM!");
+
+        java.awt.Toolkit.getDefaultToolkit().beep();
+   
+    }//fixAll()
   
-    /*[00]---------------------------------------------------------------------
+    /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public static void main(String[] args)
     {
-        Global.fileChooserSettings("Selecione o Diret\u00f3rio");
-    
-        JFileChooser fc = new JFileChooser();
-
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int res = fc.showOpenDialog(null);
-
-        if(res == JFileChooser.APPROVE_OPTION)
-        {
-            ProgressFrame frame = new ProgressFrame("");
-            
-            File dir = fc.getSelectedFile();
-            
-            File[] listFiles = dir.listFiles(new HtmlFilter());
-            
-            frame.setVisible(true);
+        /*
+        Obtem o diretorio onde estao os arquivo HTML
+        */
+        FileNameExtensionFilter filter = 
+            new FileNameExtensionFilter("Diret\u00f3rio", "x");
         
-            if (listFiles.length == 0)
-            {
-                frame.setTitle("Arquivos n\u00e3o encontrados");
-                frame.setSize(375, 120);
-                frame.println
-                (
-                    "\n\n             Nenhum novo arquivo HTML encontrado!"
-                );
-
-                return;
-            }
-
-            frame.setProgressBarVisible(listFiles.length);
-            
-            int barValue = 0;
-            
-            for (File file: listFiles)
-            {
-                
-                
-                try
-                {
-                    WhatsAppEditor w = new WhatsAppEditor(file);
-                    w.createNewFile();
-                }
-                catch (IOException ex)
-                {
-                    System.err.println(ex);
-                }
-                
-                frame.println(file.getName());
-
-
-                frame.setProgressBarValue(++barValue);
-                
-            }//for
-            
-            frame.println("FIM!");
-            
-            java.awt.Toolkit.getDefaultToolkit().beep();
-            
-        }//if
-       
+        File dir = 
+            Global.choose
+            (
+                "Selecione o Diret\u00f3rio",
+                filter,
+                true
+            );
+        
+        if (dir == null) System.exit(0);
+        
+        try
+        {
+            fixAll(dir);
+        }
+        catch (IOException ex)
+        {
+            System.err.println(ex);
+        }
+           
     }//main()
     
    /*=========================================================================
@@ -113,6 +122,6 @@ public final class Fix
                 return false;
         }//accept()
 
-    }//classe EmojiFileFilter
+    }//classe HtmlFilter
     
 }//app Fix

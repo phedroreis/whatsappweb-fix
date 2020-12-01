@@ -27,15 +27,23 @@ public final class ProgressFrame extends JFrame
     -------------------------------------------------------------------------*/
     /**
      * Configura a janela.
+     * 
+     * @param title Um titulo para a janela
+     * 
+     * @param width Largura da janela
+     * 
+     * @param height Altura da janela
      */
-    public ProgressFrame(final String title)
+    public ProgressFrame(final String title, final int width, final int height)
     {
         super(title);
         
+        setSize(width, height);
+        
+        setLocationRelativeTo(null);
+       
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        setSize(700, 450);
-        
+       
         setLayout(new BorderLayout());
         
         jTextArea = new JTextArea();
@@ -86,7 +94,7 @@ public final class ProgressFrame extends JFrame
      * Torna visivel a barra de progresso e a configura.
      * 
      * @param maximumValue O valor maximo que a barra de progresso pode assumir
-     * que serah exatamente o numero de arquivos a serem normalizados.
+     * que serah exatamente o numero de arquivos a serem processados.
      */
     public void setProgressBarVisible(final int maximumValue)
     {
@@ -97,12 +105,11 @@ public final class ProgressFrame extends JFrame
         jProgressBar.setVisible(true);
     }//setProgressBarVisible()
     
-    /*[03]---------------------------------------------------------------------
+    /*[04]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     /**
-     * Imprime uma string na area de texto da janela mostrando qual era o nome
-     * do arquivo antes e depois de normalizado.
+     * Imprime uma string na area de texto da janela e salta duas linhas. 
      * 
      * @param s A string.
      */

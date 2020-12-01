@@ -1,6 +1,9 @@
 package br.com.hkp.whatsappwebfix.global;
 
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
  * A funcao desta classe eh fornecer metodos e campos que sejam de acesso para 
@@ -35,14 +38,14 @@ public final class Global
        
             
     /*[01]---------------------------------------------------------------------
-    
+                     Configura a classe FileChooser 
     -------------------------------------------------------------------------*/
     /**
-     * Configura os textos do objeto FileChooser para Portugues
+     * 
      * 
      * @param title Um titulo para a janela
      */
-    public static void fileChooserSettings(final String title)
+    private static void fileChooserSettings(final String title)
     {
         UIManager.put("FileChooser.openDialogTitleText", title);
         UIManager.put("FileChooser.lookInLabelText", "Selecionar"); 
@@ -74,11 +77,50 @@ public final class Global
         UIManager.put
         (
             "FileChooser.fileDateHeaderText", 
-            "Data de Altera\u00e7\u00e3o.");
-        UIManager.put
-        (
-            "FileChooser.acceptAllFileFilterText", "Diret\u00f3rio"
+            "Data de Altera\u00e7\u00e3o."
         );
     }//FileChooserSettings()
+    
+    /*[02]---------------------------------------------------------------------
+       
+    -------------------------------------------------------------------------*/
+    /**
+     * Permite que o usuario selecione um diretorio ou um arquivo
+     * 
+     * @param title Um titulo para a janela
+     * 
+     * @param filter Um filtro que determina que tipo de arquivo pode ser 
+     * selecionado
+     * 
+     * @param chooseDir Se true so seleciona diretorios. Se false, arquivos.
+     * 
+     * @return O diretorio ou o arquivo selecionado
+     */
+    public static File choose
+    (
+        final String title,
+        final FileNameExtensionFilter filter, 
+        final boolean chooseDir
+    )
+    {
+        fileChooserSettings(title);
+        
+        JFileChooser fc = new JFileChooser();
+        
+        fc.setFileFilter(filter);
+        
+        if (chooseDir)
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        else
+            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int res = fc.showOpenDialog(null);
+
+        if(res == JFileChooser.APPROVE_OPTION)
+            return fc.getSelectedFile();
+        else
+            return null;
+        
+    }//choose()
     
 }//classe Global

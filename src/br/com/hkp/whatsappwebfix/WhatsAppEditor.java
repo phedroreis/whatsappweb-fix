@@ -68,6 +68,11 @@ public final class WhatsAppEditor
     private final File outputFile;
     private final File reportFile;
     
+    /*
+    Um HashMap para conter entradas que associam um emoji UTF-8 a sua string de
+    codepoints juntamente com a informacao sobre como o emoji foi renderizado
+    pelo programa. As entradas desse HashMap serao gravadas em um arquivo texto.
+    */
     private final HashMap<String, String> emojisReport;
     
     /*[00]---------------------------------------------------------------------

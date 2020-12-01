@@ -1,9 +1,11 @@
 
 package br.com.hkp.whatsappwebfix.apps;
 
-import br.com.hkp.whatsappwebfix.util.DownloadPngs;
+import br.com.hkp.whatsappwebfix.DownloadPngs;
+import br.com.hkp.whatsappwebfix.global.Global;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -22,6 +24,9 @@ import java.io.IOException;
  ****************************************************************************/
 public class GetPngs
 {
+    /*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
     /**
      * @param args n/a
      */
@@ -29,11 +34,19 @@ public class GetPngs
     {
         DownloadPngs downloadPngs = new DownloadPngs();
         
-         /*
-        Obtem o diretorio onde estao os arquivo PNG cujos nomes serao
-        normalizados
+        /*
+        Obtem o arquivo whatsapp-emojis.html
         */
-        File file = downloadPngs.getFile();
+        FileNameExtensionFilter filter = 
+            new FileNameExtensionFilter("HTML", "html", "htm");
+        
+        File file = 
+            Global.choose
+            (
+                "Selecione o arquivo whatsapp-emojis.html",
+                filter,
+                false
+            );
                 
         if (file == null) System.exit(0);
         

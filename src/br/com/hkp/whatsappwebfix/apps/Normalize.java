@@ -1,8 +1,10 @@
 package br.com.hkp.whatsappwebfix.apps;
 
 import br.com.hkp.whatsappwebfix.NormalizeFilenames;
+import br.com.hkp.whatsappwebfix.global.Global;
 import java.io.File;
 import java.io.FileNotFoundException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
  * O conjunto de arquivos PNG que se obtem no download da pagina 
@@ -127,7 +129,16 @@ public final class Normalize
         Obtem o diretorio onde estao os arquivo PNG cujos nomes serao
         normalizados
         */
-        File dir = normalizeFilenames.getDir();
+        FileNameExtensionFilter filter = 
+            new FileNameExtensionFilter("Diret\u00f3rio", "x");
+       
+        File dir = 
+            Global.choose
+            (
+                "Selecione o Diret\u00f3rio com os Arquivos PNG",
+                filter,
+                true
+            );
                 
         if (dir == null) System.exit(0);
         
@@ -147,5 +158,5 @@ public final class Normalize
          
     }//main()
     
-}//Aplicacao Normalize
+}//app Normalize
 
