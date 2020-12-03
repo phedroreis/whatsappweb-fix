@@ -203,7 +203,7 @@ public final class WhatsAppEditor
        
         } 
         else
-            return null;
+            return oldTag;
   
     }//getNewTag()
     
@@ -215,10 +215,9 @@ public final class WhatsAppEditor
     {
         Matcher m = EMOJI_TAG_PATTERN.matcher(htmlContent);
               
-        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>(1000);
         
-        while (m.find())
-            map.put(m.group(), getNewTag(m.group()));
+        while (m.find()) map.put(m.group(), getNewTag(m.group()));
        
         return map;
    
