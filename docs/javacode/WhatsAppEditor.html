@@ -1,4 +1,11 @@
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/javacode.css"/>
+</head>
+<body>
 <div class="javacode" style="width:657px;">
 
 <div class="linenumber">
@@ -177,11 +184,11 @@
     -------------------------------------------------------------------------*/</span>
     <span class="xw52fz_reserved">private</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_function">getNewTag</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> oldTag)
     {
-        <span class="xw52fz_classname">Matcher</span> <span class="xw52fz_function">matcher</span> = <span class="xw52fz_constant">ALT_ATTR_PATTERN</span>.<span class="xw52fz_function">matcher</span>(oldTag);
+        <span class="xw52fz_classname">Matcher</span> m = <span class="xw52fz_constant">ALT_ATTR_PATTERN</span>.<span class="xw52fz_function">matcher</span>(oldTag);
         
-        <span class="xw52fz_reserved">if</span> (<span class="xw52fz_function">matcher</span>.<span class="xw52fz_function">find</span>()) 
+        <span class="xw52fz_reserved">if</span> (m.<span class="xw52fz_function">find</span>()) 
         {
-            <span class="xw52fz_classname">String</span> utf8Emoji = <span class="xw52fz_function">matcher</span>.<span class="xw52fz_function">group</span>();
+            <span class="xw52fz_classname">String</span> utf8Emoji = m.<span class="xw52fz_function">group</span>();
             
             utf8Emoji = utf8Emoji.<span class="xw52fz_function">substring</span>
                         (
@@ -282,3 +289,5 @@
 </span>
 </code></pre>
 </div>
+</body>
+</html>

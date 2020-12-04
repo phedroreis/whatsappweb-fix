@@ -130,4 +130,34 @@ footer
   clear: both;
 }
 
+iframe.code
+{
+  background-color: rgb(229, 235, 252);
+  float: left;
+  width: 700px;
+  height: 700px;
+  padding: 0;
+  margin: 0;
+}
+
+div.comment
+{
+  position: relative;
+  left: 10px;
+}
+
+div.comment::first-line
+{
+  font-size: x-large;
+  font-style: italic;
+  font-weight: bolder;
+  color: red;
+}
+
+div.comment p
+{
+  padding: 5px;
+  text-align: justify;
+}
+
 

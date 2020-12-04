@@ -3,20 +3,19 @@
 
 div.javacode
 {
-    float: left;
-    margin-bottom: 20px;
-    padding: 0;
+  float: left;
+  padding: 0;
+  margin: 0;
 }
 
 div.javacode pre
 {
-    float: left;
-    margin: 0;
-    padding: 0;
-    border: solid 1px;
-    width: 630px;
-    background-color: rgb(229, 235, 252);
-    overflow-x: scroll;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 630px;
+  background-color: rgb(229, 235, 252);
+  overflow-x: hidden;
 }
 
 div.javacode pre, code
@@ -25,18 +24,14 @@ div.javacode pre, code
     padding:0;
 }
 
-div.javacode code
-{
-    position: relative;
-    left: -55px;
-}
+
 
 div.javacode div.linenumber
 {
     float: left;
     margin: 0;
-    padding: 0px 0px 0px 1px;
-    border-top: solid 1px black;
+    padding: 0;
+    border-right: solid 1px;
     background-color: rgb(206, 206, 206);
     color: black;
     font-size: 13px;
@@ -80,25 +75,6 @@ div.javacode div.linenumber
     font-weight: bolder;
 }
 
-div.comment
-{
-    position: relative;
-    left: 10px;
-}
 
-div.comment::first-line
-{
-    font-size: x-large;
-    font-style: italic;
-    font-weight: bolder;
-    color: red;
-}
-
-
-div.comment p
-{
-    padding: 5px;
-    text-align: justify;
-}
 
 
