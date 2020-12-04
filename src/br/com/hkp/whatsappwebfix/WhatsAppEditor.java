@@ -170,11 +170,11 @@ public final class WhatsAppEditor
     -------------------------------------------------------------------------*/
     private String getNewTag(final String oldTag)
     {
-        Matcher matcher = ALT_ATTR_PATTERN.matcher(oldTag);
+        Matcher m = ALT_ATTR_PATTERN.matcher(oldTag);
         
-        if (matcher.find()) 
+        if (m.find()) 
         {
-            String utf8Emoji = matcher.group();
+            String utf8Emoji = m.group();
             
             utf8Emoji = utf8Emoji.substring
                         (

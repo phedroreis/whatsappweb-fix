@@ -46,9 +46,7 @@ public final class DownloadPngs
             
             frame.println(String.format("%04d - %s\n", ++count, url));
         }
-        
-        System.out.println("");
-        
+ 
     }//downloadAll()
     
     /*[02]---------------------------------------------------------------------

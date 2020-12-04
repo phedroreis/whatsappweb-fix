@@ -25,8 +25,7 @@ public final class DownloadJpgs
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private void downloadAll(final Matcher m) 
-        throws IOException
+    private void downloadAll(final Matcher m) throws IOException
     {
         int count = 0;
         
@@ -45,9 +44,7 @@ public final class DownloadJpgs
             
             frame.println(String.format("%04d - %s\n", ++count, url));
         }
-        
-        System.out.println("");
-        
+ 
     }//downloadAll()
     
     /*[02]---------------------------------------------------------------------
