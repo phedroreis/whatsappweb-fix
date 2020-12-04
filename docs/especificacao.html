@@ -37,7 +37,7 @@
 
       <h2>Pacote whatsappwebfix</h2>
 
-      <h4>Classe WhatsAppEditor</h4>
+      <h3>Classe WhatsAppEditor</h3>
 
       <p>
         Esta classe deve ser a encarregada de ler o arquivo de uma página WhatsApp salva e produzir uma cópia desse arquivo onde os emojis inseridos pelo usuário apareçam renderizados.
@@ -46,7 +46,7 @@
       <iframe class="code" src="javacode/WhatsAppEditor.html"></iframe>
 
       
-        <p>getNewTag()</p>
+        <h4>getNewTag()</h4>
         <p>
           O método recebe uma tag que insere emoji no arquivo original e retorna uma nova tag que deve substitui-la no arquivo cópia.
         </p>
@@ -61,29 +61,16 @@
         </p>
       
 
-     
-        <p>getNewTag()</p>
-        <p>
-          O método recebe uma tag que insere emoji no arquivo original e retorna uma nova tag que deve substitui-la no arquivo cópia.
-        </p>
-        <p>
-          Na linha 173 um objeto Matcher é criado para localizar o atributo alt na tag.
-        </p>
-        <p>
-          A String com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 179. E o nome do arquivo que contém a figura deste emoji é obtido na linha 184.
-        </p>
-        <p>
-          A nova tag que este método vai retornar dependerá do nome atribuído a utf8Emoji. Se for null não existe arquivo PNG para este emoji no disco do usuário e uma tag span é retornada. Se o nome do arquivo estiver precedido por um sinal de exclamação, trata-se do arquivo com a imagem do emoji raiz e será retornada uma tag que coloca uma moldura vermelha na renderização do emoji. Nos outros casos é retornada uma tag img que insere o arquivo correto para este emoji.
-        </p>
+
      
 
-      <h4>Classe DownloadPngs</h4>
+      <h3>Classe DownloadPngs</h3>
 
       <p>
         Classe encarregada de baixar os arquivos de imagens de emojis no site da Emojipedia.
       </p>
 
-      <h4>Classe NormalizeFilenames</h4>
+      <h3>Classe NormalizeFilenames</h3>
 
       <p>
         Faz o trabalho de normalizar os nomes dos arquivos baixados pela aplicação GetPngs.jar
@@ -91,7 +78,7 @@
 
       <h2>Pacote util</h2>
 
-      <h4>Classe Normalizer</h4>
+      <h3>Classe Normalizer</h3>
 
       <p>
         Como um exemplo, tomemos o emoji 🇧🇷 que é codificado pelos seguintes UNICODES: U+1F1E7 U+1F1F7. Para renderizar este emoji uma página do WhatsApp Web o faria por intermédio de uma tag como esta abaixo:
@@ -158,154 +145,24 @@
         E esta é fundamentalmente a ideia do processo de normalização aplicada nos dois métodos da classe Normalizer do pacote util. 
       </p>
 
-      <div class="javacode" style="width:650px;">
-
-        <div class="linenumber">
-        00</br>01</br>02</br>03</br>04</br>05</br>06</br>07</br>08</br>09</br>10</br>11</br>12</br>13</br>14</br>15</br>16</br>17</br>18</br>19</br>20</br>21</br>22</br>23</br>24</br>25</br>26</br>27</br>28</br>29</br>30</br>31</br>32</br>33</br>34</br>35</br>36</br>37</br>38</br>39</br>
-        </div>
-        <pre><code>
-        <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_function">utf8ToCodepoints</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> utf8Emoji)
-        {
-            <span class="xw52fz_classname">StringBuilder</span> codePoints = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">StringBuilder</span>(64);
-        
-            <span class="xw52fz_comment">/*
-            Le caractere por caractere UTF-8 e os converte para codepoint
-            */</span>        
-            <span class="xw52fz_reserved">for</span> (<span class="xw52fz_reserved">int</span> position = 0; position &lt; utf8Emoji.<span class="xw52fz_function">length</span>(); position++)
-            {
-                <span class="xw52fz_reserved">char</span> c = utf8Emoji.<span class="xw52fz_function">charAt</span>(position);
-        
-                <span class="xw52fz_comment">/*
-                VARIATION SELECTOR-16 e LOW SURROGATES caracteres nao sao inclusos
-                na representacao normalizada do emoji
-                */</span>
-                <span class="xw52fz_reserved">if</span> ((c == '\ufe0f') || (<span class="xw52fz_classname">Character</span>.<span class="xw52fz_function">isLowSurrogate</span>(c))) <span class="xw52fz_reserved">continue</span>;
-        
-                <span class="xw52fz_comment">/*
-                Obtem o codepoint do UTF-8, converte para hexadecimal e insere na
-                string que serah retornada pelo metodo
-                */</span>            
-                codePoints.<span class="xw52fz_function">append</span>
-                (
-                    <span class="xw52fz_classname">String</span>.<span class="xw52fz_function">format</span>
-                    (
-                        position == 0 ? <span class="xw52fz_literalstring">"%x"</span> : <span class="xw52fz_literalstring">"-%x"</span>, 
-                        <span class="xw52fz_classname">Character</span>.<span class="xw52fz_function">codePointAt</span>(utf8Emoji, position)
-                    )
-                );
-        
-            }<span class="xw52fz_comment">//for
-        </span>
-        
-            <span class="xw52fz_reserved">return</span> codePoints.<span class="xw52fz_function">toString</span>();
-        
-        }<span class="xw52fz_comment">//utf8ToCodepoints()
-        </span>
-        </code></pre>
-      </div>
-
-      <div class="comment">
-        <p>utf8ToCodepoints()</p>
-        <p>
-          O método que converte strings UTF-8 para strings de codepoints.
-        </p>
-        <p>
-          Na linha 03 o objeto <span class="xw52fz_classname">StringBuilder</span> codePoints é criado para armazenar a string de codepoints. E o loop da linha 08 lê a string UTF-8 caractere por caractere e a cada iteração os atribui à variável c na linha 10.
-        </p>
-        <p>
-          A linha 16 testa se c é um LOW SURROGATE BYTE ou um UNICODE U+FE0F. Se sim, como estes caracteres devem ser desprezados, o loop pula direto para a próxima iteração.
-        </p>
-        <p>
-          Mas se c não é LOW SURROGATE ou U+FE0F, seu código UNICODE é obtido,  convertido para uma string com este valor em hexadecimal, e essa string é então concatenada ao objeto codePoints.
-        </p>
-        <p>
-          Ao fim do loop o conteúdo de codePoints é convertido em String pela chamada de <span class="xw52fz_function">toString()</span> e esse valor retornado para o chamador do método.
-        </p>
-      </div>
-
-      
-
-      <div class="javacode" style="width:650px;">
-
-        <div class="linenumber">
-        00</br>01</br>02</br>03</br>04</br>05</br>06</br>07</br>08</br>09</br>10</br>11</br>12</br>13</br>14</br>15</br>16</br>17</br>18</br>19</br>20</br>21</br>22</br>23</br>24</br>25</br>26</br>27</br>28</br>29</br>30</br>
-        </div>
-        <pre><code>
-            <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_function">filenameToCodepoints</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> filename)
-            {
-                            
-                <span class="xw52fz_comment">/*
-                Extrai do nome do arquivo a parte que eh o nome do emoji
-                */</span>
-                <span class="xw52fz_classname">String</span> emojiName = filename.<span class="xw52fz_function">replaceFirst</span>(<span class="xw52fz_literalstring">"_[0-9a-f_\\-]+\\.png"</span>, <span class="xw52fz_literalstring">""</span>);
-        
-                <span class="xw52fz_comment">/*
-                Deleta do nome do arquivo:
-                
-                - A parte que eh nome do emoji
-                - Qualquer codepoint repetido precedido por _
-                - Qualquer codepoint VARIATION SELECTOR
-                - A extensao .png
-                
-                Sobra apenas a string de codepoints que define o emoji
-                */</span>
-                <span class="xw52fz_reserved">return</span>
-                (
-                    filename.<span class="xw52fz_function">replaceFirst</span>(emojiName + <span class="xw52fz_literalstring">"_"</span>, <span class="xw52fz_literalstring">""</span>).
-                    <span class="xw52fz_function">replaceAll</span>(<span class="xw52fz_literalstring">"_[0-9a-f]+"</span>,<span class="xw52fz_literalstring">""</span>).
-                    <span class="xw52fz_function">replaceAll</span>(<span class="xw52fz_literalstring">"-fe0f"</span>,<span class="xw52fz_literalstring">""</span>).
-                    <span class="xw52fz_function">replace</span>(<span class="xw52fz_literalstring">".png"</span>, <span class="xw52fz_literalstring">""</span>)
-                );
-                
-            }<span class="xw52fz_comment">//filenameToCodepoints()
-        </span>
-        </code></pre>
-      </div>
-
-      <div class="comment">
-        <p>
-          filenameToCodepoints()
-        </p>
-        <p>
-          Converte o nome de um arquivo PNG para string de codepoints.
-        </p>
-        <p>
-          Na linha 07, a expressão regular é usada para deletar o sufixo com os codepoints do nome do arquivo. Então o que sobra e é atribuído ao objeto emojiName é apenas a string com o nome oficial do emoji por extenso.
-        </p>
-        <p>
-          Mas se a intenção é exatamente obter estes codepoints, então por que uma expressão regular para deletar essa parte do nome do arquivo?
-        </p>
-        <p>
-          Não deveria ser o contrário? Uma expressão regular para deletar <b>TUDO QUE NÂO FOSSE CODEPOINT</b> no nome do arquivo?
-        </p>
-        <p>Sim, mas é muito difícil criar uma regex para deletar apenas o nome do emoji. Porque este nome pode ter qualquer caractere, incluindo os mesmos caracteres que ocorrem no sufixo com os códigos em hexadecimal. Esta regex iria acabar incluindo na localização também parte do sufixo ou todo o sufixo.
-        </p>
-        <p>
-          Portanto o truque aqui é deletar inicialmente o sufixo e atribuir o nome do emoji à variável emojiName.
-        </p>
-        <p>
-          Em seguida emojiName é deletado do nome do arquivo e o que sobra é justamente o sufixo que queremos!
-        </p>
-        <p>
-          Deste sufixo ainda será deletado, se houver, qualquer codepoint repetido (duplicado), qualquer codepoint VARIATION SELECTOR e também a extensão .png do arquivo. Retornando apenas a string de codepoints que define o emoji cuja figura se obtém ao abrir este mesmo arquivo.
-        </p>
-      </div>
-
-      <h4>Classe DownloadPngs</h4>
+      <h3>Classe DownloadPngs</h3>
       <p>
         Esta classe usa um arquivo com o código fonte da URL https://emojipedia.org/whatsapp/ para localizar e baixar os arquivos PNG com figuras de emojis estilo WhatsApp.
       </p>
 
       <h2>Pacote apps</h2>
-      <h4>Classe Fix</h4>
+
+      <h3>Classe Fix</h3>
       <p>
         Gera cópias de páginas salvas onde os emojis são renderizados.
       </p>
-      <h4>Classe Normalize</h4>
+
+      <h3>Classe Normalize</h3>
       <p>
         Classe que normaliza os nomes dos arquivos PNG baixados da Emojipedia.
       </p>
-      <h4>Classe GetPngs</h4>
+
+      <h3>Classe GetPngs</h3>
       <p>
         O executável que obtém os arquivos PNGs no servidor da Emojipedia.
       </p>

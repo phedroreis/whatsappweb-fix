@@ -1,37 +1,58 @@
 @charset "UTF-8";
 
-/*fonte utilizada nos paragrafos*/
+@import "var.css";
+
+/*--------------------------------------------------------------------------
+                     fonte utilizada nos paragrafos
+---------------------------------------------------------------------------*/
 @font-face
 {
     font-family: 'robot';
     src: url("../fonts/RobotoSlab-VariableFont_wght.ttf");
 }
 
+/*--------------------------------------------------------------------------
+                   Estiliza a tag section de cada frame
+ --------------------------------------------------------------------------*/     
 .frame-sections
 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.frame-sections h1
+
+.frame-sections h1 /*Para titulo do frame*/
 {
     font-size: 2em;
 }
 
-.frame-sections h2
+.frame-sections h2 /*Para nomes de pacotes*/
 {
     font-size: 1.6em;
+    background-color: darkgray;
+    text-align: center;
 }
 
-.frame-sections h3
+.frame-sections h3 /*Para identificadores de classes*/
 {
     font-size: 1.2em;
+    clear: both;
 }
 
-.frame-sections h4
+.frame-sections h3::before
+{
+  content: "\25C6   ";
+}
+
+.frame-sections h4 /*Para identificadores de metodos*/
 {
     font-size: 1em;
+    color: var(--olive);
 }
 
+.frame-sections h5 /*Para identificadores de campos*/
+{
+  font-size: 1em;
+}
 
 
 .frame-sections p
@@ -43,6 +64,7 @@
     padding-bottom: 0.6em;
 
 }
+/*------------------------------------------------------------------------*/
 
 span.filename
 {
@@ -124,40 +146,23 @@ dl.deflist-default dd
   padding:0;
 }
 
+iframe.code
+{
+  background-color: var(--paleblue);
+  float: left;
+  width: 700px;
+  height: 700px;
+  padding: 0;
+  margin: 0px 5px 15px 0px;
+}
 
 footer
 {
   clear: both;
 }
 
-iframe.code
-{
-  background-color: rgb(229, 235, 252);
-  float: left;
-  width: 700px;
-  height: 700px;
-  padding: 0;
-  margin: 0;
-}
 
-div.comment
-{
-  position: relative;
-  left: 10px;
-}
 
-div.comment::first-line
-{
-  font-size: x-large;
-  font-style: italic;
-  font-weight: bolder;
-  color: red;
-}
 
-div.comment p
-{
-  padding: 5px;
-  text-align: justify;
-}
 
 

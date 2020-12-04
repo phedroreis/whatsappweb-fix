@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+:root
+{
+  --paleblue:rgb(229, 235, 252);
+  --gray:rgb(206, 206, 206);
+  --aqua: rgb(129, 189, 169);
+  --olive: olive;
+  --hotpink: hotpink;
+  --blue: blue;
+  --cadetblue: cadetblue;
+  --red: red;
+  --slategray: slategray;
+}
