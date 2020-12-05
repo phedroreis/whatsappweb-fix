@@ -42,14 +42,13 @@ public final class FileTools
     public static void downloadUrl(final String url, final String path)
         throws IOException
     {
-         String filename = 
-                url.substring(url.lastIndexOf('/') + 1, url.length());
+        String filename = url.substring(url.lastIndexOf('/'), url.length());
          
         URL download = new URL(url);
 
         ReadableByteChannel rbc = Channels.newChannel(download.openStream());
         
-        FileOutputStream fos = new FileOutputStream(path + '/' + filename);
+        FileOutputStream fos = new FileOutputStream(path + filename);
         
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         

@@ -3,13 +3,21 @@ package br.com.hkp.whatsappwebfix;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import br.com.hkp.whatsappwebfix.util.FileTools;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class DownloadJpgs
 {
     private final ProgressFrame frame;
+    
+    private int count;
+    
+    private static final String TARGET_DIR = "jpg";
     
     /*[00]---------------------------------------------------------------------
     
@@ -20,15 +28,37 @@ public final class DownloadJpgs
     public DownloadJpgs()
     {
         frame = new ProgressFrame("Baixando...", 800, 450);
+        
+        count = 0;
     }//construtor
-   
+    
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private void downloadAll(final Matcher m) throws IOException
+    private void downloadUrl(final String url) throws IOException
     {
-        int count = 0;
+        int start = url.lastIndexOf('/');
         
+        String filename = url.substring(start, url.indexOf(".jpg", start) + 4);
+        
+        URL download = new URL(url);
+  
+        ReadableByteChannel rbc = Channels.newChannel(download.openStream());
+        
+        FileOutputStream fos = new FileOutputStream(TARGET_DIR + filename);
+        
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        
+        fos.close();
+           
+    }//downloadUrl()
+   
+    /*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    private void downloadHrefs(final Matcher m) throws IOException
+    {
+                
         while (m.find())
         {
             /*
@@ -39,15 +69,45 @@ public final class DownloadJpgs
                 replace("amp;", "").
                 replace("\"", "");
             
-                        
-            FileTools.downloadUrl(url, "jpg");
-            
-            frame.println(String.format("%04d - %s\n", ++count, url));
+            try
+            {
+                downloadUrl(url);
+
+                frame.println(String.format("%04d - %s\n", ++count, url));
+            }
+            catch (IOException ex)
+            {
+                System.out.println(ex);
+            }
         }
  
-    }//downloadAll()
+    }//downloadHrefs()
     
-    /*[02]---------------------------------------------------------------------
+    /*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    private void downloadHttps(final Matcher m) throws IOException
+    {
+               
+        while (m.find())
+        {
+            String url = m.group().replace("\\/","/").replace("\"", "");
+            
+            try
+            {
+                downloadUrl(url);
+                
+                frame.println(String.format("%04d - %s\n", ++count, url));
+            }
+            catch (IOException ex)
+            {
+                System.err.println(ex);
+            }
+        }
+ 
+    }//downloadHttps()
+    
+    /*[04]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     /**
@@ -60,7 +120,7 @@ public final class DownloadJpgs
     public void downloadJpgs(final File file) throws IOException
     {
       
-        File downloaDir = new File("jpg");
+        File downloaDir = new File(TARGET_DIR);
         
         if (!downloaDir.exists())
         {
@@ -78,11 +138,18 @@ public final class DownloadJpgs
         frame.setVisible(true);
         
         /*
-        regex para localizar nomes de arquivos PNG no atributo srcset
+        regex para localizar nomes de arquivos jpg em tags img
         */
-        Pattern href = Pattern.compile("href=\"https.+?\"");
+        Pattern href = Pattern.compile("href=\"https.+?[.]jpg.+?\"");
                   
-        downloadAll(href.matcher(contentFile));//baixa os arquivos 
+        downloadHrefs(href.matcher(contentFile));//baixa os arquivos 
+        
+        /*
+        regex para localizar nomes de arquivos jpg em scripts
+        */
+        Pattern http = Pattern.compile("https:\\\\/\\\\/.+?[.]jpg.+?\"");
+                  
+        downloadHttps(http.matcher(contentFile));//baixa os arquivos 
                      
         frame.setTitle("");
         
