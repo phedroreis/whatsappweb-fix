@@ -56,6 +56,12 @@ div.javacode div.linenumber
     color: var(--red);
 }
 
+.xw52fz_method
+{
+    color: var(--olive);
+    font-style: italic;
+}
+
 .xw52fz_function
 {
     color: var(--olive);

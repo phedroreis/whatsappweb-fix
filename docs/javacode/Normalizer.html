@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/javacode.css"/>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+000</br>001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>
+</div>
+<pre><code>
+<span class="xw52fz_reserved">package</span> br.com.hkp.whatsappwebfix.util;
+
+<span class="xw52fz_comment">/******************************************************************************
+ * Fornece os metodos para converter de UTF-8 string para codepoint string. E
+ * para converter o nome original do arquivo baixado da Emojipedia em uma 
+ * string de codepoints referente a figura do emoji contida no respectivo 
+ * arquivo PNG
+ * 
+ * @since 26 de novembro de 2020 v1.0
+ * @version 1.0
+ * @author "Pedro Reis"
+ *****************************************************************************/</span>
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">Normalizer</span>
+{
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Recebe uma String representando um emoji codificado em UTF-8 e retorna
+     * a string de codepoints deste emoji.
+     * &lt;p&gt;
+     * Mas se esta string terminar com um codepoint VARIATION SELECTOR-16 este 
+     * sera excluido da String retornada.
+     * 
+     * @param utf8Emoji Um emoji codificado em UTF-8
+     * 
+     * @return Uma string de codepoints que representa o emoji
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_method">utf8ToCodepoints</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> utf8Emoji)
+    {
+        <span class="xw52fz_classname">StringBuilder</span> codePoints = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">StringBuilder</span>(64);
+        
+        <span class="xw52fz_comment">/*
+        Le caractere por caractere UTF-8 e os converte para codepoint
+        */</span>        
+        <span class="xw52fz_reserved">for</span> (<span class="xw52fz_reserved">int</span> position = 0; position &lt; utf8Emoji.<span class="xw52fz_method">length</span>(); position++)
+        {
+            <span class="xw52fz_reserved">char</span> c = utf8Emoji.<span class="xw52fz_method">charAt</span>(position);
+            
+            <span class="xw52fz_comment">/*
+            VARIATION SELECTOR-16 e LOW SURROGATES caracteres nao sao inclusos
+            na representacao normalizada do emoji
+            */</span>
+            <span class="xw52fz_reserved">if</span> ((c == '\ufe0f') || (<span class="xw52fz_classname">Character</span>.<span class="xw52fz_method">isLowSurrogate</span>(c))) <span class="xw52fz_reserved">continue</span>;
+            
+            <span class="xw52fz_comment">/*
+            Obtem o codepoint do UTF-8, converte para hexadecimal e insere na
+            string que serah retornada pelo metodo
+            */</span>            
+            codePoints.<span class="xw52fz_method">append</span>
+            (
+                <span class="xw52fz_classname">String</span>.<span class="xw52fz_method">format</span>
+                (
+                    position == 0 ? <span class="xw52fz_literalstring">"%x"</span> : <span class="xw52fz_literalstring">"-%x"</span>, 
+                    <span class="xw52fz_classname">Character</span>.<span class="xw52fz_method">codePointAt</span>(utf8Emoji, position)
+                )
+            );
+            
+        }<span class="xw52fz_comment">//for
+</span>        
+       
+        <span class="xw52fz_reserved">return</span> codePoints.<span class="xw52fz_method">toString</span>();
+        
+    }<span class="xw52fz_comment">//utf8ToCodepoints()
+</span>    
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Recebe uma string com o nome de um arquivo PNG baixado do site Emojipedia
+     * que contem a figura de um detemrinado emoji e retorna a string de 
+     * codepoints deste emoji.
+     * 
+     * @param filename O nome do arquivo
+     * 
+     * @return Uma string de codepoints que representa o emoji
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_method">filenameToCodepoints</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> filename)
+    {
+                    
+        <span class="xw52fz_comment">/*
+        Extrai do nome do arquivo a parte que eh o nome do emoji
+        */</span>
+        <span class="xw52fz_classname">String</span> emojiName = filename.<span class="xw52fz_method">replaceFirst</span>(<span class="xw52fz_literalstring">"_[0-9a-f_\\-]+\\.png"</span>, <span class="xw52fz_literalstring">""</span>);
+
+        <span class="xw52fz_comment">/*
+        Deleta do nome do arquivo:
+        
+        - A parte que eh nome do emoji
+        - Qualquer codepoint repetido precedido por _
+        - Qualquer codepoint VARIATION SELECTOR
+        - A extensao .png
+        
+        Sobra apenas a string de codepoints que define o emoji
+        */</span>
+        <span class="xw52fz_reserved">return</span>
+        (
+            filename.<span class="xw52fz_method">replaceFirst</span>(emojiName + <span class="xw52fz_literalstring">"_"</span>, <span class="xw52fz_literalstring">""</span>).
+            <span class="xw52fz_method">replaceAll</span>(<span class="xw52fz_literalstring">"_[0-9a-f]+"</span>,<span class="xw52fz_literalstring">""</span>).
+            <span class="xw52fz_method">replaceAll</span>(<span class="xw52fz_literalstring">"-fe0f"</span>,<span class="xw52fz_literalstring">""</span>).
+            <span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">".png"</span>, <span class="xw52fz_literalstring">""</span>)
+        );
+        
+    }<span class="xw52fz_comment">//filenameToCodepoints()
+</span> 
+}<span class="xw52fz_comment">//classe Normalizer
+</span>
+</code></pre>
+</div></body>
+</html>

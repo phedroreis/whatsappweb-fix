@@ -3,7 +3,7 @@
 @import "var.css";
 
 /*--------------------------------------------------------------------------
-                     fonte utilizada nos paragrafos
+                     Fonte utilizada nos paragrafos
 ---------------------------------------------------------------------------*/
 @font-face
 {
@@ -30,6 +30,7 @@
     font-size: 1.6em;
     background-color: darkgray;
     text-align: center;
+    clear: both;
 }
 
 .frame-sections h3 /*Para identificadores de classes*/
@@ -38,7 +39,7 @@
     clear: both;
 }
 
-.frame-sections h3::before
+.frame-sections h3::before /* Insere um diamond antes do nome da classe */
 {
   content: "\25C6   ";
 }
@@ -54,8 +55,7 @@
   font-size: 1em;
 }
 
-
-.frame-sections p
+.frame-sections p /* Estiliza os paragrafos */
 {
     line-height: 1.5em;
     text-align: justify;
@@ -64,28 +64,27 @@
     padding-bottom: 0.6em;
 
 }
-/*------------------------------------------------------------------------*/
 
-span.filename
+.frame-sections span.filename /*Para nomes de arquivos*/
 {
     font-family: 'Courier New', Courier, monospace;
 }
 
 
-span.java-method
+.frame-sections span.java-method /*Para nomes de metodos*/
 {
     font-weight: bolder;
 }
 
 
-.frame-sections a, a:visited
+.frame-sections a, a:visited /*Links*/
 {
     text-decoration: none;
     color: royalblue;
  
 }
 
-.frame-sections ul
+.frame-sections ul /* Listas nao ordenadas */
 {
     margin-left: 3em;
 }
@@ -95,14 +94,25 @@ span.java-method
     padding: 0.5em;
 }
 
-code.htmlcode
+.frame-sections code.htmlcode /*Para codigo HTML*/
 {
   font-size: 1.2em;
 }
 
+.frame-sections iframe.code
+{
+  background-color: var(--paleblue);
+  float: left;
+  width: 700px;
+  height: 700px;
+  padding: 0;
+  margin: 0px 5px 15px 0px;
+}
 
-
-a.nav-button, a.nav-button:visited
+/*-------------------------------------------------------------------------
+            Estiliza botoes Anterior e Proximo no fim da pagina
+-------------------------------------------------------------------------*/               
+a.nav-button, a.nav-button:visited 
 {
     display: block;
     background-color:rgb(141, 135, 135);
@@ -126,40 +136,17 @@ a.nav-button, a.nav-button:visited
     float: right;
 }
 
-dl.deflist-default
-{
-  margin:0;
-  padding: 5px;
-  border: solid 2px;
-}
-
-dl.deflist-default dt
-{
-  margin-top: 5px;
-  margin-bottom: 3px;
-  font-weight: bolder;
-}
-
-dl.deflist-default dd
-{
-  margin-bottom: 3px;
-  padding:0;
-}
-
-iframe.code
-{
-  background-color: var(--paleblue);
-  float: left;
-  width: 700px;
-  height: 700px;
-  padding: 0;
-  margin: 0px 5px 15px 0px;
-}
-
+/*---------------------------------------------------------------------------
+                     Estiliza o rodape da pagina
+ --------------------------------------------------------------------------*/                     
 footer
 {
   clear: both;
 }
+
+/*--------------------------------------------------------------------------*/
+
+
 
 
 

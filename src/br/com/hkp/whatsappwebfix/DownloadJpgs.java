@@ -63,7 +63,7 @@ public final class DownloadJpgs
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private void downloadUrl(final String url) throws IOException
+    private void downloadUrl(final String url) 
     {
         if (!urlSet.add(url)) return;
         
@@ -81,8 +81,7 @@ public final class DownloadJpgs
             
             if (index != null)
             {
-                index++;
-                filenameIndexMap.put(filename, index);
+                filenameIndexMap.put(filename, ++index);
                 filename = filename.replace(EXT, "_" + index + EXT);
             }
             
@@ -110,7 +109,7 @@ public final class DownloadJpgs
     /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private void downloadHrefs(final Matcher m) throws IOException
+    private void downloadHrefs(final Matcher m) 
     {
                 
         while (m.find())
@@ -131,7 +130,7 @@ public final class DownloadJpgs
     /*[03]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private void downloadHttps(final Matcher m) throws IOException
+    private void downloadHttps(final Matcher m) 
     {
                
         while (m.find())

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/javacode.css"/>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+000</br>001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>107</br>108</br>109</br>110</br>111</br>112</br>113</br>114</br>115</br>116</br>117</br>118</br>119</br>120</br>121</br>122</br>123</br>
+</div>
+<pre><code>
+<span class="xw52fz_reserved">package</span> br.com.hkp.whatsappwebfix.gui;
+
+<span class="xw52fz_reserved">import</span> java.awt.<span class="xw52fz_classname">BorderLayout</span>;
+<span class="xw52fz_reserved">import</span> java.awt.<span class="xw52fz_classname">Color</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">JFrame</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">JProgressBar</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">JScrollPane</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">JTextArea</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">ScrollPaneConstants</span>;
+
+<span class="xw52fz_comment">/******************************************************************************
+ * Eh a janela da interface grafica dos apps que processam arquivos em lote.
+ * 
+ * @author "Pedro Reis"
+ * @since 28 de novembro de 2020 v1.0
+ * @version v1.0
+ *****************************************************************************/</span>
+
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">ProgressFrame</span> <span class="xw52fz_reserved">extends</span> <span class="xw52fz_classname">JFrame</span>
+{
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">JTextArea</span> jTextArea;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">JScrollPane</span> jScrollPane;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">JProgressBar</span> jProgressBar;
+    
+    <span class="xw52fz_comment">/*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Configura a janela.
+     * 
+     * @param title Um titulo para a janela
+     * 
+     * @param width Largura da janela
+     * 
+     * @param height Altura da janela
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_classname">ProgressFrame</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> title, <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">int</span> width, <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">int</span> height)
+    {
+        <span class="xw52fz_reserved">super</span>(title);
+        
+        <span class="xw52fz_method">setSize</span>(width, height);
+        
+        <span class="xw52fz_method">setLocationRelativeTo</span>(<span class="xw52fz_reserved">null</span>);
+       
+        <span class="xw52fz_method">setDefaultCloseOperation</span>(<span class="xw52fz_classname">JFrame</span>.<span class="xw52fz_constant">EXIT_ON_CLOSE</span>);
+       
+        <span class="xw52fz_method">setLayout</span>(<span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">BorderLayout</span>());
+        
+        jTextArea = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">JTextArea</span>();
+        
+        jTextArea.<span class="xw52fz_method">setEditable</span>(false);
+        
+        jScrollPane = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">JScrollPane</span>(jTextArea);
+        
+        jScrollPane.<span class="xw52fz_method">setVerticalScrollBarPolicy</span>
+        (
+            <span class="xw52fz_classname">ScrollPaneConstants</span>.<span class="xw52fz_constant">VERTICAL_SCROLLBAR_AS_NEEDED</span>
+        );
+        
+        jScrollPane.<span class="xw52fz_method">setHorizontalScrollBarPolicy</span>
+        (
+            <span class="xw52fz_classname">ScrollPaneConstants</span>.<span class="xw52fz_constant">HORIZONTAL_SCROLLBAR_AS_NEEDED</span>
+        );
+        
+        jProgressBar = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">JProgressBar</span>();
+        jProgressBar.<span class="xw52fz_method">setVisible</span>(false);
+        
+        <span class="xw52fz_method">add</span>(jScrollPane, <span class="xw52fz_classname">BorderLayout</span>.<span class="xw52fz_constant">CENTER</span>);
+        <span class="xw52fz_method">add</span>(jProgressBar, <span class="xw52fz_classname">BorderLayout</span>.<span class="xw52fz_constant">SOUTH</span>);
+        
+        <span class="xw52fz_method">setVisible</span>(false);
+       
+    }<span class="xw52fz_comment">//construtor
+</span>    
+       
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Atualiza a barra de progresso exbindo o status do processo.
+     * 
+     * @param value O num. de arquivos jah processados
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">setProgressBarValue</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">int</span> value)
+    {
+        jProgressBar.<span class="xw52fz_method">setValue</span>(value);
+        jProgressBar.<span class="xw52fz_method">setString</span>(value + <span class="xw52fz_literalstring">" arquivos"</span>);
+    }<span class="xw52fz_comment">//setProgressBarValue()
+</span>    
+    <span class="xw52fz_comment">/*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Torna visivel a barra de progresso e a configura.
+     * 
+     * @param maximumValue O valor maximo que a barra de progresso pode assumir
+     * que serah exatamente o numero de arquivos a serem processados.
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">setProgressBarVisible</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">int</span> maximumValue)
+    {
+        jProgressBar.<span class="xw52fz_method">setStringPainted</span>(true);
+        jProgressBar.<span class="xw52fz_method">setForeground</span>(<span class="xw52fz_classname">Color</span>.<span class="xw52fz_constant">BLACK</span>);
+        jProgressBar.<span class="xw52fz_method">setValue</span>(0);
+        jProgressBar.<span class="xw52fz_method">setMaximum</span>(maximumValue);
+        jProgressBar.<span class="xw52fz_method">setVisible</span>(true);
+    }<span class="xw52fz_comment">//setProgressBarVisible()
+</span>    
+    <span class="xw52fz_comment">/*[04]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Imprime uma string na area de texto da janela e salta duas linhas. 
+     * 
+     * @param s A string.
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">println</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> s)
+    {
+        jTextArea.<span class="xw52fz_method">append</span>(s + <span class="xw52fz_literalstring">"\n\n"</span>);
+        jTextArea.<span class="xw52fz_method">setCaretPosition</span>(jTextArea.<span class="xw52fz_method">getText</span>().<span class="xw52fz_method">length</span>()); 
+    }<span class="xw52fz_comment">//println()
+</span>      
+    
+}<span class="xw52fz_comment">//classe ProgressFrame
+</span>
+</code></pre>
+</div></body>
+</html>

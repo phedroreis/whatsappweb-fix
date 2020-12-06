@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/javacode.css"/>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+000</br>001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>107</br>108</br>109</br>110</br>111</br>112</br>113</br>114</br>115</br>116</br>117</br>118</br>119</br>120</br>121</br>122</br>123</br>124</br>125</br>126</br>
+</div>
+<pre><code>
+<span class="xw52fz_reserved">package</span> br.com.hkp.whatsappwebfix.global;
+
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">File</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">JFileChooser</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">UIManager</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.filechooser.<span class="xw52fz_classname">FileNameExtensionFilter</span>;
+
+<span class="xw52fz_comment">/******************************************************************************
+ * A funcao desta classe eh fornecer metodos e campos que sejam de acesso para 
+ * todas as outras classes do projeto.
+ * 
+ * @author "Pedro Reis"
+ * @since 27 de novembro de 2020 v1.0
+ * @version v1.0
+ *****************************************************************************/</span>
+
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">Global</span>
+{
+   <span class="xw52fz_comment">/**
+    * Diretorio comum para acesso de todos os arquivos salvos do WhatsApp Web.
+    * Todos os arquivos compartilhados pelas paginas salvas do app devem ficar 
+    * aqui
+    */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">PASTA_BASE</span> = <span class="xw52fz_literalstring">"PastaBase"</span>;
+    
+    <span class="xw52fz_comment">/**
+     * Eh o nome do diretorio para onde serao movidos os arquivos PNG de imagem
+     * de emojis.
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">EMOJIS_DIRNAME</span> = <span class="xw52fz_literalstring">"emoji-images"</span>;
+        
+    <span class="xw52fz_comment">/**
+     * Esta string eh acrescentada a um arquivo que seja copia do original.
+     * Se o original for, por exemplo, index.html, sua copia editada serah
+     * nomeada como index.fix.html
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">FILENAME_DIFF</span> = <span class="xw52fz_literalstring">".fix"</span>;
+       
+            
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+                     Configura a classe FileChooser 
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * 
+     * 
+     * @param title Um titulo para a janela
+     */</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">fileChooserSettings</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> title)
+    {
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.openDialogTitleText"</span>, title);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.lookInLabelText"</span>, <span class="xw52fz_literalstring">"Selecionar"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.openButtonText"</span>, <span class="xw52fz_literalstring">"Abrir"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.cancelButtonText"</span>, <span class="xw52fz_literalstring">"Cancelar"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.fileNameLabelText"</span>, <span class="xw52fz_literalstring">"Nome do Arquivo"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.filesOfTypeLabelText"</span>, <span class="xw52fz_literalstring">"Tipo de Arquivo"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.folderNameLabelText"</span>, <span class="xw52fz_literalstring">"Selecionado"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>
+        (
+            <span class="xw52fz_literalstring">"FileChooser.openButtonToolTipText"</span>, <span class="xw52fz_literalstring">"Abrir o Arquivo Selecionado"</span>
+        ); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.cancelButtonToolTipText"</span>,<span class="xw52fz_literalstring">"Cancelar"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.fileNameHeaderText"</span>,<span class="xw52fz_literalstring">"Nome"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.upFolderToolTipText"</span>, <span class="xw52fz_literalstring">"Acima"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>
+        (
+            <span class="xw52fz_literalstring">"FileChooser.homeFolderToolTipText"</span>,
+            <span class="xw52fz_literalstring">"\u00c1rea de Trabalho"</span>
+        ); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.newFolderToolTipText"</span>,<span class="xw52fz_literalstring">"Nova Pasta"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.listViewButtonToolTipText"</span>,<span class="xw52fz_literalstring">"Lista"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.newFolderButtonText"</span>,<span class="xw52fz_literalstring">"Nova Pasta"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.renameFileButtonText"</span>, <span class="xw52fz_literalstring">"Renomear"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.deleteFileButtonText"</span>, <span class="xw52fz_literalstring">"Eliminar"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.filterLabelText"</span>, <span class="xw52fz_literalstring">"Tipo"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.detailsViewButtonToolTipText"</span>, <span class="xw52fz_literalstring">"Detalhes"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.fileSizeHeaderText"</span>,<span class="xw52fz_literalstring">"Tamanho"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>
+        (
+            <span class="xw52fz_literalstring">"FileChooser.fileDateHeaderText"</span>, 
+            <span class="xw52fz_literalstring">"Data de Altera\u00e7\u00e3o."</span>
+        );
+    }<span class="xw52fz_comment">//FileChooserSettings()
+</span>    
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+       
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Permite que o usuario selecione um diretorio ou um arquivo
+     * 
+     * @param title Um titulo para a janela
+     * 
+     * @param filter Um filtro que determina que tipo de arquivo pode ser 
+     * selecionado
+     * 
+     * @param chooseDir Se true so seleciona diretorios. Se false, arquivos.
+     * 
+     * @return O diretorio ou o arquivo selecionado
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">File</span> <span class="xw52fz_method">choose</span>
+    (
+        <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> title,
+        <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">FileNameExtensionFilter</span> filter, 
+        <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">boolean</span> chooseDir
+    )
+    {
+        <span class="xw52fz_method">fileChooserSettings</span>(title);
+        
+        <span class="xw52fz_classname">JFileChooser</span> fc = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">JFileChooser</span>();
+        
+        fc.<span class="xw52fz_method">setFileFilter</span>(filter);
+        
+        <span class="xw52fz_reserved">if</span> (chooseDir)
+            fc.<span class="xw52fz_method">setFileSelectionMode</span>(<span class="xw52fz_classname">JFileChooser</span>.<span class="xw52fz_constant">DIRECTORIES_ONLY</span>);
+        <span class="xw52fz_reserved">else</span>
+            fc.<span class="xw52fz_method">setFileSelectionMode</span>(<span class="xw52fz_classname">JFileChooser</span>.<span class="xw52fz_constant">FILES_ONLY</span>);
+
+        <span class="xw52fz_reserved">int</span> res = fc.<span class="xw52fz_method">showOpenDialog</span>(<span class="xw52fz_reserved">null</span>);
+
+        <span class="xw52fz_reserved">if</span>(res == <span class="xw52fz_classname">JFileChooser</span>.<span class="xw52fz_constant">APPROVE_OPTION</span>)
+            <span class="xw52fz_reserved">return</span> fc.<span class="xw52fz_method">getSelectedFile</span>();
+        <span class="xw52fz_reserved">else</span>
+            <span class="xw52fz_reserved">return</span> <span class="xw52fz_reserved">null</span>;
+        
+    }<span class="xw52fz_comment">//choose()
+</span>    
+}<span class="xw52fz_comment">//classe Global
+</span>
+</code></pre>
+</div></body>
+</html>

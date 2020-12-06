@@ -112,18 +112,7 @@ public final class WhatsAppEditor
     /*[01]---------------------------------------------------------------------
       
     -------------------------------------------------------------------------*/
-    /**
-     * Recebe uma string codificada em utf8 que eh o emoji a ser exibido e que
-     * foi lida do valor do atributo alt. Na tag que insere emojis na pagina.
-     *
-     * Esta string eh utilizada para encontrar o nome do arquivo que tem a 
-     * figura correspondente a este emoji.
-     * 
-     * @param utf8Emoji Um emoji codificado em utf8
-     * 
-     * @return O nome que deve ter o arquivo PNG com a imagem deste emoji
-     */
-    public String utf8EmojiToFilename(final String utf8Emoji)
+    private String utf8EmojiToFilename(final String utf8Emoji)
     {
         String codepoints = Normalizer.utf8ToCodepoints(utf8Emoji);
                
