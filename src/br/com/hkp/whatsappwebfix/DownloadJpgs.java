@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,12 +23,15 @@ public final class DownloadJpgs
        
     private static final String TARGET_DIR = "jpg";
     
+    private static final String EXT = "." + TARGET_DIR;
+    
     private FileOutputStream fos;
+    
+    private final HashMap<String, Integer> filenameIndexMap;
     
     private final HashSet<String> urlSet;
     
-    private final HashSet<String> filenameSet;
-    
+     
     /*[00]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
@@ -40,11 +44,10 @@ public final class DownloadJpgs
         
         count = 0;
                
-        urlSet = new HashSet<>(1000);
+        urlSet = new HashSet<>(2000);
         
-        filenameSet = new HashSet<>(1000);
-        
-        fos = null;
+        filenameIndexMap = new HashMap<>(2000);
+     
         try 
         {
            fos = new FileOutputStream("err.txt");
@@ -53,7 +56,7 @@ public final class DownloadJpgs
         } 
         catch(final FileNotFoundException e) 
         {
-           // tratamento do erro
+           System.err.println("Falha ao criar err.txt");
         }
     }//construtor
     
@@ -66,7 +69,7 @@ public final class DownloadJpgs
         
         int start = url.lastIndexOf('/');
         
-        int extPosition = url.indexOf(".jpg", start);
+        int extPosition = url.indexOf(EXT, start);
         
         if (extPosition == -1) return;
         
@@ -74,8 +77,15 @@ public final class DownloadJpgs
         {
             String filename = url.substring(start, extPosition + 4);
             
-            if (!filenameSet.add(filename)) return;
-
+            Integer index = filenameIndexMap.put(filename, 0);
+            
+            if (index != null)
+            {
+                index++;
+                filenameIndexMap.put(filename, index);
+                filename = filename.replace(EXT, "_" + index + EXT);
+            }
+            
             URL download = new URL(url);
 
             ReadableByteChannel rbc = 
@@ -152,7 +162,7 @@ public final class DownloadJpgs
         {
             if (!downloaDir.mkdirs())
             {
-                System.err.println("Erro ao criar pasta /jpg");
+                System.err.println("Erro ao criar pasta /" + TARGET_DIR);
                 System.exit(1);
             }
         } 
@@ -166,7 +176,8 @@ public final class DownloadJpgs
         /*
         regex para localizar nomes de arquivos jpg em tags img
         */
-        Pattern href = Pattern.compile("href=\"https.+?[.]jpg.+?\"");
+        Pattern href = 
+            Pattern.compile("href=\"https.+?[.]" + TARGET_DIR + ".+?\"");
                   
         downloadHrefs(href.matcher(contentFile));//baixa os arquivos 
         
@@ -176,14 +187,15 @@ public final class DownloadJpgs
         Pattern http = 
             Pattern.compile
             (
-                "https:\\\\/\\\\/scontent.+?([\"\\],{}]|[.]jpg).+?[\"\\],}]"
+                "https:\\\\/\\\\/scontent.+?([\"\\],{}]|[.]" + TARGET_DIR + ")"
+                + ".+?[\"\\],}]"
             );
                   
         downloadHttps(http.matcher(contentFile));//baixa os arquivos 
                      
         frame.setTitle("");
         
-        frame.println("Arquivos baixados para a pasta jpg");
+        frame.println("Arquivos baixados para a pasta " + TARGET_DIR);
         
         fos.close();
                
