@@ -3,11 +3,14 @@ package br.com.hkp.whatsappwebfix;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import br.com.hkp.whatsappwebfix.util.FileTools;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,8 +19,14 @@ public final class DownloadJpgs
     private final ProgressFrame frame;
     
     private int count;
-    
+       
     private static final String TARGET_DIR = "jpg";
+    
+    private FileOutputStream fos;
+    
+    private final HashSet<String> urlSet;
+    
+    private final HashSet<String> filenameSet;
     
     /*[00]---------------------------------------------------------------------
     
@@ -30,6 +39,22 @@ public final class DownloadJpgs
         frame = new ProgressFrame("Baixando...", 800, 450);
         
         count = 0;
+               
+        urlSet = new HashSet<>(1000);
+        
+        filenameSet = new HashSet<>(1000);
+        
+        fos = null;
+        try 
+        {
+           fos = new FileOutputStream("err.txt");
+           final PrintStream ps = new PrintStream(fos);
+           System.setErr(ps);
+        } 
+        catch(final FileNotFoundException e) 
+        {
+           // tratamento do erro
+        }
     }//construtor
     
     /*[01]---------------------------------------------------------------------
@@ -37,20 +62,39 @@ public final class DownloadJpgs
     -------------------------------------------------------------------------*/
     private void downloadUrl(final String url) throws IOException
     {
+        if (!urlSet.add(url)) return;
+        
         int start = url.lastIndexOf('/');
         
-        String filename = url.substring(start, url.indexOf(".jpg", start) + 4);
+        int extPosition = url.indexOf(".jpg", start);
         
-        URL download = new URL(url);
-  
-        ReadableByteChannel rbc = Channels.newChannel(download.openStream());
+        if (extPosition == -1) return;
         
-        FileOutputStream fos = new FileOutputStream(TARGET_DIR + filename);
-        
-        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-        
-        fos.close();
-           
+        try
+        {
+            String filename = url.substring(start, extPosition + 4);
+            
+            if (!filenameSet.add(filename)) return;
+
+            URL download = new URL(url);
+
+            ReadableByteChannel rbc = 
+                Channels.newChannel(download.openStream());
+
+            FileOutputStream thisFos = 
+                new FileOutputStream(TARGET_DIR + filename);
+
+            thisFos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+
+            thisFos.close();
+            
+            frame.println(String.format("%04d - %s\n", ++count, url));
+        }
+        catch (IOException ex)
+        {
+            System.err.println(ex);
+        }
+               
     }//downloadUrl()
    
     /*[02]---------------------------------------------------------------------
@@ -69,16 +113,7 @@ public final class DownloadJpgs
                 replace("amp;", "").
                 replace("\"", "");
             
-            try
-            {
-                downloadUrl(url);
-
-                frame.println(String.format("%04d - %s\n", ++count, url));
-            }
-            catch (IOException ex)
-            {
-                System.out.println(ex);
-            }
+            downloadUrl(url);
         }
  
     }//downloadHrefs()
@@ -93,16 +128,7 @@ public final class DownloadJpgs
         {
             String url = m.group().replace("\\/","/").replace("\"", "");
             
-            try
-            {
-                downloadUrl(url);
-                
-                frame.println(String.format("%04d - %s\n", ++count, url));
-            }
-            catch (IOException ex)
-            {
-                System.err.println(ex);
-            }
+            downloadUrl(url);
         }
  
     }//downloadHttps()
@@ -147,13 +173,19 @@ public final class DownloadJpgs
         /*
         regex para localizar nomes de arquivos jpg em scripts
         */
-        Pattern http = Pattern.compile("https:\\\\/\\\\/.+?[.]jpg.+?\"");
+        Pattern http = 
+            Pattern.compile
+            (
+                "https:\\\\/\\\\/scontent.+?([\"\\],{}]|[.]jpg).+?[\"\\],}]"
+            );
                   
         downloadHttps(http.matcher(contentFile));//baixa os arquivos 
                      
         frame.setTitle("");
         
         frame.println("Arquivos baixados para a pasta jpg");
+        
+        fos.close();
                
         java.awt.Toolkit.getDefaultToolkit().beep();
    
