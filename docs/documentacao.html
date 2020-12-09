@@ -54,13 +54,19 @@
             A linha 117 obtém a String de codepoints para este emoji. Enquanto a linha 119 acrescenta a esta String o caminho relativo e a extensão produzindo o nome do arquivo.
           </p>
           <p>
-            A linha 122 cria um objeto File com o caminho absoluto para representar este arquivo e a linha 124 testa se o arquivo existe.
+            Isto é, o nome do arquivo tem caminho relativo ao diretório onde estão os arquivos HTML processados pelo programa.
           </p>
           <p>
-            Caso não exista, o método verifica se existe um arquivo com a figura do emoji raiz deste emoji. E se existir retorna este nome de arquivo para que o programa possa pelo menos renderizar uma figura que se aproxime do emoji correto. No entanto a informação de que se trata de um arquivo com uma figura apenas semelhante é passada acrescentando uma exclamação (!) antes do nome do arquivo retornado.
+            A linha 122 cria um objeto File com o caminho absoluto para representar este arquivo e a linha 124 testa se o arquivo existe. (Aqui precisamos do caminho absoluto para o programa verificar se existe um arquivo no disco com este nome que foi obtido. Já o caminho relativo será utilizado no documento HTML para que este possa renderizar o emoji com este arquivo PNG.)
+          </p>
+          <p>
+            Mas caso não exista o arquivo, o método então verifica se existe um arquivo com a figura do emoji raiz deste emoji. E se existir retorna este nome de arquivo para que o programa possa pelo menos renderizar uma figura que se aproxime do emoji correto. No entanto a informação de que se trata de um arquivo com uma figura apenas semelhante é passada acrescentando uma exclamação (!) antes do nome do arquivo retornado.
           </p>
           <p>
             Mas se não existir nem mesmo um arquivo com a figura do emoji raiz o método retorna null.
+          </p>
+          <p>
+            Em suma: este método faz a associação entre a tag no arquivo HTML original que insere a figura do emoji, com o nome de um arquivo PNG na pasta emoji-images contendo justamente uma figura para o emoji especificado na tag.
           </p>
     
         <h4>getNewTag()</h4>
@@ -68,29 +74,67 @@
             O método recebe uma tag que insere emoji no arquivo original e retorna uma nova tag que deve substitui-la no arquivo cópia.
           </p>
           <p>
-            Na linha 162 um objeto Matcher é criado para localizar o atributo alt na tag.
+            O dado que define qual emoji deve ser renderizado é o valor do atributo alt na tag do arquivo original. 
+          </p>
+          <p>
+            Portanto na linha 162 um objeto Matcher é criado para localizar o atributo alt na tag. 
           </p>
           <p>
             A String com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 168. E o nome do arquivo que contém a figura deste emoji é obtido na linha 173.
           </p>
           <p>
-            A nova tag que este método vai retornar dependerá do nome atribuído a utf8Emoji. Se for null não existe arquivo PNG para este emoji no disco do usuário e uma tag span é retornada. Se o nome do arquivo estiver precedido por um sinal de exclamação, trata-se do arquivo com a imagem do emoji raiz e será retornada uma tag que coloca uma moldura vermelha na renderização do emoji. Nos outros casos é retornada uma tag img que insere o arquivo correto para este emoji.
+            A nova tag que este método vai retornar dependerá do nome atribuído a utf8Emoji. 
           </p>
+          <ul>
+            <li>
+              Se for null não existe arquivo PNG para este emoji na pasta emoji-images e uma tag span é retornada.
+            </li>
+            <li>
+              Se o nome do arquivo for retornado precedido por um sinal de exclamação (!) trata-se do arquivo com a figura do emoji raiz. O método irá construir uma tag para renderizar este emoji com uma fina moldura vermelha ao redor. Indicando para o leitor da página que aquela figura não é exatamente a figura do emoji mas somente uma que se aproxima e estava disponível na pasta emoji-images.
+            </li>
+            <li>
+              Nos outros casos é retornada uma tag img que insere o arquivo correto para este emoji.
+            </li>
+          </ul>
 
         <h4>getMap()</h4>  
           <p>
             Constrói um HashMap associando cada tag que insere emojis no arquivo original à tag que irá substitui-la no arquivo destino.
           </p>
+          <p>
+            getMap() varre o conteúdo do arquivo original procurando por tags que inserem emojis. Para cada nova tag localizada o método cria uma entrada na estrutura HashMap que tem esta tag como chave. E como o valor para esta chave, a tag pela qual será substituída no arquivo destino (cópia do original mas com tags deste tipo substituídas).
+          </p>
+          <p>
+            Numa próxima etapa, o método createNewFile() irá varrer o arquivo original para cada chave (tag original) neste HashMap, substituindo-a no arquivo destino pelo seu respetivo valor (tag gerada pelo programa) neste HashMap.
+          </p>
 
         <h4>createNewFile()</h4>  
           <p>
-            Produz o arquivo HTML capaz de renderizar os emojis.
+            Cria o arquivo HTML capaz de renderizar os emojis.
           </p>
+          <p>
+            Na linha 225 o arquivo que será gravado é criado. Em seguida, na linha 231, tagMap recebe um HashMap mapeando todas as tags que inserem emojis no arquivo original, em tags que irão substitui-las no arquivo destino criado na linha 225.
+          </p>
+          <p>
+            O loop na linha 233 obtém cada uma das chaves neste mapa (as tags originais) e varre o conteúdo do arquivo original substituindo as ocorrências desta tag. As novas tags irão renderizar o emoji com os arquivos PNG baixados pela aplicação GetPngs.jar deste projeto.
+          </p>
+          <p>
+            A linha 236 grava este conteúdo editado no arquivo destino equanto que a linha 238 fecha este arquivo.
+          </p>
+          <p>
+            O método agora se ocupa de gravar um arquivo de relatório listando todos os emojis que a página tentava inserir, informando juntamente seus respectivos codepoints e a informação se o emoji foi renderizado corretamente, se o programa teve que usar o arquivo com a figura deste emoji raiz, ou se, na falta de um arquivo PNG para este emoji e até para seu raiz, este foi inserido na página simplesmente como  um caractere UNICODE por meio de uma tag span.
+          </p>
+          <p>
+            A estrutura de dados com esta informação é também um HashMap cujas entradas foram inseridas nas execuções do método utf8EmojiToFilename(). Para cada String UTF-8 que utf8EmojiToFilename() converteu para nome de arquivo, o método verificou se este respectivo arquivo existia, se o que existia era apenas o arquivo com a imagem do emoji raiz, ou se nenhum arquivo PNG disponível poderia ser adequado para a renderização do emoji. E esse dado foi então inserido como uma entrada no HashMap emojisReport.
+          </p>
+
 
       <h3>Classe DownloadPngs</h3>
         <p>
           Esta classe usa um arquivo com o código fonte da URL https://emojipedia.org/whatsapp/ para localizar e baixar os arquivos PNG com figuras de emojis estilo WhatsApp.
         </p>
+
+        <iframe class="code" src="javacode/DownloadPngs.html"></iframe>
 
 
       <h3>Classe NormalizeFilenames</h3>

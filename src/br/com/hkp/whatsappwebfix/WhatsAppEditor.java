@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
 /******************************************************************************
  * Esta classe tem todos os metodos para criar uma copia editada de uma pagina
  * salva com conversas no app WhatsApp Web.
@@ -121,34 +119,40 @@ public final class WhatsAppEditor
         
         File test = new File(absolutePath + filename);
                
-        if (!test.exists())
+        if (test.exists())
+        {
+            emojisReport.put
+            (
+                utf8Emoji,
+                "Renderizado                : " + codepoints
+            );
+        }
+        else
         {
             filename = filename.replaceAll("-[-a-f0-9]+[.]png", ".png");
                                
             test = new File(absolutePath + filename);
             
-            if (!test.exists())
+            if (test.exists())
             {
                 emojisReport.put
                 (
-                    utf8Emoji, 
-                    codepoints + " : Faltando arquivo PNG"
+                    utf8Emoji,
+                    "Renderizado com emoji raiz : " + codepoints
                 );
-                return null;
+                return ("!" + filename);
             }
             else
             {
                 emojisReport.put
                 (
-                    utf8Emoji,
-                    codepoints + " : Renderizado com emoji raiz"
+                    utf8Emoji, 
+                    "Faltando arquivo PNG       : " + codepoints
                 );
-                return ("!" + filename);
+                return null;
             }
-        }
-        else
-            emojisReport.put(utf8Emoji, codepoints + " : Renderizado");
-        
+        }//if-else
+              
         return filename;
         
     }//utf8EmojiToFilename()

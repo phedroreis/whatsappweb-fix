@@ -92,6 +92,7 @@
 .frame-sections li
 {
     padding: 0.5em;
+    text-align: justify;
 }
 
 .frame-sections code.htmlcode /*Para codigo HTML*/

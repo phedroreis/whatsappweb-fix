@@ -1,4 +1,3 @@
-
 package br.com.hkp.whatsappwebfix.apps;
 
 import br.com.hkp.whatsappwebfix.WhatsAppEditor;

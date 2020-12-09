@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/javacode.css"/>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+000</br>001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>107</br>
+</div>
+<pre><code>
+<span class="xw52fz_reserved">package</span> br.com.hkp.whatsappwebfix;
+
+<span class="xw52fz_reserved">import</span> br.com.hkp.whatsappwebfix.gui.<span class="xw52fz_classname">ProgressFrame</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.whatsappwebfix.util.<span class="xw52fz_classname">FileTools</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">File</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">IOException</span>;
+<span class="xw52fz_reserved">import</span> java.util.regex.<span class="xw52fz_classname">Matcher</span>;
+<span class="xw52fz_reserved">import</span> java.util.regex.<span class="xw52fz_classname">Pattern</span>;
+
+<span class="xw52fz_comment">/*****************************************************************************
+ * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
+ * Emojipedia.
+ * 
+ * @since 27 de novembro de 2020 
+ * @version 1.0
+ * @author "Pedro Reis"
+ ****************************************************************************/</span>
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">DownloadPngs</span>
+{
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">ProgressFrame</span> frame;
+    
+    <span class="xw52fz_comment">/*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Construtor da classe
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_classname">DownloadPngs</span>()
+    {
+        frame = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">ProgressFrame</span>(<span class="xw52fz_literalstring">"Baixando..."</span>, 800, 450);
+    }<span class="xw52fz_comment">//construtor
+</span>   
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">downloadAll</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">Matcher</span> m, <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> toDelete) 
+        <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_reserved">int</span> count = 0;
+        
+        <span class="xw52fz_reserved">while</span> (m.<span class="xw52fz_method">find</span>())
+        {
+            <span class="xw52fz_classname">String</span> url = m.<span class="xw52fz_method">group</span>().<span class="xw52fz_method">replace</span>(toDelete, <span class="xw52fz_literalstring">""</span>);
+            
+            <span class="xw52fz_classname">FileTools</span>.<span class="xw52fz_method">downloadUrl</span>(url, <span class="xw52fz_literalstring">"png"</span>);
+            
+            frame.<span class="xw52fz_method">println</span>(<span class="xw52fz_classname">String</span>.<span class="xw52fz_method">format</span>(<span class="xw52fz_literalstring">"%04d - %s\n"</span>, ++count, url));
+        }
+ 
+    }<span class="xw52fz_comment">//downloadAll()
+</span>    
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Baixa os arquivos listados na pagina de WhatsApp emojis da Emojipedia.
+     * 
+     * @param emojipediaFile
+     * @throws IOException Em caso de erro de IO
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">downloadPngs</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> emojipediaFile) <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+      
+        <span class="xw52fz_classname">File</span> downloaDir = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">File</span>(<span class="xw52fz_literalstring">"png"</span>);
+        
+        <span class="xw52fz_reserved">if</span> (!downloaDir.<span class="xw52fz_method">exists</span>())
+        {
+            <span class="xw52fz_reserved">if</span> (!downloaDir.<span class="xw52fz_method">mkdirs</span>())
+            {
+                <span class="xw52fz_classname">System</span>.err.<span class="xw52fz_method">println</span>(<span class="xw52fz_literalstring">"Erro ao criar pasta /png"</span>);
+                <span class="xw52fz_classname">System</span>.<span class="xw52fz_method">exit</span>(1);
+            }
+        } 
+                       
+        <span class="xw52fz_classname">String</span> contentFile = <span class="xw52fz_classname">FileTools</span>.<span class="xw52fz_method">readTextFile</span>(emojipediaFile);
+             
+      <span class="xw52fz_comment">/*---------------------------------------------------------------------*/</span>
+            
+        frame.<span class="xw52fz_method">setVisible</span>(true);
+        
+        <span class="xw52fz_comment">/*
+        regex para localizar nomes de arquivos PNG no atributo srcset
+        */</span>
+        <span class="xw52fz_classname">Pattern</span> srcSet = <span class="xw52fz_classname">Pattern</span>.<span class="xw52fz_method">compile</span>(<span class="xw52fz_literalstring">" srcset=\"https.+?\\.png\\b"</span>);
+        
+        <span class="xw52fz_classname">Matcher</span> m = srcSet.<span class="xw52fz_method">matcher</span>(contentFile);
+        
+        <span class="xw52fz_method">downloadAll</span>(m, <span class="xw52fz_literalstring">" srcset=\""</span>);<span class="xw52fz_comment">//baixa os arquivos que regex localizar
+</span>        
+        <span class="xw52fz_comment">/*
+        regex para localizar nomes de arquivos PNG no atributo data-src
+        */</span>
+        <span class="xw52fz_classname">Pattern</span> dataSrc = <span class="xw52fz_classname">Pattern</span>.<span class="xw52fz_method">compile</span>(<span class="xw52fz_literalstring">"data-src=\"https.+?\\.png\\b"</span>);
+        
+        m = dataSrc.<span class="xw52fz_method">matcher</span>(contentFile);
+        
+        <span class="xw52fz_method">downloadAll</span>(m, <span class="xw52fz_literalstring">"data-src=\""</span> );<span class="xw52fz_comment">//baixa os arqs. que regex localizar
+</span>        
+        frame.<span class="xw52fz_method">setTitle</span>(<span class="xw52fz_literalstring">""</span>);
+        
+        frame.<span class="xw52fz_method">println</span>(<span class="xw52fz_literalstring">"Arquivos baixados para a pasta png"</span>);
+               
+        java.awt.<span class="xw52fz_classname">Toolkit</span>.<span class="xw52fz_method">getDefaultToolkit</span>().<span class="xw52fz_method">beep</span>();
+   
+    }<span class="xw52fz_comment">//downloadPngs()
+</span>    
+}<span class="xw52fz_comment">//classe DownloadPngs
+</span>
+</code></pre>
+</div></body>
+</html>
