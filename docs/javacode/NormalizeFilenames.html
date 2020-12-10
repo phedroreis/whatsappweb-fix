@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/javacode.css"/>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+000</br>001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>107</br>108</br>109</br>110</br>111</br>112</br>113</br>114</br>115</br>116</br>117</br>118</br>119</br>120</br>121</br>122</br>123</br>124</br>125</br>126</br>127</br>128</br>129</br>130</br>131</br>132</br>133</br>134</br>135</br>136</br>137</br>138</br>139</br>140</br>141</br>142</br>143</br>144</br>145</br>146</br>147</br>148</br>149</br>150</br>151</br>152</br>153</br>154</br>155</br>156</br>157</br>158</br>159</br>160</br>161</br>162</br>163</br>164</br>165</br>166</br>167</br>168</br>169</br>170</br>171</br>172</br>173</br>174</br>175</br>176</br>177</br>178</br>179</br>180</br>181</br>182</br>183</br>184</br>185</br>186</br>187</br>188</br>189</br>190</br>191</br>192</br>193</br>194</br>195</br>196</br>197</br>198</br>199</br>200</br>201</br>202</br>203</br>204</br>205</br>206</br>
+</div>
+<pre><code>
+<span class="xw52fz_reserved">package</span> br.com.hkp.whatsappwebfix;
+
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.whatsappwebfix.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_constant">EMOJIS_DIRNAME</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.whatsappwebfix.gui.<span class="xw52fz_classname">ProgressFrame</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.whatsappwebfix.util.<span class="xw52fz_classname">Normalizer</span>.<span class="xw52fz_method">filenameToCodepoints</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">File</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">FileNotFoundException</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">FilenameFilter</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">PrintWriter</span>;
+<span class="xw52fz_reserved">import</span> java.util.<span class="xw52fz_classname">TreeMap</span>;
+
+<span class="xw52fz_comment">/******************************************************************************
+
+ *****************************************************************************/</span>
+
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">NormalizeFilenames</span>
+{
+    <span class="xw52fz_comment">/*
+    Para gravar o arquivo de log do processo
+    */</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_classname">PrintWriter</span> printWriter;
+    
+    <span class="xw52fz_comment">/*-------------------------------------------------------------------------
+    O arquivo de log eh no formato HTML. HEAD e FOOTER sao gravadas 
+    respectivamente no inicio e no final desse arquivo
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">STYLE</span> =
+<span class="xw52fz_literalstring">"  &lt;style&gt;\n"</span> +
+<span class="xw52fz_literalstring">"    th\n"</span> +
+<span class="xw52fz_literalstring">"    {\n"</span> +    
+<span class="xw52fz_literalstring">"      padding:10px\n"</span> +   
+<span class="xw52fz_literalstring">"    }\n"</span> +    
+<span class="xw52fz_literalstring">"    td, th\n"</span> + 
+<span class="xw52fz_literalstring">"    {\n/"</span> +
+<span class="xw52fz_literalstring">"      text-align: left;\n"</span> +
+<span class="xw52fz_literalstring">"    }\n"</span> + 
+<span class="xw52fz_literalstring">"    tr:nth-child(even)\n"</span> +
+<span class="xw52fz_literalstring">"    {\n"</span> +
+<span class="xw52fz_literalstring">"      background-color: #dddddd;\n"</span> +
+<span class="xw52fz_literalstring">"    }\n"</span> +
+<span class="xw52fz_literalstring">"  &lt;/style&gt;\n"</span>;    
+    
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">HEAD</span> = 
+<span class="xw52fz_literalstring">"&lt;!DOCTYPE html&gt;\n"</span> +
+<span class="xw52fz_literalstring">"&lt;html lang=\"pt-br\"&gt;\n"</span> +
+<span class="xw52fz_literalstring">"&lt;head&gt;\n"</span> +
+<span class="xw52fz_literalstring">"  &lt;meta charset=\"UTF-8\"&gt;\n"</span> +
+<span class="xw52fz_literalstring">"  &lt;title&gt;Log&lt;/title&gt;\n"</span> + <span class="xw52fz_constant">STYLE</span> +    
+<span class="xw52fz_literalstring">"&lt;/head&gt;\n"</span> +
+<span class="xw52fz_literalstring">"&lt;body&gt;\n"</span> +
+<span class="xw52fz_literalstring">"  &lt;table&gt;\n"</span> +
+<span class="xw52fz_literalstring">"    &lt;tr&gt;\n"</span> +
+<span class="xw52fz_literalstring">"      &lt;th&gt;Emoji&lt;/th&gt;\n"</span> +    
+<span class="xw52fz_literalstring">"      &lt;th&gt;Nome Original&lt;/th&gt;\n"</span> +
+<span class="xw52fz_literalstring">"      &lt;th&gt;Normalizado&lt;/th&gt;\n"</span> +
+<span class="xw52fz_literalstring">"    &lt;/tr&gt;\n"</span> +
+<span class="xw52fz_literalstring">"    &lt;tbody&gt;\n"</span>;
+
+    
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">FOOTER</span> = 
+<span class="xw52fz_literalstring">"    &lt;/tbody&gt;\n"</span> +    
+<span class="xw52fz_literalstring">"  &lt;/table&gt;\n"</span> +   
+<span class="xw52fz_literalstring">"&lt;/body&gt;\n"</span> +
+<span class="xw52fz_literalstring">"&lt;/html&gt;"</span>;
+    
+    <span class="xw52fz_comment">/*-----------------------------------------------------------------------*/</span>
+    
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+       
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Normaliza os nomes dos arquivos PNG e os move para uma pasta propria.
+     * 
+     * @param dir O diretorio onde estao os arquivo a serem normalizados
+     * 
+     * @throws java.io.FileNotFoundException
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">normalize</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> dir) <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">FileNotFoundException</span>
+    {
+        <span class="xw52fz_classname">ProgressFrame</span> normalizeFrame = 
+            <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">ProgressFrame</span>(<span class="xw52fz_literalstring">"Normalizando..."</span>, 700, 450);
+        
+        <span class="xw52fz_classname">File</span>[] fileList = dir.<span class="xw52fz_method">listFiles</span>(<span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">EmojiFileFilter</span>());
+        
+        normalizeFrame.<span class="xw52fz_method">setVisible</span>(true);
+        
+        <span class="xw52fz_reserved">if</span> (fileList.length == 0)
+        {
+            normalizeFrame.<span class="xw52fz_method">setTitle</span>(<span class="xw52fz_literalstring">"Arquivos n\u00e3o encontrados"</span>);
+            normalizeFrame.<span class="xw52fz_method">setSize</span>(375, 120);
+            normalizeFrame.<span class="xw52fz_method">println</span>
+            (
+                <span class="xw52fz_literalstring">"\n\n      Nenhum arquivo com imagem de emoji encontrado!"</span>
+            );
+            
+            <span class="xw52fz_reserved">return</span>;
+        }
+        
+        normalizeFrame.<span class="xw52fz_method">setProgressBarVisible</span>(fileList.length);
+         
+        <span class="xw52fz_comment">/*--------------------------------------------------------------------
+        Cria um novo diretorio, de nome emoji-images, dentro do diretorio onde
+        estao os arquivos PNG com as imagens do emojis.
+        ---------------------------------------------------------------------*/</span>
+        <span class="xw52fz_classname">File</span> newDir = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">File</span>(dir.<span class="xw52fz_method">getAbsolutePath</span>()+ <span class="xw52fz_literalstring">"/"</span> + <span class="xw52fz_constant">EMOJIS_DIRNAME</span>);
+        
+        <span class="xw52fz_classname">String</span> newDirName = newDir.<span class="xw52fz_method">getAbsolutePath</span>();
+        
+        <span class="xw52fz_reserved">if</span> (!newDir.<span class="xw52fz_method">exists</span>()) newDir.<span class="xw52fz_method">mkdirs</span>();
+        
+        <span class="xw52fz_comment">/*--------------------------------------------------------------------*/</span>
+      
+        <span class="xw52fz_reserved">int</span> barValue = 0; <span class="xw52fz_comment">//contador de num. de arquivos jah normalizados
+</span>        
+        <span class="xw52fz_classname">TreeMap</span>&lt;<span class="xw52fz_classname">String</span>, <span class="xw52fz_classname">String</span>&gt; map = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">TreeMap</span>&lt;&gt;();
+        
+        <span class="xw52fz_comment">/*--------------------------------------------------------------------
+         Normaliza os nomes dos arquivos PNG e os move para o diretorio recem-
+         criado
+        ---------------------------------------------------------------------*/</span> 
+        <span class="xw52fz_reserved">for</span> (<span class="xw52fz_classname">File</span> file: fileList)
+        {
+            <span class="xw52fz_classname">String</span> filename = file.<span class="xw52fz_method">getName</span>();
+            
+            <span class="xw52fz_classname">String</span> normalizedFilename = <span class="xw52fz_method">filenameToCodepoints</span>(filename) + <span class="xw52fz_literalstring">".png"</span>;
+            
+            <span class="xw52fz_comment">/*
+            Insere nome original do arquivo e o normalizado em um TreeMap
+            para que o arquivo de log exiba uma lista de todos os PNGs 
+            normalizados ordenada alfabeticamente pelo nome original
+            */</span>
+            map.<span class="xw52fz_method">put</span>(filename, normalizedFilename);
+                                
+            <span class="xw52fz_comment">/*-----------------------------------------------------------------
+            O arquivo eh renomeado fazendo com que seja movido para o diretorio
+            recem criado
+            ------------------------------------------------------------------*/</span>
+            <span class="xw52fz_classname">File</span> newName = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">File</span>(newDirName + <span class="xw52fz_literalchar">'/'</span> + normalizedFilename);
+            
+            normalizeFrame.<span class="xw52fz_method">println</span>
+            (
+                filename + <span class="xw52fz_literalstring">" \u21e8 "</span> + <span class="xw52fz_constant">EMOJIS_DIRNAME</span> + <span class="xw52fz_literalchar">'/'</span> + newName.<span class="xw52fz_method">getName</span>() 
+            );
+        
+                        
+            file.<span class="xw52fz_method">renameTo</span>(newName); 
+            <span class="xw52fz_comment">/*----------------------------------------------------------------*/</span>
+                                                                     
+            normalizeFrame.<span class="xw52fz_method">setProgressBarValue</span>(++barValue);
+           
+        }<span class="xw52fz_comment">//fim do for 
+</span>        
+        <span class="xw52fz_comment">/*---------------------------------------------------------------------
+                             Grava o arquivo de log
+        ---------------------------------------------------------------------*/</span>
+        normalizeFrame.<span class="xw52fz_method">setTitle</span>(<span class="xw52fz_literalstring">"Gravando arquivo de log..."</span>);
+        
+        barValue = 0;
+       
+        printWriter = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">PrintWriter</span>(newDirName + <span class="xw52fz_literalstring">"/_emoji-list.html"</span>);
+        
+        printWriter.<span class="xw52fz_method">println</span>(<span class="xw52fz_constant">HEAD</span>);
+        
+        <span class="xw52fz_reserved">for</span>(<span class="xw52fz_classname">String</span> filename: map.<span class="xw52fz_method">keySet</span>())
+        {
+            <span class="xw52fz_classname">String</span> normalizedFilename = map.<span class="xw52fz_method">get</span>(filename);
+            printWriter.<span class="xw52fz_method">println</span>(<span class="xw52fz_literalstring">"    &lt;tr&gt;"</span>);
+            printWriter.<span class="xw52fz_method">println</span>
+            (
+                <span class="xw52fz_literalstring">"        &lt;td&gt;&lt;img src=\""</span> + normalizedFilename +<span class="xw52fz_literalstring">"\"&gt;&lt;/td&gt;"</span>
+            );
+            printWriter.<span class="xw52fz_method">println</span>(<span class="xw52fz_literalstring">"        &lt;td&gt;"</span> + filename + <span class="xw52fz_literalstring">"&lt;/td&gt;"</span>);
+            printWriter.<span class="xw52fz_method">println</span>(<span class="xw52fz_literalstring">"        &lt;td&gt;"</span> + normalizedFilename + <span class="xw52fz_literalstring">"&lt;/td&gt;"</span>);
+            printWriter.<span class="xw52fz_method">println</span>(<span class="xw52fz_literalstring">"    &lt;/tr&gt;"</span>);
+            normalizeFrame.<span class="xw52fz_method">setProgressBarValue</span>(++barValue);
+        }<span class="xw52fz_comment">//for    
+</span>        
+        printWriter.<span class="xw52fz_method">println</span>(<span class="xw52fz_constant">FOOTER</span>);
+        
+        printWriter.<span class="xw52fz_method">close</span>();
+        
+        normalizeFrame.<span class="xw52fz_method">setTitle</span>(barValue + <span class="xw52fz_literalstring">" arquivos normalizados"</span>);
+        <span class="xw52fz_comment">/*--------------------------------------------------------------------*/</span>
+        
+        java.awt.<span class="xw52fz_classname">Toolkit</span>.<span class="xw52fz_method">getDefaultToolkit</span>().<span class="xw52fz_method">beep</span>();
+         
+    }<span class="xw52fz_comment">//normalize()
+</span>      
+    <span class="xw52fz_comment">/*=========================================================================
+                             Classe interna
+    =========================================================================*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">EmojiFileFilter</span> <span class="xw52fz_reserved">implements</span> <span class="xw52fz_classname">FilenameFilter</span>
+    {
+        <span class="xw52fz_comment">/*
+        Este filtro retorna true apenas para arquivos que sao imagens de emojis
+        baixadas da pagina https://emojipedia.org/whatsapp/2.19.352
+        */</span>
+        @<span class="xw52fz_classname">Override</span>
+        <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">boolean</span> <span class="xw52fz_method">accept</span>(<span class="xw52fz_classname">File</span> dir, <span class="xw52fz_classname">String</span> filename)
+        {
+            <span class="xw52fz_reserved">return</span> filename.<span class="xw52fz_method">matches</span>(<span class="xw52fz_literalstring">".+_[0-9a-f\\-_]+\\.png"</span>);
+        }<span class="xw52fz_comment">//accept()
+</span>
+    }<span class="xw52fz_comment">//classe EmojiFileFilter
+</span>    
+}<span class="xw52fz_comment">//classe NormalizeFileNames
+</span>
+</code></pre>
+</div></body>
+</html>

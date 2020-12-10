@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class GetJpgs
+public final class GetJpgs
 {
     /*[00]---------------------------------------------------------------------
     

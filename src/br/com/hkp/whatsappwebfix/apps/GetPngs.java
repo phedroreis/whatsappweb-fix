@@ -21,7 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  * @author "Pedro Reis"
  ****************************************************************************/
-public class GetPngs
+public final class GetPngs
 {
     /*[00]---------------------------------------------------------------------
     
@@ -39,13 +39,12 @@ public class GetPngs
         FileNameExtensionFilter filter = 
             new FileNameExtensionFilter("HTML", "html", "htm");
         
-        File file = 
-            Global.choose
-            (
-                "Selecione o arquivo whatsapp-emojis.html",
-                filter,
-                false
-            );
+        File file = Global.choose
+                    (
+                        "Selecione o arquivo whatsapp-emojis.html",
+                        filter,
+                        false
+                    );
                 
         if (file == null) System.exit(0);
         

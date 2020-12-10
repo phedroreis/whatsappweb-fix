@@ -2,13 +2,12 @@ package br.com.hkp.whatsappwebfix;
 
 import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
-import static br.com.hkp.whatsappwebfix.util.Normalizer.filenameToCodepoints;
+import br.com.hkp.whatsappwebfix.util.Normalizer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.util.TreeMap;
-import javax.swing.JFileChooser;
 
 /******************************************************************************
  * O conjunto de arquivos PNG que se obtem na pagina 
@@ -49,7 +48,6 @@ import javax.swing.JFileChooser;
  * <p>
  * Os arquivos de imagem PNG originalmente obtidos sao nomeados da forma como 
  * exemplificados em alguns nomes listados abaixo:
- * </p>
  * <ol>
  * <li>angry-face_1f620.png</li>
  * <li>adult_emoji-modifier-fitzpatrick-type-1-2_1f9d1-1f3fb_1f3fb.png</li>
@@ -171,29 +169,6 @@ public final class NormalizeFilenames
        
     -------------------------------------------------------------------------*/
     /**
-     * Obtem o diretorio onde estao os arquivos PNG com as imagens dos emojis.
-     * 
-     * @return O diretorio
-     */
-    public File getDir()
-    {
-        JFileChooser fc = new JFileChooser();
-
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int res = fc.showOpenDialog(null);
-
-        if(res == JFileChooser.APPROVE_OPTION)
-            return fc.getSelectedFile();
-        else
-            return null;
-        
-    }//getDir()
-    
-    /*[02]---------------------------------------------------------------------
-       
-    -------------------------------------------------------------------------*/
-    /**
      * Normaliza os nomes dos arquivos PNG e os move para uma pasta propria.
      * 
      * @param dir O diretorio onde estao os arquivo a serem normalizados
@@ -247,7 +222,8 @@ public final class NormalizeFilenames
         {
             String filename = file.getName();
             
-            String normalizedFilename = filenameToCodepoints(filename) + ".png";
+            String normalizedFilename = 
+                Normalizer.filenameToCodepoints(filename) + ".png";
             
             /*
             Insere nome original do arquivo e o normalizado em um TreeMap

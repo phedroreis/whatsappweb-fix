@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="css/deflist.css"/>
     <title>Especificação</title>
 </head>
+
 <body>
     <section class="frame-sections">
       <h1>Documentação do Código</h1>
 
       <p>
-        As classes do projeto serão distribuídas em 5 pacotes:
+        As classes do projeto são distribuídas em 5 pacotes:
       </p>
       <dl class="deflist-default">
         <dt>whatsappwebfix</dt>
@@ -77,10 +79,10 @@
             O dado que define qual emoji deve ser renderizado é o valor do atributo alt na tag do arquivo original. 
           </p>
           <p>
-            Portanto na linha 162 um objeto Matcher é criado para localizar o atributo alt na tag. 
+            Portanto na linha 166 um objeto Matcher é criado para localizar o atributo alt na tag. 
           </p>
           <p>
-            A String com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 168. E o nome do arquivo que contém a figura deste emoji é obtido na linha 173.
+            A String com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 172. E o nome do arquivo que contém a figura deste emoji é obtido na linha 177.
           </p>
           <p>
             A nova tag que este método vai retornar dependerá do nome atribuído a utf8Emoji. 
@@ -141,7 +143,9 @@
 
         <p>
           Faz o trabalho de normalizar os nomes dos arquivos baixados pela aplicação GetPngs.jar
-        </p>        
+        </p>    
+        
+        <iframe class="code" src="javacode/NormalizeFilenames.html"></iframe>
 
 
       <h2>Pacote apps</h2>
@@ -266,7 +270,7 @@
 
         <a href="introducao.html" target="frame" class="nav-button nav-button-prev">Anterior</a>
 
-        <a href="frame.html" target="frame" class="nav-button nav-button-next">Próxima</a>
+        <a href="estrutura-de-pacotes.html" target="frame" class="nav-button nav-button-next">Próxima</a>
 
     </footer>
     

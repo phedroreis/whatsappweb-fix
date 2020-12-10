@@ -1,0 +1,2660 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "whatsappweb-fix",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAF2S56QnsrSTBw=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "JavaReverse",
+			"ownedElements": [
+				{
+					"_type": "UMLPackage",
+					"_id": "AAAAAAF2S56QzMrToSA=",
+					"_parent": {
+						"$ref": "AAAAAAF2S56QnsrSTBw="
+					},
+					"name": "br",
+					"ownedElements": [
+						{
+							"_type": "UMLPackage",
+							"_id": "AAAAAAF2S56QzMrUxSM=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56QzMrToSA="
+							},
+							"name": "com",
+							"ownedElements": [
+								{
+									"_type": "UMLPackage",
+									"_id": "AAAAAAF2S56QzMrVK/c=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56QzMrUxSM="
+									},
+									"name": "hkp",
+									"ownedElements": [
+										{
+											"_type": "UMLPackage",
+											"_id": "AAAAAAF2S56QzMrWgaU=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56QzMrVK/c="
+											},
+											"name": "whatsappwebfix",
+											"ownedElements": [
+												{
+													"_type": "UMLClass",
+													"_id": "AAAAAAF2S56QzMrXJ1I=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "DownloadJpgs",
+													"attributes": [
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56Rb8tOOL4=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "frame",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtPfNo=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "count",
+															"visibility": "private",
+															"type": "int"
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtQhRM=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "TARGET_DIR",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"type": "String",
+															"isReadOnly": true,
+															"defaultValue": "\"jpg\""
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtRAbs=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "EXT",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"type": "String",
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtSTNU=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "fos",
+															"visibility": "private"
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtTip0=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "filenameIndexMap",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtUNuU=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "urlSet",
+															"tags": [
+																{
+																	"_type": "Tag",
+																	"_id": "AAAAAAF2S56RectxOXA=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RcMtUNuU="
+																	},
+																	"name": "collection",
+																	"kind": "string",
+																	"value": "HashSet"
+																}
+															],
+															"visibility": "private",
+															"isLeaf": true,
+															"type": "String",
+															"multiplicity": "*",
+															"isReadOnly": true
+														}
+													],
+													"operations": [
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56QzcrYKjU=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "DownloadJpgs",
+															"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nConstrutor da classe",
+															"stereotype": "constructor"
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56QzcrZTnI=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "downloadUrl",
+															"documentation": "[01]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56QzcraJlE=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56QzcrZTnI="
+																	},
+																	"name": "url",
+																	"type": "String"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56QzcrbpFA=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56QzcrZTnI="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56QzcrcuYU=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "downloadHrefs",
+															"documentation": "[02]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Qzcrd408=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56QzcrcuYU="
+																	},
+																	"name": "m"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56QzcreuSI=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56QzcrcuYU="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56Qzcrf8+k=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "downloadHttps",
+															"documentation": "Deleta o prefixo e strings amp; e as aspas no final\n[03]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56QzcrgNbs=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Qzcrf8+k="
+																	},
+																	"name": "m"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56QzcrhWWQ=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Qzcrf8+k="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56QzsrixVc=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56QzMrXJ1I="
+															},
+															"name": "downloadJpgs",
+															"documentation": "[04]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nBaixa os arquivos listados na pagina\n@param file o arquivo com as URLs\n@throws IOException Em caso de erro de IO",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56QzsrjFWg=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56QzsrixVc="
+																	},
+																	"name": "file"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Qzsrk2z4=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56QzsrixVc="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														}
+													],
+													"isFinalSpecialization": true,
+													"isLeaf": true
+												},
+												{
+													"_type": "UMLClass",
+													"_id": "AAAAAAF2S56Q4MrlQxc=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "DownloadPngs",
+													"documentation": "---------------------------------------------------------------------\nregex para localizar nomes de arquivos jpg em tags img\nregex para localizar nomes de arquivos jpg em scripts\nBaixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da\nEmojipedia.\n@since 27 de novembro de 2020\n@version 1.0\n@author \"Pedro Reis\"",
+													"attributes": [
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcMtV/kI=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q4MrlQxc="
+															},
+															"name": "frame",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														}
+													],
+													"operations": [
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56Q4Mrmcz0=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q4MrlQxc="
+															},
+															"name": "DownloadPngs",
+															"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nConstrutor da classe",
+															"stereotype": "constructor"
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56Q4MrnA5M=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q4MrlQxc="
+															},
+															"name": "downloadAll",
+															"documentation": "[01]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q4Mroa7A=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q4MrnA5M="
+																	},
+																	"name": "m"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q4MrpOpE=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q4MrnA5M="
+																	},
+																	"name": "toDelete",
+																	"type": "String"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q4MrqIeg=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q4MrnA5M="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56Q4MrrZC8=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q4MrlQxc="
+															},
+															"name": "downloadPngs",
+															"documentation": "[02]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nBaixa os arquivos listados na pagina de WhatsApp emojis da Emojipedia.\n@param emojipediaFile\n@throws IOException Em caso de erro de IO",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q4MrstQs=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q4MrrZC8="
+																	},
+																	"name": "emojipediaFile"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q4Mrtv3s=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q4MrrZC8="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														}
+													],
+													"isFinalSpecialization": true,
+													"isLeaf": true
+												},
+												{
+													"_type": "UMLClass",
+													"_id": "AAAAAAF2S56Q/Mru+8g=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "NormalizeFilenames",
+													"ownedElements": [
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56Q/MrvdoY=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q/Mru+8g="
+															},
+															"name": "EmojiFileFilter",
+															"documentation": "--------------------------------------------------------------------\n        Cria um novo diretorio, de nome emoji-images, dentro do diretorio onde\n        estao os arquivos PNG com as imagens do emojis.\n        ---------------------------------------------------------------------\n--------------------------------------------------------------------\n--------------------------------------------------------------------\n         Normaliza os nomes dos arquivos PNG e os move para o diretorio recem-\n         criado\n        ---------------------------------------------------------------------\nInsere nome original do arquivo e o normalizado em um TreeMap\n            para que o arquivo de log exiba uma lista de todos os PNGs \n            normalizados ordenada alfabeticamente pelo nome original\n-----------------------------------------------------------------\n            O arquivo eh renomeado fazendo com que seja movido para o diretorio\n            recem criado\n            ------------------------------------------------------------------\n----------------------------------------------------------------\n---------------------------------------------------------------------\n                             Grava o arquivo de log\n        ---------------------------------------------------------------------\n--------------------------------------------------------------------\n=========================================================================\n                             Classe interna\n    =========================================================================",
+															"visibility": "private",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56Q/MrwWCs=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q/MrvdoY="
+																	},
+																	"name": "accept",
+																	"documentation": "Este filtro retorna true apenas para arquivos que sao imagens de emojis\n        baixadas da pagina https://emojipedia.org/whatsapp/2.19.352",
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56Q/MrxBZ8=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56Q/MrwWCs="
+																			},
+																			"name": "dir"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56Q/Mryr4c=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56Q/MrwWCs="
+																			},
+																			"name": "filename",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56Q/crzZ+g=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56Q/MrwWCs="
+																			},
+																			"type": "boolean",
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														}
+													],
+													"documentation": "---------------------------------------------------------------------\nregex para localizar nomes de arquivos PNG no atributo srcset\nregex para localizar nomes de arquivos PNG no atributo data-src\nO conjunto de arquivos PNG que se obtem na pagina\nhttps://emojipedia.org/whatsapp/2.19.352 sao as figuras de emojis que serao\ninseridas nas paginas salvas do app WhatsApp Web.\n<p>\nNestas paginas ha tags <b>img</b> com funcao de inserir tais figuras onde um\natributo <b>alt</b> tem por valor uma string de caracteres indicando o emoji\na ser inserido. Representando este emoji pela string de codigos utf8 que o\ndefinem.\n<p>\nContudo, nas paginas salvas, por alguma razao estas tags nao funcionam.\nDiferentemente do que ocorre quando estas mesmas paginas sao renderizadas\nonline pelo navegador.\n<p>\nPortanto o objetivo deste projeto eh produzir uma ferramenta de software que\nedite estas tags, fazendo com que insiram as figuras dos emojis nas paginas\nsalvas pelo usuario e abertas em modo offline. Emojis estes que sao\nreferenciados nas tags por uma string de caracteres codificados em utf8.\n<p>\nLogo, a ferramenta deve localizar o arquivo com a figura relativa a este\nemoji por esta string do atributo alt. Para que a tag seja editada pela\nferramenta fazendo-a inserir a figura no arquivo de imagem no disco.\nArquivo este que terah por nome uma string de codepoints analoga a string\nutf8 do atributo alt na tag que serah editada.\n<p>\nEntao a funcao deste programa eh renomear todos estes arquivos obtidos da\npagina https://emojipedia.org/whatsapp/2.19.352 para que estes nomes sejam\numa string de codepoints que representem o emoji que corresponde a imagem no\narquivo.\n<p>\nOu seja, ira converter o nome de um arquivo com a imagem de um emoji X\nqualquer para uma string de codepoints Y que codifica este emoji. Mas o\npadrao desta string Y de codepoints deve ser exatamente o mesmo que sera\nusado na conversao das strings utf8 nos valores do atributo alt nas tags que\nserao editadas. Estas conversoes devem produzir a mesma string Y para que o\narquivo de imagem correspondente ao emoji X seja localizado no disco.\n<p>\nOs arquivos de imagem PNG originalmente obtidos sao nomeados da forma como\nexemplificados em alguns nomes listados abaixo:\n<ol>\n<li>angry-face_1f620.png</li>\n<li>adult_emoji-modifier-fitzpatrick-type-1-2_1f9d1-1f3fb_1f3fb.png</li>\n<li>blonde-woman-type-1-2_1f471-1f3fb-200d-2640-fe0f</li>\n</ol>\n<p>\nNo segundo caso o codepoint 1f3fb se repete e no terceiro o caractere de\nVARIATION SELECTOR-16 (fe0f) eh terminal no nome do arquivo.\n<p>\nMas a repeticao consecutiva de codepoints nao faz parte da representacao de\nemojis como strings de codepoints. Jah o caractere fe0f sempre que aparece,\neh no fim dessa string. No entanto alguns nomes e arquivos omitem esse\ncaractere mesmo quando ele faz parte da string de codepoints do emoji.\n<p>\nPor outro lado uma string de codepoints identificando um emoji, muitas vezes,\ninclui caracteres LOW SURROGATES. Tipos de caracteres estes que sempre sao\nomitidos nestes nomes de arquivos.\n<p>\nEntao como o objetivo eh criar uma normalizacao que sempre converta tanto um\nnome de arquivo, como uma string de codepoints de emoji, EXATAMENTE em uma\nmesma e identica string de codepoints, o que faremos eh eliminar codepoints\nconsecutivamente repetidos em nomes de arquivos. E eliminar LOW SURROGATES em\nstrings codepoints (obtidas a partir de strings utf8 nos arquivos HTML)\nque representam emojis. E também eliminar caracteres (ef0f) em ambos: nas\nstrings obtidas nos valores dos atributos alt das tags e nos sufixos de nomes\ndos arquivos.\n<p>\nPara ficar mais claro pode-se observar o seguinte exemplo:\n<p>\nPara o emoji do polegar para baixo, o nome orignal do arquivo eh\nthumbs-down-sign_1f44e.png.\n<p>\nElimando o prefixo com a descricao do emoji no nome do arquivo e a extensao\nfica apenas 1f44e.\n<p>\nE sua string no atributo alt da tag teria os  seguintes codepoints:\n1f44e-dc4e-fe0f\n<p>\nOnde cd4e eh um caractere LOW SURROGATE e fe0f eh o VARIATION SELECTOR.\n<p>Se eliminarmos os LOW SURROGATES na string lida no atributo alt, e os\nfe0f nesta e tambem nos nomes dos arquivos, obtemos de ambos a mesma string\n1f44e. E portanto o programa pode associar o valor do atributo alt (que\nindica qual emoji deve ser exibido) com o arquivo PNG que tem a imagem deste\nemoji.\n<p>\nJustamente o que queremos fazer para poder editar esta tag e faze-la exibir\na imagem do emoji e para isso localizando no disco o arquivo PNG que tem esta\nimagem.\n<p>\nPortanto o que o metodo normalize() desta classe faz eh aplicar nos nomes dos\narquivos PNG catalogados na pagina  https://emojipedia.org/whatsapp/2.19.352,\na parte desse procedimento destinada a normalizar os nomes de todos estes\narquivos.\n<p>\nEste metodo recebe como argumento o diretorio onde devem estar todos estes\narquivos e edita o nome de todos eles, normalizando-os, e movendo todos estes\narquivos para uma so pasta.\n@author \"Pedro Reis\"\n@since 28 de novembro de 2020 v1.0\n@version v1.0",
+													"attributes": [
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcctWXEs=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q/Mru+8g="
+															},
+															"name": "printWriter",
+															"documentation": "Para gravar o arquivo de log do processo",
+															"visibility": "private"
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcctXskM=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q/Mru+8g="
+															},
+															"name": "STYLE",
+															"documentation": "-------------------------------------------------------------------------\n    O arquivo de log eh no formato HTML. HEAD e FOOTER sao gravadas \n    respectivamente no inicio e no final desse arquivo\n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"type": "String",
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcctY04w=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q/Mru+8g="
+															},
+															"name": "HEAD",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"type": "String",
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcctZ1B0=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q/Mru+8g="
+															},
+															"name": "FOOTER",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"type": "String",
+															"isReadOnly": true
+														}
+													],
+													"operations": [
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56Q/cr0Beo=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56Q/Mru+8g="
+															},
+															"name": "normalize",
+															"documentation": "-----------------------------------------------------------------------\n[01]---------------------------------------------------------------------\n       \n    -------------------------------------------------------------------------\nNormaliza os nomes dos arquivos PNG e os move para uma pasta propria.\n@param dir O diretorio onde estao os arquivo a serem normalizados\n@throws java.io.FileNotFoundException",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q/cr1438=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q/cr0Beo="
+																	},
+																	"name": "dir"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56Q/cr2WD0=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56Q/cr0Beo="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														}
+													],
+													"isFinalSpecialization": true,
+													"isLeaf": true
+												},
+												{
+													"_type": "UMLClass",
+													"_id": "AAAAAAF2S56RIMr3388=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "WhatsAppEditor",
+													"documentation": "Esta classe tem todos os metodos para criar uma copia editada de uma pagina\nsalva com conversas no app WhatsApp Web.\n<p>\nEsta copia deve ser capaz de exibir os emojis inseridos pelo usuario. Ao\ncontrario do que ocorrem com as paginas originalmente salvas.\n@author \"Pedro Reis\"\n@since 29 de novembro de 2020 v1.0\n@version v1.0",
+													"attributes": [
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56Rcctath0=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "ALT_ATTR_PATTERN",
+															"documentation": "Localiza o atributo alt na tag que insere emojis",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56Rcctbfcg=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "EMOJI_TAG_PATTERN",
+															"documentation": "Localiza tags que inserem emojis",
+															"visibility": "private",
+															"isStatic": true,
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcstcHSk=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "htmlContent",
+															"documentation": "Aramazena todo o conteudo de um arquivo HTML",
+															"visibility": "private",
+															"type": "String"
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcstdmOI=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "buffer",
+															"documentation": "buffer para otimizar processos de leitura e gravacao",
+															"visibility": "private",
+															"isLeaf": true,
+															"type": "int",
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56Rcste/lY=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "absolutePath",
+															"documentation": "O diretorio onde estao os arquivos HTML",
+															"visibility": "private",
+															"isStatic": true,
+															"type": "String"
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcstfkCE=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "inputFile",
+															"documentation": "Arquivo que serah lido e arquivo que sera gravado e arquivo de relatorio",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcstgNtQ=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "outputFile",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56RcsthwHc=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "reportFile",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														},
+														{
+															"_type": "UMLAttribute",
+															"_id": "AAAAAAF2S56Rcstixys=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "emojisReport",
+															"documentation": "Um HashMap para conter entradas que associam um emoji UTF-8 a sua string de\n    codepoints juntamente com a informacao sobre como o emoji foi renderizado\n    pelo programa. As entradas desse HashMap serao gravadas em um arquivo texto.",
+															"visibility": "private",
+															"isLeaf": true,
+															"isReadOnly": true
+														}
+													],
+													"operations": [
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56RIMr4rNI=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "WhatsAppEditor",
+															"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nConstrutor da classe.\n@param file O arquivo que deve ser processado para gerar uma copia com as\ntags que inserem emojis editadas.\n@throws java.io.IOException Em caso de erro de IO",
+															"stereotype": "constructor",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIMr5BUE=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIMr4rNI="
+																	},
+																	"name": "file"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56RIMr6hcM=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "utf8EmojiToFilename",
+															"documentation": "[01]---------------------------------------------------------------------\n      \n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIcr70bA=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIMr6hcM="
+																	},
+																	"name": "utf8Emoji",
+																	"type": "String"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIcr872E=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIMr6hcM="
+																	},
+																	"type": "String",
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56RIcr9+9s=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "getNewTag",
+															"documentation": "[02]---------------------------------------------------------------------\n    A partir da tag que insere emojis no arquivo original, este metodo retorna\n    uma outra tag que irah inserir o emoji na copia alterada deste arquivo.\n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIcr+3ik=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIcr9+9s="
+																	},
+																	"name": "oldTag",
+																	"type": "String"
+																},
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIcr/gGk=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIcr9+9s="
+																	},
+																	"type": "String",
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56RIcsAqB4=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "getMap",
+															"documentation": "[03]---------------------------------------------------------------------\n      Retorna um HashMap associando cada tag que foi encontrada no arquivo\n      original a tag que deve substitui-la na copia editada deste arquivo.\n    -------------------------------------------------------------------------",
+															"visibility": "private",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIcsBW/g=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIcsAqB4="
+																	},
+																	"direction": "return"
+																}
+															]
+														},
+														{
+															"_type": "UMLOperation",
+															"_id": "AAAAAAF2S56RIcsCnL4=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RIMr3388="
+															},
+															"name": "createNewFile",
+															"documentation": "[04]---------------------------------------------------------------------\n        \n    -------------------------------------------------------------------------\nGrava um novo arquivo. Neste arquivo os emojis sao renderizados.\n@throws IOException Em caso de erro de IO.",
+															"parameters": [
+																{
+																	"_type": "UMLParameter",
+																	"_id": "AAAAAAF2S56RIcsDs0Q=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RIcsCnL4="
+																	},
+																	"type": "void",
+																	"direction": "return"
+																}
+															]
+														}
+													],
+													"isFinalSpecialization": true,
+													"isLeaf": true
+												},
+												{
+													"_type": "UMLPackage",
+													"_id": "AAAAAAF2S56RLcsEqaA=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "apps",
+													"ownedElements": [
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RLcsFkgc=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RLcsEqaA="
+															},
+															"name": "Fix",
+															"ownedElements": [
+																{
+																	"_type": "UMLClass",
+																	"_id": "AAAAAAF2S56RLcsGEuI=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RLcsFkgc="
+																	},
+																	"name": "HtmlFilter",
+																	"documentation": "Obtem o diretorio onde estao os arquivo HTML\n=========================================================================\n                              Classe interna\n    =========================================================================",
+																	"visibility": "private",
+																	"operations": [
+																		{
+																			"_type": "UMLOperation",
+																			"_id": "AAAAAAF2S56RLcsHePI=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RLcsGEuI="
+																			},
+																			"name": "accept",
+																			"parameters": [
+																				{
+																					"_type": "UMLParameter",
+																					"_id": "AAAAAAF2S56RLcsIjJo=",
+																					"_parent": {
+																						"$ref": "AAAAAAF2S56RLcsHePI="
+																					},
+																					"name": "dir"
+																				},
+																				{
+																					"_type": "UMLParameter",
+																					"_id": "AAAAAAF2S56RLcsJgpE=",
+																					"_parent": {
+																						"$ref": "AAAAAAF2S56RLcsHePI="
+																					},
+																					"name": "filename",
+																					"type": "String"
+																				},
+																				{
+																					"_type": "UMLParameter",
+																					"_id": "AAAAAAF2S56RLcsKyWo=",
+																					"_parent": {
+																						"$ref": "AAAAAAF2S56RLcsHePI="
+																					},
+																					"type": "boolean",
+																					"direction": "return"
+																				}
+																			]
+																		}
+																	],
+																	"isFinalSpecialization": true,
+																	"isLeaf": true
+																}
+															],
+															"documentation": "Cria copias de paginas HTML WhatsApp Web com os emojis renderizados.\n@author \"Pedro Reis\"\n@since 29 de novembro de 2020 v1.0\n@version v1.0",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RLcsLVcU=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RLcsFkgc="
+																	},
+																	"name": "fixAll",
+																	"documentation": "[01]---------------------------------------------------------------------\n         Corrige todos os arquivos HTML encontrados no diretorio dir\n    -------------------------------------------------------------------------",
+																	"visibility": "private",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RLssMAgE=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RLcsLVcU="
+																			},
+																			"name": "dir"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RLssNpYo=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RLcsLVcU="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RLssO6XE=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RLcsFkgc="
+																	},
+																	"name": "main",
+																	"documentation": "[02]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RLssP23o=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RLssO6XE="
+																			},
+																			"name": "args",
+																			"type": "String",
+																			"multiplicity": "*"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RLssQKyM=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RLssO6XE="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														},
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RMssRcoU=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RLcsEqaA="
+															},
+															"name": "GetJpgs",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RMssS2o8=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RMssRcoU="
+																	},
+																	"name": "main",
+																	"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\n@param args n/a",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RMssTiBw=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RMssS2o8="
+																			},
+																			"name": "args",
+																			"type": "String",
+																			"multiplicity": "*"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RMssUtLg=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RMssS2o8="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56ROMsVPRc=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RLcsEqaA="
+															},
+															"name": "GetPngs",
+															"documentation": "Obtem o arquivo whatsapp-emojis.html\nBaixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da\nEmojipedia.\n<p>\nEsse programa precisa encontrar o arquivo whatsapp-emojis.html no diretorio\ncorrente para executar. Neste arquivo ele encontra as URLs dos PNGs de\nemojis que serao baixados.\n<p>\nO arquivo whatsapp-emojis.html eh o codigo fonte da pagina\nhttps://emojipedia.org/whatsapp/\n@since 27 de novembro de 2020\n@version 1.0\n@author \"Pedro Reis\"",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56ROMsWULQ=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56ROMsVPRc="
+																	},
+																	"name": "main",
+																	"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\n@param args n/a",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56ROMsX8Xg=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56ROMsWULQ="
+																			},
+																			"name": "args",
+																			"type": "String",
+																			"multiplicity": "*"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56ROMsYfY8=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56ROMsWULQ="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RQMsZCLo=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RLcsEqaA="
+															},
+															"name": "Normalize",
+															"documentation": "Obtem o arquivo whatsapp-emojis.html\nO conjunto de arquivos PNG que se obtem no download da pagina\nhttps://emojipedia.org/whatsapp/2.19.352 sao as figuras de emojis que serao\ninseridas nas paginas salvas do app WhatsApp Web.\n<p>\nNestas paginas ha tags <b>img</b> com funcao de inserir tais figuras onde um\natributo <b>alt</b> tem por valor uma string de caracteres indicando o emoji\na ser inserido. Representando este emoji pela string de codigos utf8 que o\ndefinem.\n<p>\nContudo, nas paginas salvas, por alguma razao estas tags nao funcionam.\nDiferentemente do que ocorre quando estas mesmas paginas sao renderizadas\nonline pelo navegador.\n<p>\nPortanto o objetivo deste projeto eh produzir uma ferramenta de software que\nedite estas tags, fazendo com que insiram as figuras dos emojis nas paginas\nsalvas pelo usuario e abertas em modo offline. Emojis estes que sao\nreferenciados nas tags por uma string de caracteres codificados em utf8.\n<p>\nLogo, a ferramenta deve localizar o arquivo com a figura relativa a este\nemoji por esta string do atributo alt. Para que a tag seja editada pela\nferramenta fazendo-a inserir a figura no arquivo de imagem no disco.\nArquivo este que terah por nome uma string de codepoints analoga a string\nutf8 do atributo alt na tag que serah editada.\n<p>\nEntao a funcao deste programa eh renomear todos estes arquivos obtidos da\npagina https://emojipedia.org/whatsapp/2.19.352 para que estes nomes sejam\numa string de codepoints que representem o emoji que corresponde a imagem no\narquivo.\n<p>\nOu seja, ira converter o nome de um arquivo com a imagem de um emoji X\nqualquer para uma string de codepoints Y que codifica este emoji. Mas o\npadrao desta string Y de codepoints deve ser exatamente o mesmo que sera\nusado na conversao das strings utf8 nos valores do atributo alt nas tags que\nserao editadas. Estas conversoes devem produzir a mesma string Y para que o\narquivo de imagem correspondente ao emoji X seja localizado no disco.\n<p>\nOs arquivos de imagem PNG originalmente obtidos sao nomeados da forma como\nexemplificados em alguns nomes listados abaixo:\n</p>\n<ol>\n<li>angry-face_1f620.png</li>\n<li>adult_emoji-modifier-fitzpatrick-type-1-2_1f9d1-1f3fb_1f3fb.png</li>\n<li>blonde-woman-type-1-2_1f471-1f3fb-200d-2640-fe0f</li>\n</ol>\n<p>\nNo segundo caso o codepoint 1f3fb se repete e no terceiro o caractere de\nVARIATION SELECTOR-16 (fe0f) eh terminal no nome do arquivo.\n<p>\nMas a repeticao consecutiva de codepoints nao faz parte da representacao de\nemojis como strings de codepoints. Jah o caractere fe0f sempre que aparece,\neh no fim dessa string. No entanto alguns nomes e arquivos omitem esse\ncaractere mesmo quando ele faz parte da string de codepoints do emoji.\n<p>\nPor outro lado uma string de codepoints identificando um emoji, muitas vezes,\ninclui caracteres LOW SURROGATES. Tipos de caracteres estes que sempre sao\nomitidos nestes nomes de arquivos.\n<p>\nEntao como o objetivo eh criar uma normalizacao que sempre converta tanto um\nnome de arquivo, como uma string de codepoints de emoji, EXATAMENTE em uma\nmesma e identica string de codepoints, o que faremos eh eliminar codepoints\nconsecutivamente repetidos em nomes de arquivos. E eliminar LOW SURROGATES em\nstrings codepoints (obtidas a partir de strings utf8 nos arquivos HTML)\nque representam emojis. E também eliminar caracteres (ef0f) em ambos: nas\nstrings obtidas nos valores dos atributos alt das tags e nos sufixos de nomes\ndos arquivos.\n<p>\nPara ficar mais claro pode-se observar o seguinte exemplo:\n<p>\nPara o emoji do polegar para baixo, o nome orignal do arquivo eh\nthumbs-down-sign_1f44e.png.\n<p>\nElimando o prefixo com a descricao do emoji no nome do arquivo e a extensao\nfica apenas 1f44e.\n<p>\nE sua string no atributo alt da tag teria os  seguintes codepoints:\n1f44e-dc4e-fe0f\n<p>\nOnde cd4e eh um caractere LOW SURROGATE e fe0f eh o VARIATION SELECTOR.\n<p>Se eliminarmos os LOW SURROGATES na string lida no atributo alt, e os\nfe0f nesta e tambem nos nomes dos arquivos, obtemos de ambos a mesma string\n1f44e. E portanto o programa pode associar o valor do atributo alt (que\nindica qual emoji deve ser exibido) com o arquivo PNG que tem a imagem deste\nemoji.\n<p>\nJustamente o que queremos fazer para poder editar esta tag e faze-la exibir\na imagem do emoji e para isso localizando no disco o arquivo PNG que tem esta\nimagem.\n<p>\nPortanto o que esse programa faz eh aplicar nos nomes dos arquivos PNG\ncatalogados na pagina  https://emojipedia.org/whatsapp/2.19.352\na parte desse procedimento destinada a normalizar os nomes de todos estes\narquivos.\n@author \"Pedro Reis\"\n@since 28 de novembro de 2020 v1.0\n@version v1.0",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RQMsaZ5M=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RQMsZCLo="
+																	},
+																	"name": "main",
+																	"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\n@param args n/a",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RQMsblwU=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RQMsaZ5M="
+																			},
+																			"name": "args",
+																			"type": "String",
+																			"multiplicity": "*"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RQMscJlg=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RQMsaZ5M="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														}
+													],
+													"documentation": "Pacote para as classes executáveis JAR"
+												},
+												{
+													"_type": "UMLPackage",
+													"_id": "AAAAAAF2S56RUcsd52U=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "global",
+													"ownedElements": [
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RUcservw=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RUcsd52U="
+															},
+															"name": "Global",
+															"documentation": "Cria um objeto NormalizeFilenames que tem os metodos para normalizar\n        os nomes dos arquivos PNG com as imagens de emojis que serao utilizadas\nObtem o diretorio onde estao os arquivo PNG cujos nomes serao\n        normalizados\nChama o metodo para normalizar os nomes dos arquivos neste diretorio\n            e mover estes arquivos para agrupa-los todos em um outro diretorio\n            especifico.\nA funcao desta classe eh fornecer metodos e campos que sejam de acesso para\ntodas as outras classes do projeto.\n@author \"Pedro Reis\"\n@since 27 de novembro de 2020 v1.0\n@version v1.0",
+															"attributes": [
+																{
+																	"_type": "UMLAttribute",
+																	"_id": "AAAAAAF2S56Rcstjj+E=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RUcservw="
+																	},
+																	"name": "PASTA_BASE",
+																	"documentation": "Diretorio comum para acesso de todos os arquivos salvos do WhatsApp Web.\nTodos os arquivos compartilhados pelas paginas salvas do app devem ficar\naqui",
+																	"isStatic": true,
+																	"isLeaf": true,
+																	"type": "String",
+																	"isReadOnly": true,
+																	"defaultValue": "\"PastaBase\""
+																},
+																{
+																	"_type": "UMLAttribute",
+																	"_id": "AAAAAAF2S56Rcstk3nM=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RUcservw="
+																	},
+																	"name": "EMOJIS_DIRNAME",
+																	"documentation": "Eh o nome do diretorio para onde serao movidos os arquivos PNG de imagem\nde emojis.",
+																	"isStatic": true,
+																	"isLeaf": true,
+																	"type": "String",
+																	"isReadOnly": true,
+																	"defaultValue": "\"emoji-images\""
+																},
+																{
+																	"_type": "UMLAttribute",
+																	"_id": "AAAAAAF2S56RcstlI9U=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RUcservw="
+																	},
+																	"name": "FILENAME_DIFF",
+																	"documentation": "Esta string eh acrescentada a um arquivo que seja copia do original.\nSe o original for, por exemplo, index.html, sua copia editada serah\nnomeada como index.fix.html",
+																	"isStatic": true,
+																	"isLeaf": true,
+																	"type": "String",
+																	"isReadOnly": true,
+																	"defaultValue": "\".fix\""
+																}
+															],
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RUcsfyqo=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RUcservw="
+																	},
+																	"name": "fileChooserSettings",
+																	"documentation": "[01]---------------------------------------------------------------------\n                     Configura a classe FileChooser \n    -------------------------------------------------------------------------\n@param title Um titulo para a janela",
+																	"visibility": "private",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RUcsgIDs=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RUcsfyqo="
+																			},
+																			"name": "title",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RUcsh7hI=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RUcsfyqo="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RUcsizXA=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RUcservw="
+																	},
+																	"name": "choose",
+																	"documentation": "[02]---------------------------------------------------------------------\n       \n    -------------------------------------------------------------------------\nPermite que o usuario selecione um diretorio ou um arquivo\n@param title Um titulo para a janela\n@param filter Um filtro que determina que tipo de arquivo pode ser\nselecionado\n@param chooseDir Se true so seleciona diretorios. Se false, arquivos.\n@return O diretorio ou o arquivo selecionado",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RUcsjy6o=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RUcsizXA="
+																			},
+																			"name": "title",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RUcskk5U=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RUcsizXA="
+																			},
+																			"name": "filter"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RUcslnno=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RUcsizXA="
+																			},
+																			"name": "chooseDir",
+																			"type": "boolean"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RUssm0ks=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RUcsizXA="
+																			},
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														}
+													],
+													"documentation": "Pacote a classe com métodos e campos para acesso por todas as outras classes do projeto"
+												},
+												{
+													"_type": "UMLPackage",
+													"_id": "AAAAAAF2S56RXMsnw+g=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "gui",
+													"ownedElements": [
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RXMsonE4=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RXMsnw+g="
+															},
+															"name": "ProgressFrame",
+															"documentation": "Eh a janela da interface grafica dos apps que processam arquivos em lote.\n@author \"Pedro Reis\"\n@since 28 de novembro de 2020 v1.0\n@version v1.0",
+															"attributes": [
+																{
+																	"_type": "UMLAttribute",
+																	"_id": "AAAAAAF2S56Rc8tmTPA=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "jTextArea",
+																	"visibility": "private",
+																	"isLeaf": true,
+																	"isReadOnly": true
+																},
+																{
+																	"_type": "UMLAttribute",
+																	"_id": "AAAAAAF2S56Rc8tnBPE=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "jScrollPane",
+																	"visibility": "private",
+																	"isLeaf": true,
+																	"isReadOnly": true
+																},
+																{
+																	"_type": "UMLAttribute",
+																	"_id": "AAAAAAF2S56Rc8to2BY=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "jProgressBar",
+																	"visibility": "private",
+																	"isLeaf": true,
+																	"isReadOnly": true
+																}
+															],
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RXMspX5o=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "ProgressFrame",
+																	"documentation": "[00]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nConfigura a janela.\n@param title Um titulo para a janela\n@param width Largura da janela\n@param height Altura da janela",
+																	"stereotype": "constructor",
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXMsqTPw=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXMspX5o="
+																			},
+																			"name": "title",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXMsrf28=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXMspX5o="
+																			},
+																			"name": "width",
+																			"type": "int"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXMsslSs=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXMspX5o="
+																			},
+																			"name": "height",
+																			"type": "int"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RXcstp9g=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "setProgressBarValue",
+																	"documentation": "[02]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nAtualiza a barra de progresso exbindo o status do processo.\n@param value O num. de arquivos jah processados",
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXcsuU6s=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXcstp9g="
+																			},
+																			"name": "value",
+																			"type": "int"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXcsvs4c=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXcstp9g="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RXcsw04g=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "setProgressBarVisible",
+																	"documentation": "[03]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nTorna visivel a barra de progresso e a configura.\n@param maximumValue O valor maximo que a barra de progresso pode assumir\nque serah exatamente o numero de arquivos a serem processados.",
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXcsxtOg=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXcsw04g="
+																			},
+																			"name": "maximumValue",
+																			"type": "int"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXcsy5rM=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXcsw04g="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RXcszHSg=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RXMsonE4="
+																	},
+																	"name": "println",
+																	"documentation": "[04]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nImprime uma string na area de texto da janela e salta duas linhas.\n@param s A string.",
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXcs0Msk=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXcszHSg="
+																			},
+																			"name": "s",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RXcs1u7Q=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RXcszHSg="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														}
+													],
+													"documentation": "Pacote para as classes de interface gráfica do projeto."
+												},
+												{
+													"_type": "UMLPackage",
+													"_id": "AAAAAAF2S56RZMs2/QI=",
+													"_parent": {
+														"$ref": "AAAAAAF2S56QzMrWgaU="
+													},
+													"name": "util",
+													"ownedElements": [
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RZMs3OqU=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RZMs2/QI="
+															},
+															"name": "FileTools",
+															"documentation": "A classe fornece metodos utilitarios para ler ou gravar arquivos.\n@since 27 de novembro de 2020 v1.0\n@version 1.0\n@author \"Pedro Reis\"",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RZcs41ac=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RZMs3OqU="
+																	},
+																	"name": "readTextFile",
+																	"documentation": "[01]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZcs5a/U=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs41ac="
+																			},
+																			"name": "file"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZcs6x/M=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs41ac="
+																			},
+																			"type": "String",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RZcs7J1c=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RZMs3OqU="
+																	},
+																	"name": "readTextFile",
+																	"documentation": "[02]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZcs8Xjo=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs7J1c="
+																			},
+																			"name": "filename",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZcs999k=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs7J1c="
+																			},
+																			"type": "String",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RZcs+zc4=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RZMs3OqU="
+																	},
+																	"name": "downloadUrl",
+																	"documentation": "[03]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZcs/5Kw=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs+zc4="
+																			},
+																			"name": "url",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZctAfqg=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs+zc4="
+																			},
+																			"name": "path",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RZctB858=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RZcs+zc4="
+																			},
+																			"type": "void",
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														},
+														{
+															"_type": "UMLClass",
+															"_id": "AAAAAAF2S56RbctCUNA=",
+															"_parent": {
+																"$ref": "AAAAAAF2S56RZMs2/QI="
+															},
+															"name": "Normalizer",
+															"documentation": "Fornece os metodos para converter de UTF-8 string para codepoint string. E\npara converter o nome original do arquivo baixado da Emojipedia em uma\nstring de codepoints referente a figura do emoji contida no respectivo\narquivo PNG\n@since 26 de novembro de 2020 v1.0\n@version 1.0\n@author \"Pedro Reis\"",
+															"operations": [
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RbctDqzQ=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RbctCUNA="
+																	},
+																	"name": "utf8ToCodepoints",
+																	"documentation": "[01]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nRecebe uma String representando um emoji codificado em UTF-8 e retorna\na string de codepoints deste emoji.\n<p>\nMas se esta string terminar com um codepoint VARIATION SELECTOR-16 este\nsera excluido da String retornada.\n@param utf8Emoji Um emoji codificado em UTF-8\n@return Uma string de codepoints que representa o emoji",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RbctEr7M=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RbctDqzQ="
+																			},
+																			"name": "utf8Emoji",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RbctFybA=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RbctDqzQ="
+																			},
+																			"type": "String",
+																			"direction": "return"
+																		}
+																	]
+																},
+																{
+																	"_type": "UMLOperation",
+																	"_id": "AAAAAAF2S56RbctGW3g=",
+																	"_parent": {
+																		"$ref": "AAAAAAF2S56RbctCUNA="
+																	},
+																	"name": "filenameToCodepoints",
+																	"documentation": "Le caractere por caractere UTF-8 e os converte para codepoint\nVARIATION SELECTOR-16 e LOW SURROGATES caracteres nao sao inclusos\n            na representacao normalizada do emoji\nObtem o codepoint do UTF-8, converte para hexadecimal e insere na\n            string que serah retornada pelo metodo\n[02]---------------------------------------------------------------------\n    \n    -------------------------------------------------------------------------\nRecebe uma string com o nome de um arquivo PNG baixado do site Emojipedia\nque contem a figura de um detemrinado emoji e retorna a string de\ncodepoints deste emoji.\n@param filename O nome do arquivo\n@return Uma string de codepoints que representa o emoji",
+																	"isStatic": true,
+																	"parameters": [
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RbctHS1k=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RbctGW3g="
+																			},
+																			"name": "filename",
+																			"type": "String"
+																		},
+																		{
+																			"_type": "UMLParameter",
+																			"_id": "AAAAAAF2S56RbctIfFo=",
+																			"_parent": {
+																				"$ref": "AAAAAAF2S56RbctGW3g="
+																			},
+																			"type": "String",
+																			"direction": "return"
+																		}
+																	]
+																}
+															],
+															"isFinalSpecialization": true,
+															"isLeaf": true
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"_type": "UMLPackageDiagram",
+					"_id": "AAAAAAF2S56Rk8weBLM=",
+					"_parent": {
+						"$ref": "AAAAAAF2S56QnsrSTBw="
+					},
+					"name": "Package Structure",
+					"ownedViews": [
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56RlMwf4n0=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56QzMrToSA="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56RlMwgMFI=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56RlMwf4n0="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56QzMrToSA="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlMwhhbw=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlMwgMFI="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlMwiUtg=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlMwgMFI="
+											},
+											"font": "Arial;13;1",
+											"left": 225,
+											"top": 26,
+											"width": 40,
+											"height": 13,
+											"text": "br"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlMwjtH8=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlMwgMFI="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 114.13720703125,
+											"height": 13,
+											"text": "(from JavaReverse)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlcwkCSs=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlMwgMFI="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 220,
+									"top": 19,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56RlMwhhbw="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56RlMwiUtg="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RlMwjtH8="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RlcwkCSs="
+									}
+								}
+							],
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 220,
+							"top": 4,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56RlMwgMFI="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56RlswlKso=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56QzMrUxSM="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56RlswmzR0=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56RlswlKso="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56QzMrUxSM="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlswnLhc=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlswmzR0="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlswoMOM=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlswmzR0="
+											},
+											"font": "Arial;13;1",
+											"left": 225,
+											"top": 96,
+											"width": 40,
+											"height": 13,
+											"text": "com"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlswpR4Q=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlswmzR0="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 49.8291015625,
+											"height": 13,
+											"text": "(from br)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlswqDjM=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RlswmzR0="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 220,
+									"top": 89,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56RlswnLhc="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56RlswoMOM="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RlswpR4Q="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RlswqDjM="
+									}
+								}
+							],
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 220,
+							"top": 74,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56RlswmzR0="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56RlswrtLw=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56QzMrVK/c="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56Rlsws7MY=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56RlswrtLw="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56QzMrVK/c="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56Rlswtdw0=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rlsws7MY="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56Rlswutzg=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rlsws7MY="
+											},
+											"font": "Arial;13;1",
+											"left": 225,
+											"top": 166,
+											"width": 40,
+											"height": 13,
+											"text": "hkp"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlswvcBE=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rlsws7MY="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 62.8291015625,
+											"height": 13,
+											"text": "(from com)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RlswwKCo=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rlsws7MY="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 220,
+									"top": 159,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56Rlswtdw0="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56Rlswutzg="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RlswvcBE="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RlswwKCo="
+									}
+								}
+							],
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 220,
+							"top": 144,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56Rlsws7MY="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56Rl8wxXh4=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56QzMrWgaU="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56Rl8wyA/I=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56Rl8wxXh4="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56QzMrWgaU="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56Rl8wzlTM=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rl8wyA/I="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56Rl8w0+M0=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rl8wyA/I="
+											},
+											"fillColor": "#ffff91",
+											"font": "Arial;13;1",
+											"left": 199.852294921875,
+											"top": 236,
+											"width": 100.4072265625,
+											"height": 13,
+											"text": "whatsappwebfix"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56Rl8w1Zrk=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rl8wyA/I="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 59.22998046875,
+											"height": 13,
+											"text": "(from hkp)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56Rl8w2nh4=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56Rl8wyA/I="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"fillColor": "#ffff91",
+									"font": "Arial;13;0",
+									"left": 194.852294921875,
+									"top": 229,
+									"width": 110.4072265625,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56Rl8wzlTM="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56Rl8w0+M0="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56Rl8w1Zrk="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56Rl8w2nh4="
+									}
+								}
+							],
+							"fillColor": "#ffff91",
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 194.852294921875,
+							"top": 214,
+							"width": 110.4072265625,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56Rl8wyA/I="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56Rl8w3Fdc=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56RLcsEqaA="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56RmMw4fkQ=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56Rl8w3Fdc="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56RLcsEqaA="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMw56dQ=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw4fkQ="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMw6aZc=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw4fkQ="
+											},
+											"fillColor": "#ffff91",
+											"font": "Arial;13;1",
+											"left": 105,
+											"top": 306,
+											"width": 40,
+											"height": 13,
+											"text": "apps"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMw7s7E=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw4fkQ="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 130.76806640625,
+											"height": 13,
+											"text": "(from whatsappwebfix)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMw8T7Y=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw4fkQ="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"fillColor": "#ffff91",
+									"font": "Arial;13;0",
+									"left": 100,
+									"top": 299,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56RmMw56dQ="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56RmMw6aZc="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RmMw7s7E="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RmMw8T7Y="
+									}
+								}
+							],
+							"fillColor": "#ffff91",
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 100,
+							"top": 284,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56RmMw4fkQ="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56RmMw95is=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56RUcsd52U="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56RmMw+qD0=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56RmMw95is="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56RUcsd52U="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMw/Ib4=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw+qD0="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMxAzJE=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw+qD0="
+											},
+											"fillColor": "#ffff91",
+											"font": "Arial;13;1",
+											"left": 185,
+											"top": 306,
+											"width": 40,
+											"height": 13,
+											"text": "global"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmMxBY9c=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw+qD0="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 130.76806640625,
+											"height": 13,
+											"text": "(from whatsappwebfix)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxC9D8=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmMw+qD0="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"fillColor": "#ffff91",
+									"font": "Arial;13;0",
+									"left": 180,
+									"top": 299,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56RmMw/Ib4="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56RmMxAzJE="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RmMxBY9c="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RmcxC9D8="
+									}
+								}
+							],
+							"fillColor": "#ffff91",
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 180,
+							"top": 284,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56RmMw+qD0="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56RmcxDvnY=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56RXMsnw+g="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56RmcxEPSM=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56RmcxDvnY="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56RXMsnw+g="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxFmCw=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxEPSM="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxG2Ss=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxEPSM="
+											},
+											"fillColor": "#ffff91",
+											"font": "Arial;13;1",
+											"left": 265,
+											"top": 306,
+											"width": 40,
+											"height": 13,
+											"text": "gui"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxHorY=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxEPSM="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 130.76806640625,
+											"height": 13,
+											"text": "(from whatsappwebfix)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxIXSU=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxEPSM="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"fillColor": "#ffff91",
+									"font": "Arial;13;0",
+									"left": 260,
+									"top": 299,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56RmcxFmCw="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56RmcxG2Ss="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RmcxHorY="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RmcxIXSU="
+									}
+								}
+							],
+							"fillColor": "#ffff91",
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 260,
+							"top": 284,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56RmcxEPSM="
+							}
+						},
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF2S56RmcxJHK8=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"model": {
+								"$ref": "AAAAAAF2S56RZMs2/QI="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF2S56RmcxKMdI=",
+									"_parent": {
+										"$ref": "AAAAAAF2S56RmcxJHK8="
+									},
+									"model": {
+										"$ref": "AAAAAAF2S56RZMs2/QI="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxL+Pk=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxKMdI="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxMzuE=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxKMdI="
+											},
+											"fillColor": "#ffff91",
+											"font": "Arial;13;1",
+											"left": 345,
+											"top": 306,
+											"width": 40,
+											"height": 13,
+											"text": "util"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxNc6A=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxKMdI="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"width": 130.76806640625,
+											"height": 13,
+											"text": "(from whatsappwebfix)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF2S56RmcxOKcU=",
+											"_parent": {
+												"$ref": "AAAAAAF2S56RmcxKMdI="
+											},
+											"visible": false,
+											"fillColor": "#ffff91",
+											"font": "Arial;13;0",
+											"left": 160,
+											"top": -32,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"fillColor": "#ffff91",
+									"font": "Arial;13;0",
+									"left": 340,
+									"top": 299,
+									"width": 50,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF2S56RmcxL+Pk="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF2S56RmcxMzuE="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF2S56RmcxNc6A="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF2S56RmcxOKcU="
+									}
+								}
+							],
+							"fillColor": "#ffff91",
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 340,
+							"top": 284,
+							"width": 50,
+							"height": 40,
+							"nameCompartment": {
+								"$ref": "AAAAAAF2S56RmcxKMdI="
+							}
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56RmsxPmJY=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56RlMwf4n0="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RlswlKso="
+							},
+							"lineStyle": 3,
+							"points": "245:73;245:59;245:44"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56Rm8xQEb0=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56RlswlKso="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RlswrtLw="
+							},
+							"lineStyle": 3,
+							"points": "245:143;245:129;245:114"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56Rm8xRi8U=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56RlswrtLw="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56Rl8wxXh4="
+							},
+							"lineStyle": 3,
+							"points": "247:213;245:199;245:184"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56Rm8xSjsM=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56Rl8wxXh4="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56Rl8w3Fdc="
+							},
+							"lineStyle": 3,
+							"points": "125:283;125:269;194:249"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56Rm8xTapk=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56Rl8wxXh4="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RmMw95is="
+							},
+							"lineStyle": 3,
+							"points": "205:283;205:269;223:254"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56Rm8xUhKc=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56Rl8wxXh4="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RmcxDvnY="
+							},
+							"lineStyle": 3,
+							"points": "285:283;285:269;270:254"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF2S56Rm8xVX2g=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2S56Rl8wxXh4="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RmcxJHK8="
+							},
+							"lineStyle": 3,
+							"points": "365:283;365:269;305:250"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF2TgxgPnjbotE=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"fillColor": "#ffc1ad",
+							"font": "Arial;13;0",
+							"left": 48,
+							"top": 376,
+							"width": 88.64990234375,
+							"height": 40,
+							"text": "Classes executáveis"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF2Tg3ZJ3jhlTg=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"fillColor": "#ffc1ad",
+							"font": "Arial;13;0",
+							"left": 112,
+							"top": 440,
+							"width": 137,
+							"height": 81,
+							"text": "Classes com métodos e campos com acesso por todas as outras classes do projeto"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF2Tg78KnjppMs=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"fillColor": "#ffc1ad",
+							"font": "Arial;13;0",
+							"left": 248,
+							"top": 360,
+							"width": 70,
+							"height": 51,
+							"text": "Janela de interface "
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF2Tg9uU3juzYE=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"fillColor": "#ffc1ad",
+							"font": "Arial;13;0",
+							"left": 376,
+							"top": 360,
+							"width": 71.29541015625,
+							"height": 40,
+							"text": "Classes utilitárias"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAF2ThAFanj1pso=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2TgxgPnjbotE="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56Rl8w3Fdc="
+							},
+							"lineStyle": 1,
+							"points": "116:324;98:375"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAF2ThBQoXj9X6M=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2Tg3ZJ3jhlTg="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RmMw95is="
+							},
+							"lineStyle": 1,
+							"points": "201:324;186:439"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAF2ThBg8nkAGa4=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2Tg78KnjppMs="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RmcxDvnY="
+							},
+							"lineStyle": 1,
+							"points": "283:324;283:359"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAF2ThBt03kDNXs=",
+							"_parent": {
+								"$ref": "AAAAAAF2S56Rk8weBLM="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF2Tg9uU3juzYE="
+							},
+							"tail": {
+								"$ref": "AAAAAAF2S56RmcxJHK8="
+							},
+							"lineStyle": 1,
+							"points": "377:324;399:359"
+						}
+					]
+				}
+			]
+		}
+	],
+	"author": "Pedro Reis",
+	"copyright": "Licença MIT",
+	"version": "1.0"
+}
