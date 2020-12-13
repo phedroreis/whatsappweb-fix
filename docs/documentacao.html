@@ -135,10 +135,58 @@
         <p>
           Esta classe usa um arquivo com o código fonte da URL https://emojipedia.org/whatsapp/ para localizar e baixar os arquivos PNG com figuras de emojis estilo WhatsApp.
         </p>
+        <p>
+          A classe declara dois campos privados:
+        </p>
+        <ul>
+          <li>
+            frame: que é a janela onde será exibido progresso dos downloads.
+          </li>
+          <li>
+            TARGET_DIR: que será o nome do diretório para onde serão baixados os arquivos.
+          </li>
+        </ul>
 
         <iframe class="code" src="javacode/DownloadPngs.html"></iframe>
 
+        <h4>downloadAll()</h4>
+        <p>
+          O método recebe um objeto Matcher que empacota uma regex juntamente com o texto do arquivo HTML e localiza todas as ocorrências que casem com a regex neste texto. A regex deve localizar URLs que serão baixadas para o diretório TARGET_DIR.
+        </p>
+        <p>
+          No loop da linha 42, o método find() localiza uma URL que case com a regex e retorna true. Esta URL é recuperada pelo método group() do objeto m. A linha 46 pega essa String a partir de "https:" até o final. (Portanto a regex não deve localizar as aspas no final de um link, caso contrário daria erro ao tentar baixar o arquivo). 
+        </p>
+        <p>
+          Na linha 48 o método estático da classe FileTools é chamado para baixar o arquivo da URL para o diretório TARGET_DIR.
+        </p>
+        <p>
+          Na linha 50 uma saída formatada na janela de progresso da interface informa a URL que foi baixada.
+        </p>
 
+        <h4>DownloadPngs()</h4>
+        <p>
+          Este método recebe o arquivo que é o código fonte da página https://emojipedia.org/whatsapp e baixa todos os arquivos PNG com imagens de emojis que estiverem referenciados nesta página. (O código fonte desta página foi obtido com a opção "Exibir código fonte" do Chrome, seguido de Copy/Paste em um editor de textos).
+        </p>
+        <p>
+          A linha 71 cria o diretório TARGET_DIR para onde serão baixados os arquivos se este diretório não existir. Se não houver este diretório e o método falhar ao criar um, o programa é abortado.
+        </p>
+        <p>
+          A linha 80 copia todo o conteúdo do código fonte da página https://emojipedia.org/whatsapp para o objeto String contentFile.
+        </p>
+        <p>
+          A linha 84 abre na tela a janela que irá exibir o progresso na execução do método.
+        </p>
+        <p>
+          Nas linhas 89 a 94, todas as URLs de arquivos PNG que forem o valor de um atributo srcset serão baixadas. (Note que a regex na linha 89 começa com um espaço em branco para evitar que URLs de um atributo como, por exemplo, data-srcset sejam indevidamente baixadas).
+        </p>
+        <p>
+          Nas linhas 99 a 104, todas as URLs de arquivos PNG que forem o valor de um atributo data-src serão baixadas.
+        </p>
+        <p>
+          A linha 106 apaga o título da janela de progresso do método. A linha 108 informa que todos as URLs localizadas foram baixadas e quantas foram baixadas. A linha 110 emite um sinal sonoro de aviso de término.
+        </p>
+
+     
       <h3>Classe NormalizeFilenames</h3>
 
         <p>
