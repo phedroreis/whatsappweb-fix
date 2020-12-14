@@ -202,7 +202,7 @@ public final class NormalizeFilenames
         Cria um novo diretorio, de nome emoji-images, dentro do diretorio onde
         estao os arquivos PNG com as imagens do emojis.
         ---------------------------------------------------------------------*/
-        File newDir = new File(dir.getAbsolutePath()+ "/" + EMOJIS_DIRNAME);
+        File newDir = new File(dir.getAbsolutePath()+ '/' + EMOJIS_DIRNAME);
         
         String newDirName = newDir.getAbsolutePath();
         
