@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "var.css";
+@import "colors.css";
 
 
 div.javacode
@@ -29,8 +29,8 @@ div.javacode div.linenumber
     margin: 0;
     padding: 0;
     border-right: solid 1px;
-    background-color: var(--aqua);
-    color: black;
+    background-color: var(--javacode-linenumber-background);
+    color: var(--javacode-linenumber-color);
     font-size: 13px;
     font-family: 'Courier New', Courier, monospace;
     
@@ -38,39 +38,39 @@ div.javacode div.linenumber
 
 .xw52fz_literalstring
 {
-    color: var(--hotpink);
+    color: var(--javacode-literalstring-color);
 }
 
 .xw52fz_reserved
 {
-    color: var(--blue);
+    color: var(--javacode-reserved-color);
 }
 
 .xw52fz_constant
 {
-    color: var(--cadetblue);
+    color: var(--javacode-constant-color);
 }
 
 .xw52fz_literalchar
 {
-    color: var(--red);
+    color: var(--javacode-literalchar-color);
 }
 
 .xw52fz_method
 {
-    color: var(--olive);
+    color: var(--javacode-method-color);
     font-style: italic;
 }
 
 .xw52fz_function
 {
-    color: var(--olive);
+    color: var(--javacode-method-color);
     font-style: italic;
 }
 
 .xw52fz_comment
 {
-    color: var(--slategray);
+    color: var(--javacode-comment-color);
 }
 
 .xw52fz_classname

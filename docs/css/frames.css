@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "var.css";
+@import "colors.css";
 
 /*--------------------------------------------------------------------------
                      Fonte utilizada nos paragrafos
@@ -11,51 +11,57 @@
     src: url("../fonts/RobotoSlab-VariableFont_wght.ttf");
 }
 
+
 /*--------------------------------------------------------------------------
                    Estiliza a tag section de cada frame
  --------------------------------------------------------------------------*/     
-.frame-sections
+.frame-section
 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 
-.frame-sections h1 /*Para titulo do frame*/
+.frame-section h1 /*Para titulo do frame*/
 {
     font-size: 2em;
+    color: var(--h1-color);
 }
 
-.frame-sections h2 /*Para nomes de pacotes*/
+.frame-section h2 /*Para nomes de pacotes*/
 {
     font-size: 1.6em;
-    background-color: darkgray;
+    background-color: var(--h2-background);
+    color: var(--h2-color);
     text-align: center;
     clear: both;
 }
 
-.frame-sections h3 /*Para identificadores de classes*/
+.frame-section h3 /*Para identificadores de classes*/
 {
     font-size: 1.2em;
+    color: var(--h3-color);
     clear: both;
 }
 
-.frame-sections h3::before /* Insere um diamond antes do nome da classe */
+.frame-section h3::before /* Insere um diamond antes do nome da classe */
 {
   content: "\25C6   ";
+  color: var(--h3-color);
 }
 
-.frame-sections h4 /*Para identificadores de metodos*/
+.frame-section h4 /*Para identificadores de metodos*/
 {
     font-size: 1em;
-    color: var(--olive);
+    color: var(--h4-color);
 }
 
-.frame-sections h5 /*Para identificadores de campos*/
+.frame-section h5 /*Para identificadores de campos*/
 {
   font-size: 1em;
+  color: var(--h5-color);
 }
 
-.frame-sections p /* Estiliza os paragrafos */
+.frame-section p /* Estiliza os paragrafos */
 {
     line-height: 1.5em;
     text-align: justify;
@@ -65,44 +71,44 @@
 
 }
 
-.frame-sections span.filename /*Para nomes de arquivos*/
+.frame-section span.filename /*Para nomes de arquivos*/
 {
     font-family: 'Courier New', Courier, monospace;
 }
 
 
-.frame-sections span.java-method /*Para nomes de metodos*/
+.frame-section span.java-method /*Para nomes de metodos*/
 {
-    font-weight: bolder;
+    color: var(--javacode-method-color);
 }
 
 
-.frame-sections a, a:visited /*Links*/
+.frame-section a, a:visited /*Links*/
 {
     text-decoration: none;
-    color: royalblue;
+    color: var(--link-visited-color);
  
 }
 
-.frame-sections ul /* Listas nao ordenadas */
+.frame-section ul /* Listas nao ordenadas */
 {
     margin-left: 3em;
 }
 
-.frame-sections li
+.frame-section li
 {
     padding: 0.5em;
     text-align: justify;
 }
 
-.frame-sections code.htmlcode /*Para codigo HTML*/
+.frame-section code.htmlcode /*Para codigo HTML*/
 {
   font-size: 1.2em;
 }
 
-.frame-sections iframe.code
+.frame-section iframe.code
 {
-  background-color: var(--paleblue);
+  background-color: var(--iframe-javacode-background);
   float: left;
   width: 700px;
   height: 700px;
@@ -116,8 +122,8 @@
 a.nav-button, a.nav-button:visited 
 {
     display: block;
-    background-color:rgb(141, 135, 135);
-    color: white;
+    background-color: var(--nav-background);
+    color: var(--nav-color);
     padding: 15px 32px;
     margin-right: 10px;
     margin-top: 20px;

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "var.css";
+@import "colors.css";
 
 /*-------------------------------------------------------------------------
                            Configuracoes globais
@@ -13,6 +13,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body
+{
+  background-color: var(--default-background);
+}
 
 /*-------------------------------------------------------------------------
                    Configura o banner com o menu de navegacao
@@ -20,7 +24,7 @@
 nav#nav-bar
 {
     height: 8vh;
-    background-color: rgb(141, 135, 135);
+    background-color: var(--nav-background);
 }
 
 
@@ -56,14 +60,14 @@ ul#menu li
 
 ul#menu li:hover
 {
-    background-color: teal;
+    background-color: var(--nav-hover-color);
 }
 
 
 ul#menu li a
 {
     text-decoration: none;
-    color: white;
+    color: var(--nav-color);
 }
 
 ul#menu div
@@ -75,7 +79,7 @@ ul#menu div
     height: 8vh;
     padding: 3vh 0px;
     overflow: hidden;
-    color:white;
+    color: var(--nav-color);
     
 }
 
@@ -93,8 +97,9 @@ nav#sidebar
     float: left;
     overflow: auto;
     height: 88vh;
-    border-top: solid 1px lightgrey;
-    background-color: rgb(141, 135, 135);
+    border-top: solid 1px var(--nav-border-color);
+    border-bottom: solid 1px var(--nav-border-color);
+    background-color: var(--nav-background);
 }
 
 
@@ -107,12 +112,12 @@ nav#sidebar ul
 nav#sidebar a
 {
     text-decoration: none;
-    color: black;
+    color: var(--nav-color);
 }
 
 nav#sidebar a:hover
 {
-    color: white;
+    color: var(--nav-hover-color);
     padding-left: 10px;
 }
 
@@ -171,7 +176,7 @@ input[type="checkbox"]:checked ~ iframe
 
 input[type="checkbox"]:checked ~ label
 {
-    background-color: black;
+    background-color: var(--nav-sidebar-button-background);
 }
 
 
@@ -184,8 +189,6 @@ iframe
     width: 100%;
     height: 88vh;
     padding: 10px;
-    border-top: solid 1px lightgrey;
-    background-color: rgb(235, 235, 235)
 }
 
 /*-------------------------------------------------------------------------
@@ -197,13 +200,13 @@ footer
     text-align: center;
     padding: 1vh;
     height: 4vh;
-    border: ridge;
-    background-color: lightgoldenrodyellow;
+    background-color: var(--footer-background);
+    color: var(--footer-color);
 }
 
 /******************************************************************************************
          Configuracao alternativa para visualizacao em smartphones e tablets
------------------------------------------------------------------------------------------ */
+*******************************************************************************************/
 
 @media screen and (max-height: 700px)
 {
@@ -240,7 +243,7 @@ footer
     {
         height: 100vh;
         border-top: none;
-        border-left: solid 1px white;
+        border-left: solid 1px var(--nav-border-color);
     }
 
     iframe
