@@ -6,7 +6,7 @@
 
   --iframe-javacode-background:rgb(238, 238, 192);
 
-  --link-visited-color: royalblue;
+  --link-color:rgb(223, 67, 10);
 
   --javacode-linenumber-background: goldenrod;
   --javacode-linenumber-color: black;
@@ -15,15 +15,15 @@
   --javacode-literalstring-color: hotpink;
   --javacode-reserved-color: blue;
   --javacode-constant-color:green;
-  --javacode-comment-color: rgb(184, 179, 179);
+  --javacode-comment-color: rgb(173, 167, 167);
   --javacode-literalchar-color: red;
 
-  --h1-color: black;
+  --h1-color: maroon;
 
-  --h2-background: rgb(163, 84, 55);
-  --h2-color: black;
+  --h2-background:  goldenrod;
+  --h2-color: maroon;
 
-  --h3-color: black;
+  --h3-color: maroon;
   --h4-color: var(--javacode-method-color);
   --h5-color: blue;
 

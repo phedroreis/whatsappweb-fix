@@ -83,10 +83,10 @@
 }
 
 
-.frame-section a, a:visited /*Links*/
+.frame-section a, a:visited, a:active /*Links*/
 {
     text-decoration: none;
-    color: var(--link-visited-color);
+    color: var(--link-color);
  
 }
 

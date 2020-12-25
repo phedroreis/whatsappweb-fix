@@ -15,7 +15,7 @@
 
 body
 {
-  background-color: var(--default-background);
+    background-color: var(--default-background);
 }
 
 /*-------------------------------------------------------------------------
@@ -118,6 +118,7 @@ nav#sidebar a
 nav#sidebar a:hover
 {
     color: var(--nav-hover-color);
+    font-weight: bolder;
     padding-left: 10px;
 }
 
