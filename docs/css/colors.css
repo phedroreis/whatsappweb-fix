@@ -26,14 +26,14 @@
   --h3-color: maroon;
   --h4-color: var(--javacode-method-color);
   --h5-color: blue;
-
-  --nav-sidebar-button-background: black;
+  
   --nav-background: darkgoldenrod;
   --nav-color: white;
   --nav-border-color: white;
   --nav-hover-color: black;
+  --nav-sidebar-button-background: var(--nav-hover-color);
 
-  --footer-background: darkgoldenrod;
+  --footer-background: var(--nav-background);
   --footer-color: black;
 
 }
