@@ -2,19 +2,21 @@
 
 @import "colors.css";
 
+@import "javaids.css";
+
 
 div.javacode
 {
-  float: left;
-  padding: 0;
-  margin: 0;
+    float: left;
+    padding: 0;
+    margin: 0;
 }
 
 div.javacode pre
 {
-  float: left;
-  width: 630px;
-  overflow-x: hidden;
+    float: left;
+    width: 630px;
+    overflow-x: hidden;
 }
 
 div.javacode pre, code
@@ -33,50 +35,9 @@ div.javacode div.linenumber
     color: var(--javacode-linenumber-color);
     font-size: 13px;
     font-family: 'Courier New', Courier, monospace;
-    
 }
 
-.xw52fz_literalstring
-{
-    color: var(--javacode-literalstring-color);
-}
 
-.xw52fz_reserved
-{
-    color: var(--javacode-reserved-color);
-}
-
-.xw52fz_constant
-{
-    color: var(--javacode-constant-color);
-}
-
-.xw52fz_literalchar
-{
-    color: var(--javacode-literalchar-color);
-}
-
-.xw52fz_method
-{
-    color: var(--javacode-method-color);
-    font-style: italic;
-}
-
-.xw52fz_function
-{
-    color: var(--javacode-method-color);
-    font-style: italic;
-}
-
-.xw52fz_comment
-{
-    color: var(--javacode-comment-color);
-}
-
-.xw52fz_classname
-{
-    font-weight: bolder;
-}
 
 
 

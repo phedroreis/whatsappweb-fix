@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/frames.css"/>
     <link rel="stylesheet" href="css/deflist.css"/>
-    <title>Especificação</title>
+    <link rel="stylesheet" href="css/javaids.css"/>
+    <title>Documentação</title>
 </head>
 
 <body>
@@ -50,22 +51,22 @@
 
         <h4>utf8EmojiToFilename()</h4>
           <p>
-            Converte um emoji codificado como String UTF-8 no nome do arquivo PNG que contém a figura deste emoji.
+            Converte um emoji codificado como <span class="xw52fz_classname">String</span> UTF-8 no nome do arquivo PNG que contém a figura deste emoji.
           </p>
           <p>
-            A linha 117 obtém a String de codepoints para este emoji. Enquanto a linha 119 acrescenta a esta String o caminho relativo e a extensão produzindo o nome do arquivo.
+            A linha 117 obtém a string de codepoints para este emoji. Enquanto a linha 119 acrescenta a esta <span class="xw52fz_classname">String</span> o caminho relativo e a extensão produzindo o nome do arquivo.
           </p>
           <p>
             Isto é, o nome do arquivo tem caminho relativo ao diretório onde estão os arquivos HTML processados pelo programa.
           </p>
           <p>
-            A linha 122 cria um objeto File com o caminho absoluto para representar este arquivo e a linha 124 testa se o arquivo existe. (Aqui precisamos do caminho absoluto para o programa verificar se existe um arquivo no disco com este nome que foi obtido. Já o caminho relativo será utilizado no documento HTML para que este possa renderizar o emoji com este arquivo PNG.)
+            A linha 122 cria um objeto <span class="xw52fz_classname">File</span> com o caminho absoluto para representar este arquivo e a linha 124 testa se o arquivo existe. (Aqui precisamos do caminho absoluto para o programa verificar se existe um arquivo no disco com este nome que foi obtido. Já o caminho relativo será utilizado no documento HTML para que este possa renderizar o emoji com este arquivo PNG.)
           </p>
           <p>
             Mas caso não exista o arquivo, o método então verifica se existe um arquivo com a figura do emoji raiz deste emoji. E se existir retorna este nome de arquivo para que o programa possa pelo menos renderizar uma figura que se aproxime do emoji correto. No entanto a informação de que se trata de um arquivo com uma figura apenas semelhante é passada acrescentando uma exclamação (!) antes do nome do arquivo retornado.
           </p>
           <p>
-            Mas se não existir nem mesmo um arquivo com a figura do emoji raiz o método retorna null.
+            Mas se não existir nem mesmo um arquivo com a figura do emoji raiz o método retorna <span class="xw52fz_reserved">null</span>.
           </p>
           <p>
             Em suma: este método faz a associação entre a tag no arquivo HTML original que insere a figura do emoji, com o nome de um arquivo PNG na pasta emoji-images contendo justamente uma figura para o emoji especificado na tag.
@@ -79,17 +80,17 @@
             O dado que define qual emoji deve ser renderizado é o valor do atributo alt na tag do arquivo original. 
           </p>
           <p>
-            Portanto na linha 166 um objeto Matcher é criado para localizar o atributo alt na tag. 
+            Portanto na linha 166 um objeto <span class="xw52fz_classname">Matcher</span> é criado para localizar o atributo alt na tag. 
           </p>
           <p>
-            A String com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 172. E o nome do arquivo que contém a figura deste emoji é obtido na linha 177.
+            A <span class="xw52fz_classname">String</span> com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 172. E o nome do arquivo que contém a figura deste emoji é obtido na linha 177.
           </p>
           <p>
             A nova tag que este método vai retornar dependerá do nome atribuído a utf8Emoji. 
           </p>
           <ul>
             <li>
-              Se for null não existe arquivo PNG para este emoji na pasta emoji-images e uma tag span é retornada.
+              Se for <span class="xw52fz_reserved">null</span> não existe arquivo PNG para este emoji na pasta emoji-images e uma tag span é retornada.
             </li>
             <li>
               Se o nome do arquivo for retornado precedido por um sinal de exclamação (!) trata-se do arquivo com a figura do emoji raiz. O método irá construir uma tag para renderizar este emoji com uma fina moldura vermelha ao redor. Indicando para o leitor da página que aquela figura não é exatamente a figura do emoji mas somente uma que se aproxima e estava disponível na pasta emoji-images.
@@ -101,13 +102,13 @@
 
         <h4>getMap()</h4>  
           <p>
-            Constrói um HashMap associando cada tag que insere emojis no arquivo original à tag que irá substitui-la no arquivo destino.
+            Constrói um <span class="xw52fz_classname">HashMap</span> associando cada tag que insere emojis no arquivo original à tag que irá substitui-la no arquivo destino.
           </p>
           <p>
-            getMap() varre o conteúdo do arquivo original procurando por tags que inserem emojis. Para cada nova tag localizada o método cria uma entrada na estrutura HashMap que tem esta tag como chave. E como o valor para esta chave, a tag pela qual será substituída no arquivo destino (cópia do original mas com tags deste tipo substituídas).
+            <span class="xw52fz_method">getMap</span>() varre o conteúdo do arquivo original procurando por tags que inserem emojis. Para cada nova tag localizada o método cria uma entrada na estrutura <span class="xw52fz_classname">HashMap</span> que tem esta tag como chave. E como o valor para esta chave, a tag pela qual será substituída no arquivo destino (cópia do original mas com tags deste tipo substituídas).
           </p>
           <p>
-            Numa próxima etapa, o método createNewFile() irá varrer o arquivo original para cada chave (tag original) neste HashMap, substituindo-a no arquivo destino pelo seu respetivo valor (tag gerada pelo programa) neste HashMap.
+            Numa próxima etapa, o método <span class="xw52fz_method">createNewFile</span>() irá varrer o arquivo original para cada chave (tag original) neste <span class="xw52fz_classname">HashMap</span>, substituindo-a no arquivo destino pelo seu respetivo valor (tag gerada pelo programa) neste <span class="xw52fz_classname">HashMap</span>.
           </p>
 
         <h4>createNewFile()</h4>  
@@ -115,7 +116,7 @@
             Cria o arquivo HTML capaz de renderizar os emojis.
           </p>
           <p>
-            Na linha 225 o arquivo que será gravado é criado. Em seguida, na linha 231, tagMap recebe um HashMap mapeando todas as tags que inserem emojis no arquivo original, em tags que irão substitui-las no arquivo destino criado na linha 225.
+            Na linha 225 o arquivo que será gravado é criado. Em seguida, na linha 231, tagMap recebe um <span class="xw52fz_classname">HashMap</span> mapeando todas as tags que inserem emojis no arquivo original, em tags que irão substitui-las no arquivo destino criado na linha 225.
           </p>
           <p>
             O loop na linha 233 obtém cada uma das chaves neste mapa (as tags originais) e varre o conteúdo do arquivo original substituindo as ocorrências desta tag. As novas tags irão renderizar o emoji com os arquivos PNG baixados pela aplicação GetPngs.jar deste projeto.
@@ -127,7 +128,7 @@
             O método agora se ocupa de gravar um arquivo de relatório listando todos os emojis que a página tentava inserir, informando juntamente seus respectivos codepoints e a informação se o emoji foi renderizado corretamente, se o programa teve que usar o arquivo com a figura deste emoji raiz, ou se, na falta de um arquivo PNG para este emoji e até para seu raiz, este foi inserido na página simplesmente como  um caractere UNICODE por meio de uma tag span.
           </p>
           <p>
-            A estrutura de dados com esta informação é também um HashMap cujas entradas foram inseridas nas execuções do método utf8EmojiToFilename(). Para cada String UTF-8 que utf8EmojiToFilename() converteu para nome de arquivo, o método verificou se este respectivo arquivo existia, se o que existia era apenas o arquivo com a imagem do emoji raiz, ou se nenhum arquivo PNG disponível poderia ser adequado para a renderização do emoji. E esse dado foi então inserido como uma entrada no HashMap emojisReport.
+            A estrutura de dados com esta informação é também um <span class="xw52fz_classname">HashMap</span> cujas entradas foram inseridas nas execuções do método <span class="xw52fz_method">utf8EmojiToFilename</span>(). Para cada <span class="xw52fz_classname">String</span> UTF-8 que <span class="xw52fz_method">utf8EmojiToFilename</span>() converteu para nome de arquivo, o método verificou se este respectivo arquivo existia, se o que existia era apenas o arquivo com a imagem do emoji raiz, ou se nenhum arquivo PNG disponível poderia ser adequado para a renderização do emoji. E esse dado foi então inserido como uma entrada no <span class="xw52fz_classname">HashMap</span> emojisReport.
           </p>
 
 
@@ -143,7 +144,7 @@
             frame: que é a janela onde será exibido progresso dos downloads.
           </li>
           <li>
-            TARGET_DIR: que será o nome do diretório para onde serão baixados os arquivos.
+            <span class="xw52fz_constant">TARGET_DIR</span>: que será o nome do diretório para onde serão baixados os arquivos.
           </li>
         </ul>
 
@@ -151,13 +152,13 @@
 
         <h4>downloadAll()</h4>
         <p>
-          O método recebe um objeto Matcher que empacota uma regex juntamente com o texto do arquivo HTML e localiza todas as ocorrências que casem com a regex neste texto. A regex deve localizar URLs que serão baixadas para o diretório TARGET_DIR.
+          O método recebe um objeto <span class="xw52fz_classname">Matcher</span> que empacota uma regex juntamente com o texto do arquivo HTML e localiza todas as ocorrências que casem com a regex neste texto. A regex deve localizar URLs que serão baixadas para o diretório <span class="xw52fz_constant">TARGET_DIR</span>.
         </p>
         <p>
-          No loop da linha 42, o método find() localiza uma URL que case com a regex e retorna true. Esta URL é recuperada pelo método group() do objeto m. A linha 46 pega essa String a partir de "https:" até o final. (Portanto a regex não deve localizar as aspas no final de um link, caso contrário daria erro ao tentar baixar o arquivo). 
+          No loop da linha 42, o método <span class="xw52fz_method">find</span>() localiza uma URL que case com a regex e retorna <span class="xw52fz_reserved">true</span>. Esta URL é recuperada pelo método <span class="xw52fz_method">group</span>() do objeto m. A linha 46 pega essa <span class="xw52fz_classname">String</span> a partir de "https:" até o final. (Portanto a regex não deve localizar as aspas no final de um link, caso contrário daria erro ao tentar baixar o arquivo). 
         </p>
         <p>
-          Na linha 48 o método estático da classe FileTools é chamado para baixar o arquivo da URL para o diretório TARGET_DIR.
+          Na linha 48 o método estático da classe <span class="xw52fz_classname">FileTools</span> é chamado para baixar o arquivo da URL para o diretório <span class="xw52fz_constant">TARGET_DIR</span>.
         </p>
         <p>
           Na linha 50 uma saída formatada na janela de progresso da interface informa a URL que foi baixada.
@@ -168,10 +169,10 @@
           Este método recebe o arquivo que é o código fonte da página https://emojipedia.org/whatsapp e baixa todos os arquivos PNG com imagens de emojis que estiverem referenciados nesta página. (O código fonte desta página foi obtido com a opção "Exibir código fonte" do Chrome, seguido de Copy/Paste em um editor de textos).
         </p>
         <p>
-          A linha 71 cria o diretório TARGET_DIR para onde serão baixados os arquivos se este diretório não existir. Se não houver este diretório e o método falhar ao criar um, o programa é abortado.
+          A linha 71 cria o diretório <span class="xw52fz_constant">TARGET_DIR</span> para onde serão baixados os arquivos se este diretório não existir. Se não houver este diretório e o método falhar ao criar um, o programa é abortado.
         </p>
         <p>
-          A linha 80 copia todo o conteúdo do código fonte da página https://emojipedia.org/whatsapp para o objeto String contentFile.
+          A linha 80 copia todo o conteúdo do código fonte da página https://emojipedia.org/whatsapp para o objeto <span class="xw52fz_classname">String</span> contentFile.
         </p>
         <p>
           A linha 84 abre na tela a janela que irá exibir o progresso na execução do método.
@@ -194,7 +195,7 @@
         </p>  
         
         <p>
-          A execução do método normalize() desta classe gera um arquivo de log em HTML que tabela todos os emojis catalogados. Os campos estáticos HEAD e FOOTER são respectivamente a parte inicial e final desse arquivo.
+          A execução do método normalize() desta classe gera um arquivo de log em HTML que tabela todos os emojis catalogados. Os campos estáticos <span class="xw52fz_constant">HEAD</span> e <span class="xw52fz_constant">FOOTER</span> são respectivamente a parte inicial e final desse arquivo.
         </p>
         
         <iframe class="code" src="javacode/NormalizeFilenames.html"></iframe>
@@ -206,7 +207,7 @@
         </p>
 
         <p>
-          A linha 83 cria um array de arquivos que deve conter todos os arquivos PNG com imagens de emojis que foram baixados da Emojipedia. O objeto da classe EmojiFileFilter passado ao método listFiles() garante que apenas estes tipos de arquivos serão inseridos no array.
+          A linha 83 cria um array de arquivos que deve conter todos os arquivos PNG com imagens de emojis que foram baixados da Emojipedia. O objeto da classe <span class="xw52fz_classname">EmojiFileFilter</span> passado ao método <span class="xw52fz_method">listFiles</span>() garante que apenas estes tipos de arquivos serão inseridos no array.
         </p>
 
         <p>
@@ -226,7 +227,7 @@
         </p>
 
         <p>
-          A linha 115 cria um TreeMap onde cada entrada contém - como chave - o nome do arquivo antes de ser normalizado associado ao valor que é o nome que ele recebe depois de normalizado. Mostrando a alteração realizada no nome de cada arquivo baixado. As entradas deste TreeMap é que serão gravadas no arquivo HTML de log e por isso a escolha de uma estrutura TreeMap. Para que a listagem seja exibida ordenada alfabeticamente pelos nomes originais dos arquivos.
+          A linha 115 cria um <span class="xw52fz_classname">TreeMap</span> onde cada entrada contém - como chave - o nome do arquivo antes de ser normalizado associado ao valor que é o nome que ele recebe depois de normalizado. Mostrando a alteração realizada no nome de cada arquivo baixado. As entradas deste <span class="xw52fz_classname">TreeMap</span> é que serão gravadas no arquivo HTML de log e por isso a escolha de uma estrutura <span class="xw52fz_classname">TreeMap</span>. Para que a listagem seja exibida ordenada alfabeticamente pelos nomes originais dos arquivos.
         </p>
 
         <p> 
