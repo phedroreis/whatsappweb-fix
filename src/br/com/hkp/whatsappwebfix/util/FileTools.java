@@ -2,6 +2,7 @@ package br.com.hkp.whatsappwebfix.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -35,8 +36,31 @@ public final class FileTools
     {
         return readTextFile(new File(filename));
     }//readTextFile()
-     
+    
     /*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public static void writeTextFile(final File file, final String content)
+        throws IOException
+    {
+        FileWriter  fw = new FileWriter(file, StandardCharsets.UTF_8);
+               
+        fw.write(content);
+        
+        fw.close();
+  
+    }//writeTextFile()
+    
+    /*[04]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public static void writeTextFile(final String filename, final String content)
+        throws IOException
+    {
+        writeTextFile(new File(filename), content);
+    }//writeTextFile()
+     
+    /*[05]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public static void downloadUrl(final String url, final String path)

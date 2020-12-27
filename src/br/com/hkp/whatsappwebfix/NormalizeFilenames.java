@@ -2,11 +2,11 @@ package br.com.hkp.whatsappwebfix;
 
 import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
+import static br.com.hkp.whatsappwebfix.util.FileTools.writeTextFile;
 import br.com.hkp.whatsappwebfix.util.Normalizer;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
-import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.TreeMap;
 
 /******************************************************************************
@@ -115,11 +115,7 @@ import java.util.TreeMap;
 
 public final class NormalizeFilenames
 {
-    /*
-    Para gravar o arquivo de log do processo
-    */
-    private PrintWriter printWriter;
-    
+     
     /*-------------------------------------------------------------------------
     O arquivo de log eh no formato HTML. HEAD e FOOTER sao gravadas 
     respectivamente no inicio e no final desse arquivo
@@ -131,7 +127,7 @@ public final class NormalizeFilenames
 "      padding:10px\n" +   
 "    }\n" +    
 "    td, th\n" + 
-"    {\n/" +
+"    {\n" +
 "      text-align: left;\n" +
 "    }\n" + 
 "    tr:nth-child(even)\n" +
@@ -175,7 +171,7 @@ public final class NormalizeFilenames
      * 
      * @throws java.io.FileNotFoundException
      */
-    public void normalize(final File dir) throws FileNotFoundException
+    public void normalize(final File dir) throws IOException
     {
         ProgressFrame normalizeFrame = 
             new ProgressFrame("Normalizando...", 700, 450);
@@ -257,28 +253,26 @@ public final class NormalizeFilenames
         normalizeFrame.setTitle("Gravando arquivo de log...");
         
         barValue = 0;
-       
-        printWriter = new PrintWriter(newDirName + "/_emoji-list.html");
-        
-        printWriter.println(HEAD);
+    
+        StringBuilder sb = new StringBuilder(map.size() * 300);
+        sb.append(HEAD).append("\n");
         
         for(String filename: map.keySet())
         {
             String normalizedFilename = map.get(filename);
-            printWriter.println("    <tr>");
-            printWriter.println
-            (
-                "        <td><img src=\"" + normalizedFilename +"\"></td>"
-            );
-            printWriter.println("        <td>" + filename + "</td>");
-            printWriter.println("        <td>" + normalizedFilename + "</td>");
-            printWriter.println("    </tr>");
+            sb.append("    <tr>\n");
+            sb.append("        <td><img src=\"").append(normalizedFilename).
+            append("\"></td>\n");
+            sb.append("        <td>").append(filename).append("</td>\n");
+            sb.append("        <td>").append(normalizedFilename).
+            append("</td>\n");
+            sb.append("    </tr>\n");
             normalizeFrame.setProgressBarValue(++barValue);
-        }//for    
+        }//for 
         
-        printWriter.println(FOOTER);
+        sb.append(FOOTER).append("\n");
         
-        printWriter.close();
+        writeTextFile(newDirName + "/_emoji-list.html", sb.toString());
         
         normalizeFrame.setTitle(barValue + " arquivos normalizados");
         /*--------------------------------------------------------------------*/

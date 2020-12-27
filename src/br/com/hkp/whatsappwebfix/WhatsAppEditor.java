@@ -4,12 +4,10 @@ import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import static br.com.hkp.whatsappwebfix.global.Global.FILENAME_DIFF;
 import static br.com.hkp.whatsappwebfix.global.Global.PASTA_BASE;
 import br.com.hkp.whatsappwebfix.util.FileTools;
+import static br.com.hkp.whatsappwebfix.util.FileTools.writeTextFile;
 import br.com.hkp.whatsappwebfix.util.Normalizer;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,11 +46,7 @@ public final class WhatsAppEditor
     Aramazena todo o conteudo de um arquivo HTML
     */
     private String htmlContent;
-    
-    /*
-    buffer para otimizar processos de leitura e gravacao
-    */
-    private final int buffer;
+
     
     /*
     O diretorio onde estao os arquivos HTML
@@ -92,8 +86,6 @@ public final class WhatsAppEditor
         
         String absoluteFileName = absolutePath + inputFile.getName();
              
-        buffer = (int)inputFile.length();
-        
         htmlContent = FileTools.readTextFile(file);
         
         outputFile = 
@@ -226,26 +218,12 @@ public final class WhatsAppEditor
      */
     public void createNewFile() throws IOException
     {
-        BufferedWriter htmlFile = 
-            new BufferedWriter
-            (
-                new FileWriter(outputFile, StandardCharsets.UTF_8), buffer
-            );
-                        
         HashMap<String, String> tagMap = getMap();
         
         for(String oldTag: tagMap.keySet())
             htmlContent = htmlContent.replace(oldTag, tagMap.get(oldTag));
-       
-        htmlFile.write(htmlContent);
         
-        htmlFile.close();
-        
-        BufferedWriter report = 
-            new BufferedWriter
-            (
-                new FileWriter(reportFile, StandardCharsets.UTF_8), buffer
-            );
+        writeTextFile(outputFile, htmlContent);
         
         StringBuilder sb = new StringBuilder(emojisReport.size() * 100);
         
@@ -258,10 +236,8 @@ public final class WhatsAppEditor
             append("\n");
         }
         
-        report.write(sb.toString());
-        
-        report.close();
-        
+        writeTextFile(reportFile, sb.toString());
+                
     }//createNewFile()
     
 }//classe WhatsAppEditor

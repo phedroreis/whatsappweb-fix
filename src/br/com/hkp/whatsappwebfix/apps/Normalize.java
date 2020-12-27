@@ -3,7 +3,7 @@ package br.com.hkp.whatsappwebfix.apps;
 import br.com.hkp.whatsappwebfix.NormalizeFilenames;
 import br.com.hkp.whatsappwebfix.global.Global;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
@@ -45,11 +45,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * <p>
  * Os arquivos de imagem PNG originalmente obtidos sao nomeados da forma como 
  * exemplificados em alguns nomes listados abaixo:
- * </p>
+ * 
  * <ol>
- * <li>angry-face_1f620.png</li>
- * <li>adult_emoji-modifier-fitzpatrick-type-1-2_1f9d1-1f3fb_1f3fb.png</li>
- * <li>blonde-woman-type-1-2_1f471-1f3fb-200d-2640-fe0f</li>
+ * <li>angry-face_1f620.png
+ * <li>adult_emoji-modifier-fitzpatrick-type-1-2_1f9d1-1f3fb_1f3fb.png
+ * <li>blonde-woman-type-1-2_1f471-1f3fb-200d-2640-fe0f
  * </ol>
  * <p>
  * No segundo caso o codepoint 1f3fb se repete e no terceiro o caractere de
@@ -151,9 +151,9 @@ public final class Normalize
             */
             normalizeFilenames.normalize(dir);
         }
-        catch (FileNotFoundException ex)
+        catch (IOException e)
         {
-            System.err.println(ex);
+            System.err.println(e);
         }
          
     }//main()

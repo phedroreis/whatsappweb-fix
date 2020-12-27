@@ -54,13 +54,13 @@
             Converte um emoji codificado como <span class="xw52fz_classname">String</span> UTF-8 no nome do arquivo PNG que contém a figura deste emoji.
           </p>
           <p>
-            A linha 117 obtém a string de codepoints para este emoji. Enquanto a linha 119 acrescenta a esta <span class="xw52fz_classname">String</span> o caminho relativo e a extensão produzindo o nome do arquivo.
+            A linha 107 obtém a string de codepoints para este emoji. Enquanto a linha 109 acrescenta a esta <span class="xw52fz_classname">String</span> o caminho relativo e a extensão produzindo o nome do arquivo.
           </p>
           <p>
             Isto é, o nome do arquivo tem caminho relativo ao diretório onde estão os arquivos HTML processados pelo programa.
           </p>
           <p>
-            A linha 122 cria um objeto <span class="xw52fz_classname">File</span> com o caminho absoluto para representar este arquivo e a linha 124 testa se o arquivo existe. (Aqui precisamos do caminho absoluto para o programa verificar se existe um arquivo no disco com este nome que foi obtido. Já o caminho relativo será utilizado no documento HTML para que este possa renderizar o emoji com este arquivo PNG.)
+            A linha 112 cria um objeto <span class="xw52fz_classname">File</span> com o caminho absoluto para representar este arquivo e a linha 114 testa se o arquivo existe. (Aqui precisamos do caminho absoluto para o programa verificar se existe um arquivo no disco com este nome que foi obtido. Já o caminho relativo será utilizado no documento HTML para que este possa renderizar o emoji com este arquivo PNG.)
           </p>
           <p>
             Mas caso não exista o arquivo, o método então verifica se existe um arquivo com a figura do emoji raiz deste emoji. E se existir retorna este nome de arquivo para que o programa possa pelo menos renderizar uma figura que se aproxime do emoji correto. No entanto a informação de que se trata de um arquivo com uma figura apenas semelhante é passada acrescentando uma exclamação (!) antes do nome do arquivo retornado.
@@ -80,10 +80,10 @@
             O dado que define qual emoji deve ser renderizado é o valor do atributo alt na tag do arquivo original. 
           </p>
           <p>
-            Portanto na linha 166 um objeto <span class="xw52fz_classname">Matcher</span> é criado para localizar o atributo alt na tag. 
+            Portanto na linha 158 um objeto <span class="xw52fz_classname">Matcher</span> é criado para localizar o atributo alt na tag. 
           </p>
           <p>
-            A <span class="xw52fz_classname">String</span> com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 172. E o nome do arquivo que contém a figura deste emoji é obtido na linha 177.
+            A <span class="xw52fz_classname">String</span> com o valor do atributo alt é atribuído ao objeto utf8Emoji na linha 164. E o nome do arquivo que contém a figura deste emoji é obtido na linha 169.
           </p>
           <p>
             A nova tag que este método vai retornar dependerá do nome atribuído a utf8Emoji. 
@@ -116,13 +116,13 @@
             Cria o arquivo HTML capaz de renderizar os emojis.
           </p>
           <p>
-            Na linha 225 o arquivo que será gravado é criado. Em seguida, na linha 231, tagMap recebe um <span class="xw52fz_classname">HashMap</span> mapeando todas as tags que inserem emojis no arquivo original, em tags que irão substitui-las no arquivo destino criado na linha 225.
+            Na linha 221, tagMap recebe um <span class="xw52fz_classname">HashMap</span> mapeando todas as tags que inserem emojis no arquivo original, em tags que irão substitui-las no arquivo destino.
           </p>
           <p>
-            O loop na linha 233 obtém cada uma das chaves neste mapa (as tags originais) e varre o conteúdo do arquivo original substituindo as ocorrências desta tag. As novas tags irão renderizar o emoji com os arquivos PNG baixados pela aplicação GetPngs.jar deste projeto.
+            O loop na linha 223 obtém cada uma das chaves neste mapa (as tags originais) e varre o conteúdo do arquivo original substituindo as ocorrências desta tag. As novas tags irão renderizar o emoji com os arquivos PNG baixados pela aplicação GetPngs.jar deste projeto.
           </p>
           <p>
-            A linha 236 grava este conteúdo editado no arquivo destino equanto que a linha 238 fecha este arquivo.
+            A linha 226 grava este conteúdo editado no arquivo destino.
           </p>
           <p>
             O método agora se ocupa de gravar um arquivo de relatório listando todos os emojis que a página tentava inserir, informando juntamente seus respectivos codepoints e a informação se o emoji foi renderizado corretamente, se o programa teve que usar o arquivo com a figura deste emoji raiz, ou se, na falta de um arquivo PNG para este emoji e até para seu raiz, este foi inserido na página simplesmente como  um caractere UNICODE por meio de uma tag span.
@@ -279,10 +279,58 @@
         <h3>Classe FileTools</h3>
 
           <p>
-            Metodos estáticos para leitura e gravação de arquivos.
+            Metodos estáticos para leitura, gravação e download de arquivos.
           </p>
 
           <iframe class="code" src="javacode/FileTools.html"></iframe>
+
+          <h4>readTextFile()</h4>
+
+          <p>
+            Recebe um objeto <span class="xw52fz_classname">File</span> indicando um arquivo texto e lê todo o conteúdo deste arquivo para dentro de um objeto <span class="xw52fz_classname">String</span> que é retornado pelo método.
+          </p>
+          <p>
+            É importante ressaltar que o método espera que o arquivo esteja codificado com o padrão UTF-8
+          </p>
+
+          <h4>readTextFile()</h4>
+
+          <p>
+            Recebe o nome de um arquivo texto e lê todo o conteúdo deste arquivo para dentro de um objeto <span class="xw52fz_classname">String</span> que é retornado pelo método.
+          </p>
+          <p>
+            É importante ressaltar que o método espera que o arquivo esteja codificado com o padrão UTF-8
+          </p>
+
+          <h4>writeTextFile()</h4>
+
+          <p>
+            Recebe um objeto <span class="xw52fz_classname">File</span> e uma <span class="xw52fz_classname">String</span> e grava esta <span class="xw52fz_classname">String</span> no arquivo. Se o arquivo não existir será criado; se já existir seu conteúdo atual será substituído.
+          </p>
+
+          <p>
+            O método espera que a <span class="xw52fz_classname">String</span> passada como parâmetro esteja codificada em UTF-8.
+          </p>
+
+          <h4>writeTextFile()</h4>
+
+          <p>
+            Recebe o nome de um arquivo e uma <span class="xw52fz_classname">String</span> e grava esta <span class="xw52fz_classname">String</span> no arquivo. Se o arquivo não existir será criado; se já existir seu conteúdo atual será substituído.
+          </p>
+
+          <p>
+            O método espera que a <span class="xw52fz_classname">String</span> passada como parâmetro esteja codificada em UTF-8.
+          </p>
+
+          <h4>downloadUrl()</h4>
+
+          <p>
+            Recebe a URL de um arquivo a ser baixado e o caminho do diretório onde baixar este arquivo. O caminho pode ser relativo ao diretório corrente ou absoluto e não deve terminar com o caractere /. O método baixa o arquivo para o diretório indicado mantendo seu nome original.
+          </p>
+
+          <p>
+            Deve-se notar que nomes de arquivos inválidos no sistema em que este programa estiver rodando não permitirão baixar o arquivo e uma exceção <span class="xw52fz_classname">IOException</span> será lançada.
+          </p>
 
         <h3>Classe Normalizer</h3>
 
