@@ -74,6 +74,7 @@
 .frame-section span.filename /*Para nomes de arquivos*/
 {
     font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
 }
 
 

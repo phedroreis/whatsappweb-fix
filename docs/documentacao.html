@@ -203,39 +203,39 @@
         <h4>normalize()</h4>
 
         <p>
-          A linha 80 inicializa a janela que exibe o progresso da execução do método.
+          A linha 78 inicializa a janela que exibe o progresso da execução do método.
         </p>
 
         <p>
-          A linha 83 cria um array de arquivos que deve conter todos os arquivos PNG com imagens de emojis que foram baixados da Emojipedia. O objeto da classe <span class="xw52fz_classname">EmojiFileFilter</span> passado ao método <span class="xw52fz_method">listFiles</span>() garante que apenas estes tipos de arquivos serão inseridos no array.
+          A linha 81 cria um array de arquivos que deve conter todos os arquivos PNG com imagens de emojis que foram baixados da Emojipedia. O objeto da classe <span class="xw52fz_classname">EmojiFileFilter</span> passado ao método <span class="xw52fz_method">listFiles</span>() garante que apenas estes tipos de arquivos serão inseridos no array.
         </p>
 
         <p>
-          A linha 87 verifica se pelo menos algum arquivo foi encontrado no diretório indicado e caso contrário aborta a execução do método.
+          A linha 85 verifica se pelo menos algum arquivo foi encontrado no diretório indicado e caso contrário aborta a execução do método.
         </p>
 
         <P>
-          A linha 99 inicializa a barra de progresso passando o número de arquivos que serão normalizados.
+          A linha 97 inicializa a barra de progresso passando o número de arquivos que serão normalizados.
         </P>
 
         <p>
-          O código entre as linhas 105 e 109 cria um novo diretório dentro do diretório onde estão os arquivos PNG. Arquivos com nomes normalizados serão movidos para este diretório de nome emoji-images.
+          O código entre as linhas 103 e 107 cria um novo diretório dentro do diretório onde estão os arquivos PNG. Arquivos com nomes normalizados serão movidos para este diretório de nome emoji-images.
         </p>
 
         <p>
-          Note-se que para criar este diretório a linha 105 obtém o caminho absoluto (caminho completo desde a raiz) do diretório onde estão os arquivos PNG baixados. Isso porque o diretório corrente pode ser diferente deste no momento da execução do programa.
+          Note-se que para criar este diretório a linha 103 obtém o caminho absoluto (caminho completo desde a raiz) do diretório onde estão os arquivos PNG baixados. Isso porque o diretório corrente pode ser diferente deste no momento da execução do programa.
         </p>
 
         <p>
-          A linha 115 cria um <span class="xw52fz_classname">TreeMap</span> onde cada entrada contém - como chave - o nome do arquivo antes de ser normalizado associado ao valor que é o nome que ele recebe depois de normalizado. Mostrando a alteração realizada no nome de cada arquivo baixado. As entradas deste <span class="xw52fz_classname">TreeMap</span> é que serão gravadas no arquivo HTML de log e por isso a escolha de uma estrutura <span class="xw52fz_classname">TreeMap</span>. Para que a listagem seja exibida ordenada alfabeticamente pelos nomes originais dos arquivos.
+          A linha 113 cria um <span class="xw52fz_classname">TreeMap</span> onde cada entrada contém - como chave - o nome do arquivo antes de ser normalizado associado ao valor que é o nome que ele recebe depois de normalizado. Mostrando a alteração realizada no nome de cada arquivo baixado. As entradas deste <span class="xw52fz_classname">TreeMap</span> é que serão gravadas no arquivo HTML de log e por isso a escolha de uma estrutura <span class="xw52fz_classname">TreeMap</span>. Para que a listagem seja exibida ordenada alfabeticamente pelos nomes originais dos arquivos.
         </p>
 
         <p> 
-          O loop da linha 121 até 151 renomeia e move todos os arquivos. 
+          O loop da linha 119 até 150 renomeia e move todos os arquivos. 
         </p>
 
         <p>
-          Por fim o método grava linha por linha de um arquivo HTML com a listagem dos arquivos renomeados. Onde para cada arquivo na lista é exibida a figura do seu emoji. A este arquivo é atribuído nome de _emoji-list.html
+          Por fim o método cria um arquivo HTML com a listagem dos arquivos renomeados. Onde para cada arquivo na lista é exibida a figura do seu emoji. A este arquivo é atribuído nome de _emoji-list.html
         </p>
 
 

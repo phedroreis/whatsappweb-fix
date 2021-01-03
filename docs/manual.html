@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/frames.css"/>
+  <title>Manual</title>
+</head>
+
+<body>
+  <section id="top" class="frame-section">
+    <h1>Manual de Uso</h1>
+
+    <h2>1º passo: baixar os arquivos PNGs</h2>
+
+    <p>
+      Será necessário obter os arquivos com as figuras dos emojis utilizados pelo app Whatsapp. Arquivos que estão disponíveis no site da <a href="https://emojipedia.org/whatsapp/" target="_blank">Emojipedia</a>.
+    </p>
+    <p>
+      Execute o aplicativo <strong>GetPngs.jar</strong> para fazer o download destes arquivos. Ou então os obtenha <a href="https://mega.nz/file/87xQwCrJ#jBxjUifv0fj6VePsVtGdGulsAV7pukL9deV5QVfqPaU" target="_blank">aqui</a>.
+    </p>
+    <p id="obter-arquivo">
+      Se preferir executar <strong>GetPngs.jar</strong> ele irá baixar o conjunto atualizado dos emojis do Whatsapp. No momento em que esta página está sendo escrita a última atualização ocorreu em 9 de dezembro de 2020. Para isso você deve copiar o código fonte de https://emojipedia.org/whatsapp/ para um arquivo html. (Use "Exibir código fonte da página" no Chrome&trade; e copie e cole em um editor de texto. Salve com extensão html.) 
+    </p>
+    <p>
+      Este será o arquivo solicitado pelo <strong>GetPngs.jar</strong> para poder baixar o conjunto dos emojis. Ao ser executado, o programa simplesmente abre a janela de navegação de arquivos exibida abaixo para que você indique a localização do arquivo criado no passo acima. <small><strong>Não esqueça de criar este arquivo com a extensão html.</strong></small>
+    </p>
+    <img src="images/getpngs-selecione.png" alt="Selecionar arquivo">
+    <p>
+      Basta clicar em Abrir e o programa começa a baixar. O arquivo <span class="filename">whatsapp-emojis.dec2020.html</span> que se vê na figura já está no repositório. Use <strong>git pull</strong> para obtê-lo.
+    </p>
+    <p>
+      Com este arquivo <strong>GetPngs.jar</strong> irá baixar 3.286 figurinhas de emojis. 115 a mais do que as que estão listadas no <span class="filename">whatsapp-emojis.html</span>, que também se encontra disponível no repositório. Porque <span class="filename">whatsapp-emojis.dec2020.html</span> já tem os acréscimos de 9 de dezembro último.
+    </p>
+    <p>
+       Logo, é preferível atualizar o repositório local com <strong>git pull</strong> e indicar este novo arquivo (<span class="filename">whatsapp-emojis.dec2020.html</span>) para o aplicativo <strong>GetPngs.jar</strong>.
+    </p>
+    <p>
+      O programa irá exibir uma janela como a da figura abaixo enquanto estiver fazendo o download e ao final todos os arquivos estarão em uma pasta nomeada <span class="filename">png</span>, criada no diretório corrente. (Se for executado em plataformas Linux, esta pasta será criada no diretório home do usuário).
+    </p>
+    <img src="images/getpngs-baixando.png" alt="GetPngs.jar baixando">
+    
+    <p>
+      Mas se por acaso estiver vendo esta página muito depois de dezembro de 2020, então o próprio arquivo <span class="filename">whatsapp-emojis.dec2020.html</span> deverá estar desatualizado. Então você pode criar um novo arquivo de onde o <strong>GetPngs.jar</strong> irá extrair os dados realizando o procedimento descrito <a href="#obter-arquivo">acima</a>.
+    </p>
+
+    <h2>2º passo: normalizar nomes dos arquivos obtidos</h2>
+    <p>
+      Todos estes arquivos obtidos no passo 1 estarão com seus nomes originais. Estes incluem informação suficiente para que se determine a string de codepoints de cada respectivo emoji. Esta string é que deve ser o novo nome para o arquivo, pois o programa que corrige as páginas com as conversas do whatsapp web, precisa associar os codepoints que ele irá encontrar nas tags dessa página, com o arquivo PNG contendo exatamente a figura do emoji que a tag "quer" mostrar.
+    </p>
+    <p>
+      Isto nos leva a este segundo passo: executar o aplicativo <strong>Normalize.jar</strong>.
+    </p>
+    <p>
+      Rode o programa e apenas indique na janela mostrada abaixo o local da pasta <span class="filename">png</span> criada no passo 1.
+    </p>
+    <img src="images/normalize-selecione.png" alt="Normalize.jar">
+    <p>
+      <strong>Normalize.jar</strong> cria uma pasta de nome <span class="filename">emoji-images</span> dentro de <span class="filename">png</span> e copia todos os arquivos renomeados para esta pasta.
+    </p>
+    <img src="images/normalize-normalizando.png" alt="Normalize.jar executando">
+    <p>
+      Nesta pasta deverá também encontrar um arquivo de log que pode ser aberto no navegador: <span class="filename">_emoji-list.html</span>
+    </p>
+    <img src="images/normalize-log.png" alt="Arquivo de log">
+    <p>
+      A pasta <span class="filename">emoji-images</span> deverá então ser copiada para <em>dentro</em> de  <span class="filename">PastaBase</span>. Esta, por sua vez, é a pasta com todos os arquivos comuns.
+    </p>
+    <p>
+      Se você põe todos os arquivos comuns das conversas do app em <span class="filename">PastaBase</span>, faz sentido que <span class="filename">emoji-images</span> também esteja ali. E note que quando a aplicação <strong>Fix.jar</strong> editar as páginas salvas com conversas do app, este programa espera que todos os arquivos css (e outros referentes às páginas) também estejam em <span class="filename">PastaBase</span>. <strong>Fix.jar</strong> fará edições considerando que uma <span class="filename">PastaBase</span> existe no mesmo diretório dos arquivos html onde você salvou suas conversas pelo app.
+    </p>
+
+    <h2>3º passo: corrigir os arquivos com as conversas salvas do Whatsapp</h2>
+    <p>
+      Isto será a tarefa do <strong>Fix.jar</strong>. Rode este programa e apenas indique a localização da pasta com os arquivos onde você salvou conversas do Whatsapp. O programa irá criar cópias destes arquivos (para todos os HTML que encontrar nesta pasta) e estas cópias deverão ser capazes de renderizar corretamente os emojis inseridos pelos usuários no app.
+    </p>
+    <p>
+      Lembre-se que dentro desta pasta também deve estar a <span class="filename">PastaBase</span> com os arquivos CSS e outros, e para essa mesma <span class="filename">PastaBase</span> deve ter sido copiada a pasta <span class="filename">emoji-images</span>, com os arquivos PNG que <strong>Fix.jar</strong> espera utilizar.
+    </p>
+    <p>
+      Cada cópia gerada terá o mesmo nome do arquivo original, acrescido do sufixo .fix. Por exemplo: se o programa encontrar um arquivo <span class="filename">index.html</span> nesta pasta, ele irá tentar criar uma cópia editada deste arquivo e lhe dará o nome de <span class="filename">index.fix.html</span>
+    </p>
+    <p>
+      Também para cada arquivo HTML encontrado, será gerado um arquivo de relatório especificando todos os emojis encontrados no arquivo, e como o programa foi capaz de renderizar cada um deles.
+    </p>
+    <p>
+      <strong>Fix.jar</strong> renderiza cada emoji encontrado da melhor maneira que puder. De preferência tenta usar o arquivo PNG com a figura exata do emoji indicado na tag. Mas se este arquivo não existir, ele vai procurar um que se aproxime (neste caso note que a figura será mostrada com uma moldura vermelha!). Mas se nem isso existir na pasta <span class="filename">emoji-images</span>, a solução será exibir o caractere referente a este emoji.
+    </p>
+    <p>
+      Portanto além do <span class="filename">index.fix.html</span>, você iria encontrar também um arquivo
+      de nome <span class="filename">index.report</span>, listando todos os emojis renderizados em <span class="filename">index.fix.html</span> e como cada um foi renderizado. E também os codepoints de cada um destes emojis.
+    </p>
+    <p>
+      Isto é útil caso algum emoji não tenha sido renderizado corretamente por não existir um arquivo para sua imagem. Aí você pode pesquisar por estes codepoints na Emojipedia e encontrar o PNG correspondente. Basta pegar este arquivo, renomea-lo como sugerido (os codepoints), e copia-lo para a pasta <span class="filename">emoji-images</span>. A partir disso este emoji passa a ser renderizado nas próximas vezes que executar <strong>Fix.jar</strong>.
+    </p>
+    <p>
+      No entanto observe que <strong>Fix.jar</strong> não vai processar arquivos que já tenha processado anteriormente! Se quiser que ele corrija novamente o mesmo arquivo, é necessário deletar os arquivos .fix e .report criados previamente.
+    </p>
+    <p>
+      A imagem abaixo mostra uma pasta de nome html onde existiam os arquivos <span class="filename">index - passo 2 - move emoji - Sem dados pessoais.html</span> e <span class="filename">index.html</span>. <small><strong>Note os arquivos que foram criados após executar <strong>Fix.jar</strong> e a presença de <span class="filename">PastaBase</span> neste diretório.</strong></small>
+    </p>
+    <img src="images/fix-pasta.png" alt="Pasta com os HTML">
+    <p>
+      Veja como ficou o <span class="filename">index.report</span>. Neste caso é informado que todos os 3 emojis encontrados foram renderizados perfeitamente. 
+    </p>
+    <img src="images/index-report.png" alt="Pasta com os HTML">
+    <p>
+      De fato foram.
+    </p>
+    <img src="images/fix-pagina.png" alt="Pasta com os HTML">
+
+
+
+      <footer>
+        <hr>
+
+        <a href="estrutura-de-pacotes.html" target="frame" class="nav-button nav-button-prev">Anterior</a>
+
+      </footer>
+
+  </section>
+</body>
+</html>
