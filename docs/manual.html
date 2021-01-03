@@ -26,7 +26,7 @@
     <p>
       Este será o arquivo solicitado pelo <strong>GetPngs.jar</strong> para poder baixar o conjunto dos emojis. Ao ser executado, o programa simplesmente abre a janela de navegação de arquivos exibida abaixo para que você indique a localização do arquivo criado no passo acima. <small><strong>Não esqueça de criar este arquivo com a extensão html.</strong></small>
     </p>
-    <img src="images/getpngs-selecione.png" alt="Selecionar arquivo">
+    <img src="images/getpngs-selecione.jpg" alt="Selecionar arquivo">
     <p>
       Basta clicar em Abrir e o programa começa a baixar. O arquivo <span class="filename">whatsapp-emojis.dec2020.html</span> que se vê na figura já está no repositório. Use <strong>git pull</strong> para obtê-lo.
     </p>
@@ -39,7 +39,7 @@
     <p>
       O programa irá exibir uma janela como a da figura abaixo enquanto estiver fazendo o download e ao final todos os arquivos estarão em uma pasta nomeada <span class="filename">png</span>, criada no diretório corrente. (Se for executado em plataformas Linux, esta pasta será criada no diretório home do usuário).
     </p>
-    <img src="images/getpngs-baixando.png" alt="GetPngs.jar baixando">
+    <img src="images/getpngs-baixando.jpg" alt="GetPngs.jar baixando">
     
     <p>
       Mas se por acaso estiver vendo esta página muito depois de dezembro de 2020, então o próprio arquivo <span class="filename">whatsapp-emojis.dec2020.html</span> deverá estar desatualizado. Então você pode criar um novo arquivo de onde o <strong>GetPngs.jar</strong> irá extrair os dados realizando o procedimento descrito <a href="#obter-arquivo">acima</a>.
@@ -55,15 +55,15 @@
     <p>
       Rode o programa e apenas indique na janela mostrada abaixo o local da pasta <span class="filename">png</span> criada no passo 1.
     </p>
-    <img src="images/normalize-selecione.png" alt="Normalize.jar">
+    <img src="images/normalize-selecione.jpg" alt="Normalize.jar">
     <p>
       <strong>Normalize.jar</strong> cria uma pasta de nome <span class="filename">emoji-images</span> dentro de <span class="filename">png</span> e copia todos os arquivos renomeados para esta pasta.
     </p>
-    <img src="images/normalize-normalizando.png" alt="Normalize.jar executando">
+    <img src="images/normalize-normalizando.jpg" alt="Normalize.jar executando">
     <p>
       Nesta pasta deverá também encontrar um arquivo de log que pode ser aberto no navegador: <span class="filename">_emoji-list.html</span>
     </p>
-    <img src="images/normalize-log.png" alt="Arquivo de log">
+    <img src="images/normalize-log.jpg" alt="Arquivo de log">
     <p>
       A pasta <span class="filename">emoji-images</span> deverá então ser copiada para <em>dentro</em> de  <span class="filename">PastaBase</span>. Esta, por sua vez, é a pasta com todos os arquivos comuns.
     </p>
@@ -100,15 +100,19 @@
     <p>
       A imagem abaixo mostra uma pasta de nome html onde existiam os arquivos <span class="filename">index - passo 2 - move emoji - Sem dados pessoais.html</span> e <span class="filename">index.html</span>. <small><strong>Note os arquivos que foram criados após executar <strong>Fix.jar</strong> e a presença de <span class="filename">PastaBase</span> neste diretório.</strong></small>
     </p>
-    <img src="images/fix-pasta.png" alt="Pasta com os HTML">
+    <img src="images/fix-pasta.jpg" alt="Pasta com os HTML">
     <p>
       Veja como ficou o <span class="filename">index.report</span>. Neste caso é informado que todos os 3 emojis encontrados foram renderizados perfeitamente. 
     </p>
-    <img src="images/index-report.png" alt="Pasta com os HTML">
+    <img src="images/index-report.jpg" alt="Pasta com os HTML">
     <p>
       De fato foram.
     </p>
-    <img src="images/fix-pagina.png" alt="Pasta com os HTML">
+    <img src="images/fix-pagina.jpg" alt="Pasta com os HTML">
+    <p>
+      Mas se não houver um arquivo PNG para o emoji e este for renderizado utilizando uma figura que apenas se aproxime, será exibido assim:
+    </p>
+    <img src="images/fix-emojiraiz.jpg" alt="Renderizado com emoji raiz">
 
 
 
