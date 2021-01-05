@@ -2,7 +2,7 @@ package br.com.hkp.whatsappwebfix;
 
 import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
-import static br.com.hkp.whatsappwebfix.util.FileTools.writeTextFile;
+import br.com.hkp.whatsappwebfix.util.FileTools;
 import br.com.hkp.whatsappwebfix.util.Normalizer;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -115,52 +115,6 @@ import java.util.TreeMap;
 
 public final class NormalizeFilenames
 {
-     
-    /*-------------------------------------------------------------------------
-    O arquivo de log eh no formato HTML. HEAD e FOOTER sao gravadas 
-    respectivamente no inicio e no final desse arquivo
-    -------------------------------------------------------------------------*/
-    private static final String STYLE =
-"  <style>\n" +
-"    th\n" +
-"    {\n" +    
-"      padding:10px\n" +   
-"    }\n" +    
-"    td, th\n" + 
-"    {\n" +
-"      text-align: left;\n" +
-"    }\n" + 
-"    tr:nth-child(even)\n" +
-"    {\n" +
-"      background-color: #dddddd;\n" +
-"    }\n" +
-"  </style>\n";    
-    
-    private static final String HEAD = 
-"<!DOCTYPE html>\n" +
-"<html lang=\"pt-br\">\n" +
-"<head>\n" +
-"  <meta charset=\"UTF-8\">\n" +
-"  <title>Log</title>\n" + STYLE +    
-"</head>\n" +
-"<body>\n" +
-"  <table>\n" +
-"    <tr>\n" +
-"      <th>Emoji</th>\n" +    
-"      <th>Nome Original</th>\n" +
-"      <th>Normalizado</th>\n" +
-"    </tr>\n" +
-"    <tbody>\n";
-
-    
-    private static final String FOOTER = 
-"    </tbody>\n" +    
-"  </table>\n" +   
-"</body>\n" +
-"</html>";
-    
-    /*-----------------------------------------------------------------------*/
-    
     /*[01]---------------------------------------------------------------------
        
     -------------------------------------------------------------------------*/
@@ -198,12 +152,8 @@ public final class NormalizeFilenames
         Cria um novo diretorio, de nome emoji-images, dentro do diretorio onde
         estao os arquivos PNG com as imagens do emojis.
         ---------------------------------------------------------------------*/
-        File newDir = new File(dir.getAbsolutePath()+ '/' + EMOJIS_DIRNAME);
-        
-        String newDirName = newDir.getAbsolutePath();
-        
-        if (!newDir.exists()) newDir.mkdirs();
-        
+        String emojisDirName = FileTools.makeSubDir(dir, EMOJIS_DIRNAME);
+       
         /*--------------------------------------------------------------------*/
       
         int barValue = 0; //contador de num. de arquivos jah normalizados
@@ -232,7 +182,7 @@ public final class NormalizeFilenames
             O arquivo eh renomeado fazendo com que seja movido para o diretorio
             recem criado
             ------------------------------------------------------------------*/
-            File newName = new File(newDirName + '/' + normalizedFilename);
+            File newName = new File(emojisDirName + '/' + normalizedFilename);
             
             normalizeFrame.println
             (
@@ -250,33 +200,8 @@ public final class NormalizeFilenames
         /*---------------------------------------------------------------------
                              Grava o arquivo de log
         ---------------------------------------------------------------------*/
-        normalizeFrame.setTitle("Gravando arquivo de log...");
-        
-        barValue = 0;
-    
-        StringBuilder sb = new StringBuilder(map.size() * 300);
-        sb.append(HEAD).append("\n");
-        
-        for(String filename: map.keySet())
-        {
-            String normalizedFilename = map.get(filename);
-            sb.append("    <tr>\n");
-            sb.append("        <td><img src=\"").append(normalizedFilename).
-            append("\"></td>\n");
-            sb.append("        <td>").append(filename).append("</td>\n");
-            sb.append("        <td>").append(normalizedFilename).
-            append("</td>\n");
-            sb.append("    </tr>\n");
-            normalizeFrame.setProgressBarValue(++barValue);
-        }//for 
-        
-        sb.append(FOOTER).append("\n");
-        
-        writeTextFile(newDirName + "/_emoji-list.html", sb.toString());
-        
-        normalizeFrame.setTitle(barValue + " arquivos normalizados");
-        /*--------------------------------------------------------------------*/
-        
+        FileTools.writeLogFile(normalizeFrame, map, emojisDirName);
+             
         java.awt.Toolkit.getDefaultToolkit().beep();
          
     }//normalize()

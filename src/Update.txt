@@ -1,0 +1,2 @@
+Main-Class: br.com.hkp.whatsappwebfix.apps.Update
+Name: br/com/hkp/whatsappwebfix/apps/Update.class

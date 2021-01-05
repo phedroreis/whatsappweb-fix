@@ -31,28 +31,8 @@ public final class DownloadPngs
     {
         frame = new ProgressFrame("Baixando...", 800, 450);
     }//construtor
-   
+    
     /*[01]---------------------------------------------------------------------
-    
-    -------------------------------------------------------------------------*/
-    private void downloadAll(final Matcher m) throws IOException
-    {
-        int count = 0;
-        
-        while (m.find())
-        {
-            String s = m.group();
-            
-            String url = s.substring(s.indexOf("https:"), s.length());
-            
-            FileTools.downloadUrl(url, TARGET_DIR);
-            
-            frame.println(String.format("%04d - %s\n", ++count, url));
-        }
- 
-    }//downloadAll()
-    
-    /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     /**
@@ -77,32 +57,28 @@ public final class DownloadPngs
             }
         } 
                        
-        String contentFile = FileTools.readTextFile(emojipediaFile);
-             
-      /*---------------------------------------------------------------------*/
-            
+        
+        String regex = 
+            "https://emojipedia-us[.]s3[.]dualstack[.]us-west-1[.]"
+            + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png";
+        
+        String emojipediaPage = FileTools.readTextFile(emojipediaFile);
+                 
+        Matcher m = Pattern.compile(regex).matcher(emojipediaPage);
+        
         frame.setVisible(true);
         
-        /*
-        regex para localizar nomes de arquivos PNG no atributo srcset
-        */
-        Pattern srcSet = 
-            Pattern.compile(" srcset=\"https.+?\\." + TARGET_DIR + "\\b");
+        int count = 0;
         
-        Matcher m = srcSet.matcher(contentFile);
-        
-        downloadAll(m);//baixa os arquivos que regex localizar
-        
-        /*
-        regex para localizar nomes de arquivos PNG no atributo data-src
-        */
-        Pattern dataSrc = 
-            Pattern.compile("data-src=\"https.+?\\." + TARGET_DIR + "\\b");
-        
-        m = dataSrc.matcher(contentFile);
-        
-        downloadAll(m);//baixa os arqs. que regex localizar
-        
+        while (m.find())
+        {
+            String url = m.group();
+                       
+            FileTools.downloadUrl(url, TARGET_DIR);
+            
+            frame.println(String.format("%04d - %s\n", ++count, url));
+        }
+                  
         frame.setTitle("");
         
         frame.println("Arquivos baixados para a pasta " + TARGET_DIR);
