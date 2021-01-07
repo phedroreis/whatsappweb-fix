@@ -1,5 +1,6 @@
 package br.com.hkp.whatsappwebfix.global;
 
+import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
@@ -52,12 +53,12 @@ public final class Global
             + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png"
         );
     
-    public static Lock lock = new ReentrantLock();
-    public static Condition fixAwait = lock.newCondition();
+    public static final Lock LOCK = new ReentrantLock();
+    public static final Condition FIX_AWAIT = LOCK.newCondition();
     /**
      * 
      */
-    public static AtomicBoolean buttonHandlerCanExecute = 
+    public static final AtomicBoolean BUTTON_HANDLERS_ACTIVE = 
         new AtomicBoolean(false);
        
             
@@ -137,8 +138,10 @@ public final class Global
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         else
             fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
+        ProgressFrame p = new ProgressFrame("",0,0);
 
-        int res = fc.showOpenDialog(null);
+        int res = fc.showOpenDialog(p);
 
         if(res == JFileChooser.APPROVE_OPTION)
             return fc.getSelectedFile();

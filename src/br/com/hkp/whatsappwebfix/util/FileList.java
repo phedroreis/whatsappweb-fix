@@ -43,5 +43,20 @@ public final class FileList
         return list;
     }//getList()
     
+    public void seletcAll()
+    {
+        for(NodeList node: fileList) node.setSelected(true);
+    }
+    
+    public void deselectAll()
+    {
+        for(NodeList node: fileList) node.setSelected(false);
+    }
+    
+    public void invert()
+    {
+        for(NodeList node: fileList) node.invert();
+    }
+    
     
 }//classe FileList

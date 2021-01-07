@@ -4,6 +4,7 @@ import br.com.hkp.whatsappwebfix.WhatsAppEditor;
 import br.com.hkp.whatsappwebfix.global.Global;
 import static br.com.hkp.whatsappwebfix.global.Global.FILENAME_DIFF;
 import br.com.hkp.whatsappwebfix.gui.Error;
+import br.com.hkp.whatsappwebfix.gui.KeyListen;
 import br.com.hkp.whatsappwebfix.gui.SelectFrame;
 import br.com.hkp.whatsappwebfix.util.FileList;
 import br.com.hkp.whatsappwebfix.util.NodeList;
@@ -43,6 +44,10 @@ public final class FixGui
              
         FileList fileList = new FileList(frame);
         
+        KeyListen keyListen = new KeyListen(fileList);
+        
+        frame.addKeyListener(keyListen);
+        
         FixedFilter fixedFilter = new FixedFilter();
  
         for (File file: listFiles)
@@ -57,12 +62,12 @@ public final class FixGui
         
         while(true)
         {
-            Global.lock.lock();
-            Global.buttonHandlerCanExecute.set(true);
+            Global.LOCK.lock();
+            Global.BUTTON_HANDLERS_ACTIVE.set(true);
             try
             {
-                Global.fixAwait.await(); 
-                Global.buttonHandlerCanExecute.set(false);
+                Global.FIX_AWAIT.await(); 
+                Global.BUTTON_HANDLERS_ACTIVE.set(false);
 
                 LinkedList<NodeList> listOfFilesToFixed = fileList.getList();
                 
@@ -84,7 +89,7 @@ public final class FixGui
             }
             finally
             {
-                Global.lock.unlock();
+                Global.LOCK.unlock();
             }
           
         }//while

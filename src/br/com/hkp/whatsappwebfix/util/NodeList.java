@@ -41,6 +41,34 @@ public final class NodeList
     {
         return jCheckBox.isSelected();
     }//isSelected()
+    
+    /*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public void setSelected(final boolean selected)
+    {
+        SwingUtilities.invokeLater
+        (() ->
+        {
+            jCheckBox.setSelected(selected);
+        });
+        
+    }//setSelected()
+    
+    /*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public void invert()
+    {
+        SwingUtilities.invokeLater
+        (() ->
+        {
+            if (jCheckBox.isSelected())
+                jCheckBox.setSelected(false);
+            else
+                jCheckBox.setSelected(true); 
+        });
+    }//invert()
         
     /*[02]---------------------------------------------------------------------
     
@@ -57,20 +85,14 @@ public final class NodeList
     {        
         fixed = f;
         SwingUtilities.invokeLater
-        (
-            new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    jCheckBox.setSelected(!fixed);
-                    if (fixed) 
-                        jCheckBox.setForeground(Color.LIGHT_GRAY);
-                    else
-                        jCheckBox.setForeground(Color.BLACK);
-                }
-            }
-        );
+        (() ->
+        {
+            jCheckBox.setSelected(!fixed);
+            if (fixed)
+                jCheckBox.setForeground(Color.LIGHT_GRAY);
+            else
+                jCheckBox.setForeground(Color.BLACK);
+        });
     }//serFixed()
     
     /*[04]---------------------------------------------------------------------
