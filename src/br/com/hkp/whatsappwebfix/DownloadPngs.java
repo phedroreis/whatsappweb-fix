@@ -1,11 +1,11 @@
 package br.com.hkp.whatsappwebfix;
 
+import br.com.hkp.whatsappwebfix.global.Global;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import br.com.hkp.whatsappwebfix.util.FileTools;
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -48,23 +48,12 @@ public final class DownloadPngs
       
         File downloaDir = new File(TARGET_DIR);
         
-        if (!downloaDir.exists())
-        {
-            if (!downloaDir.mkdirs())
-            {
-                System.err.println("Erro ao criar pasta /" + TARGET_DIR);
-                System.exit(1);
-            }
-        } 
-                       
-        
-        String regex = 
-            "https://emojipedia-us[.]s3[.]dualstack[.]us-west-1[.]"
-            + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png";
-        
+        if ((!downloaDir.exists()) && (!downloaDir.mkdirs()))
+            throw new IOException("Erro ao criar pasta " + TARGET_DIR); 
+               
         String emojipediaPage = FileTools.readTextFile(emojipediaFile);
                  
-        Matcher m = Pattern.compile(regex).matcher(emojipediaPage);
+        Matcher m = Global.PNG_PATTERN.matcher(emojipediaPage);
         
         frame.setVisible(true);
         

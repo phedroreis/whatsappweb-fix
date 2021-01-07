@@ -3,6 +3,7 @@ package br.com.hkp.whatsappwebfix.apps;
 import br.com.hkp.whatsappwebfix.WhatsAppEditor;
 import br.com.hkp.whatsappwebfix.global.Global;
 import static br.com.hkp.whatsappwebfix.global.Global.FILENAME_DIFF;
+import br.com.hkp.whatsappwebfix.gui.Error;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -89,9 +90,9 @@ public final class Fix
         {
             fixAll(dir);
         }
-        catch (IOException ex)
+        catch (IOException e)
         {
-            System.err.println(ex);
+            Error.showErrorMsg(e);
         }
            
     }//main()

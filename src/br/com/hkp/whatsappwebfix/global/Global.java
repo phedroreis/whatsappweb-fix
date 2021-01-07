@@ -1,6 +1,11 @@
 package br.com.hkp.whatsappwebfix.global;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -35,6 +40,25 @@ public final class Global
      * nomeada como index.fix.html
      */
     public static final String FILENAME_DIFF = ".fix";
+    
+    /**
+     * Pattern para localizar URLs de arquivos PNG de emojis na pagina da 
+     * emojipedia.
+     */
+    public static final Pattern PNG_PATTERN = 
+        Pattern.compile
+        (
+            "https://emojipedia-us[.]s3[.]dualstack[.]us-west-1[.]"
+            + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png"
+        );
+    
+    public static Lock lock = new ReentrantLock();
+    public static Condition fixAwait = lock.newCondition();
+    /**
+     * 
+     */
+    public static AtomicBoolean buttonHandlerCanExecute = 
+        new AtomicBoolean(false);
        
             
     /*[01]---------------------------------------------------------------------

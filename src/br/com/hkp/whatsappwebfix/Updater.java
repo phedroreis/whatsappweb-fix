@@ -1,5 +1,6 @@
 package br.com.hkp.whatsappwebfix;
 
+import br.com.hkp.whatsappwebfix.global.Global;
 import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import br.com.hkp.whatsappwebfix.util.FileTools;
@@ -8,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -30,10 +30,10 @@ public final class Updater
     /**
      * Construtor da classe
      * 
-     * @param pastaBase Caminho completo para a PastaBase com arquivos comuns
+     * @param pastaBase PastaBase com arquivos comuns
      * 
-     * @throws java.io.IOException Se o diretorio para baixar os emojis nao 
-     * puder ser criado
+     * @throws IOException Se o diretorio para baixar os emojis nao puder ser 
+     * criado
      */
     public Updater(final File pastaBase) throws IOException
     {
@@ -56,11 +56,10 @@ public final class Updater
     {
         frame.setVisible(true);
         
-        frame.println("Procurando por novos emojis na Emojipedia. Aguarde...");
-        
-        String regex = 
-            "https://emojipedia-us[.]s3[.]dualstack[.]us-west-1[.]"
-            + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png";
+        frame.println
+        (
+            "\nProcurando por novos emojis na Emojipedia. Aguarde..."
+        );
         
         FileTools.downloadUrl
         (
@@ -70,12 +69,10 @@ public final class Updater
         File emojipediaFile = new File(emojisAbsoluteDirName + "/whatsapp");
         
         String emojipediaPage = FileTools.readTextFile(emojipediaFile);
+                         
+        Matcher m = Global.PNG_PATTERN.matcher(emojipediaPage);
         
-        Pattern patternRegex = Pattern.compile(regex);
-                 
-        Matcher m = patternRegex.matcher(emojipediaPage);
-        
-        TreeMap<String, String> fileList = new TreeMap<>();
+        TreeMap<String, String> mapUrl2filename = new TreeMap<>();
        
         while (m.find())
         {
@@ -87,16 +84,21 @@ public final class Updater
                 filenameToCodepoints(FileTools.extractFilenameFromUrl(url)) +
                 ".png";
             
-            if (!(new File(pathname).exists())) fileList.put(url, pathname);
+            if (!(new File(pathname).exists()))
+                mapUrl2filename.put(url, pathname);
            
-        }
+        }//while
         
-        int newEmojis = fileList.size();
+        int newEmojis = mapUrl2filename.size();
         
         if (newEmojis == 0)
         {
-            frame.setTitle("Nada a fazer desta vez");
-            frame.println("Nenhum novo emoji para atualizar!");
+            frame.setTitle("Nada a Fazer Desta Vez");
+            
+            frame.println
+            (
+                "Nenhum novo emoji para baixar. Biblioteca atualizada."
+            );
         }
         else
         {
@@ -104,31 +106,45 @@ public final class Updater
         
             frame.setProgressBarVisible(newEmojis);
             
-            frame.println("Encontrados " + newEmojis + " novos emojis.");
+            String s = (newEmojis > 1) ? "s" : "";   
+            
+            frame.println
+            (
+                String.format
+                (
+                    "%s%s %d %s%s %s%s.", 
+                    "Encontrado", s, newEmojis, "novo", s, "emoji", s
+                )
+            );
 
             int count = 0;
 
-            for(String url: fileList.keySet())
+            for(String url: mapUrl2filename.keySet())
             {
-                FileTools.downloadUrl2Pathname(url, fileList.get(url));
+                FileTools.downloadUrl2Pathname(url, mapUrl2filename.get(url));
 
                 frame.println(String.format("%04d - %s\n", ++count, url));
 
                 frame.setProgressBarValue(count);
-
-            }
+            }//for
               
             frame.setTitle("");
 
             frame.println
             (
-                "Arquivos baixados para a pasta " + emojisAbsoluteDirName
+                 String.format
+                 (
+                     "%s%s %s%s %s %s.", 
+                     "Arquivo", s, "baixado", s, "para a pasta", 
+                     emojisAbsoluteDirName
+                 )
             );
             
             emojipediaFile.delete();
             
-            FileTools.writeLogFile(frame, fileList, emojisAbsoluteDirName);
-        }
+            FileTools.writeLogFile(frame, mapUrl2filename, emojisAbsoluteDirName);
+            
+        }//if-else
                
         java.awt.Toolkit.getDefaultToolkit().beep();
    

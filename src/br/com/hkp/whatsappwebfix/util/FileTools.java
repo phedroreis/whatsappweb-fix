@@ -111,16 +111,11 @@ public final class FileTools
         throws IOException
     {
         File subDir = new File(dir.getAbsolutePath()+ '/' + dirName);
-        
-        boolean sucess = true;
-        
-        if (!subDir.exists()) sucess = subDir.mkdirs();
+            
+        if ((!subDir.exists()) && (!subDir.mkdirs()))
+            throw new IOException("Erro ao criar pasta " + dirName); 
        
-        if (sucess)
-           return subDir.getAbsolutePath();
-        else
-           throw new IOException("Erro ao criar pasta " + dirName); 
-        
+        return subDir.getAbsolutePath();
     }//makeSubDir()
     
     /*-------------------------------------------------------------------------

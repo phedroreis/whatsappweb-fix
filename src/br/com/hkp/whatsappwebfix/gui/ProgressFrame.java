@@ -2,6 +2,8 @@ package br.com.hkp.whatsappwebfix.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -69,6 +71,17 @@ public final class ProgressFrame extends JFrame
         add(jProgressBar, BorderLayout.SOUTH);
         
         setVisible(false);
+        
+        //Insere o icone na janela
+        try
+        {
+            URL url = getClass().getResource("favicon.png");
+            setIconImage(Toolkit.getDefaultToolkit().getImage(url));
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+        }
        
     }//construtor
     

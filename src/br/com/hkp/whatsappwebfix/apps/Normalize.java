@@ -2,6 +2,7 @@ package br.com.hkp.whatsappwebfix.apps;
 
 import br.com.hkp.whatsappwebfix.NormalizeFilenames;
 import br.com.hkp.whatsappwebfix.global.Global;
+import br.com.hkp.whatsappwebfix.gui.Error;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -153,7 +154,7 @@ public final class Normalize
         }
         catch (IOException e)
         {
-            System.err.println(e);
+            Error.showErrorMsg(e);
         }
          
     }//main()
