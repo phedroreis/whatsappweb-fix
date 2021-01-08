@@ -32,12 +32,13 @@ public final class Global
     
     /**
      * Eh o nome do diretorio para onde serao movidos os arquivos PNG de imagem
-     * de emojis.
+     * de emojis depois de normalizados.
      */
     public static final String EMOJIS_DIRNAME = "emoji-images";
         
     /**
-     * Esta string eh acrescentada a um arquivo que seja copia do original.
+     * Esta string eh acrescentada a um arquivo HTML corrigido que seja copia do
+     * original.
      * Se o original for, por exemplo, index.html, sua copia editada serah
      * nomeada como index.fix.html
      */
@@ -45,6 +46,7 @@ public final class Global
     
     /**
      * Nome com caminho absoluto do arquivo/diretorio selecionado pelo usuario
+     * por meio do metodo public static File choose() desta classe.
      */
     public static String TARGET_ABSOLUTE_PATHNAME;
     
@@ -59,16 +61,23 @@ public final class Global
             + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png"
         );
     
+    /**
+     * Estes objetos possuem a funcao de pausar ou ativar a thread principal do
+     * app FixGui.
+     */
     public static final Lock LOCK = new ReentrantLock();
     public static final Condition FIX_AWAIT = LOCK.newCondition();
+    
     /**
-     * 
+     * Quando true, no app FixGui, os arquivos HTML estao sendo processados. E 
+     * os botoes Sair e Pau Na Maquina ficam com suas funcoes desativadas.
      */
     public static final AtomicBoolean BUTTON_HANDLERS_ACTIVE = 
         new AtomicBoolean(false);
     
     /**
-    * JFrame para que JFileChooser e JOptionPane herdem o favicon da aplicacao
+    * JFrame oculto. Serve para que JFileChooser e JOptionPane herdem o favicon
+    * da aplicacao.
     */
     public static final ProgressFrame PARENT = 
         new ProgressFrame("", 0, 0, JFrame.EXIT_ON_CLOSE);
@@ -78,7 +87,7 @@ public final class Global
                      Configura a classe FileChooser 
     -------------------------------------------------------------------------*/
     /**
-     * 
+     * Configura o objeto navegador de arquivos JFileChooser.
      * 
      * @param title Um titulo para a janela
      */
@@ -122,7 +131,7 @@ public final class Global
        
     -------------------------------------------------------------------------*/
     /**
-     * Permite que o usuario selecione um diretorio ou um arquivo
+     * Permite que o usuario selecione um diretorio ou um arquivo.
      * 
      * @param title Um titulo para a janela
      * 

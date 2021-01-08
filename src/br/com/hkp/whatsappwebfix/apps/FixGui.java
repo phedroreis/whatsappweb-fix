@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * Cria copias de paginas HTML WhatsApp Web com os emojis renderizados.
  * 
  * @author "Pedro Reis"
- * @since 29 de novembro de 2020 v1.0
+ * @since 7 de janeiro de 2021 v1.0
  * @version v1.0
  *****************************************************************************/
 public final class FixGui
@@ -30,6 +30,10 @@ public final class FixGui
     -------------------------------------------------------------------------*/
     private void fix(File dir) throws IOException, InterruptedException
     {
+        /*
+        Obtem um array com todos os arquivos HTML do diretorio "dir" que nao 
+        sejam arquivos corrigidos criados por esta propria aplicacao
+        */
         File[] listFiles = dir.listFiles(new HtmlFilter());
        
         if (listFiles.length == 0) 
@@ -38,16 +42,43 @@ public final class FixGui
                 "Nenhum arquivo que possa ser corrigido foi encontrado!"
             );
         
+        /*
+        A janela de interface da aplicacao
+        */
         SelectFrame frame = new SelectFrame();
-             
+        
+        /*
+        Esta estrutura irah armazenar a lista de arquivos exibida por frame
+        */
         FileList fileList = new FileList(frame);
         
+        /*
+        Um listener de teclas para a GUI (interface) responder a comandos pelo
+        teclado. O objeto "fileList" eh passado ao construtor para que keyListen
+        possa executar metodos deste objeto que selecionam ou deselecionam 
+        arquivos listados
+        */
         KeyListen keyListen = new KeyListen(fileList);
         
+        /*
+        O listener de teclado eh passado a janela de interface para que seja
+        repassado para cada botao da interface e cada CheckBox na interface. Ou
+        seja, para cada elemento GUI da janela de interface. Assim os comandos 
+        de teclado funcionarao quando qualquer elemento da GUI estiver com o
+        foco.
+        */
         frame.addKeyListener(keyListen);
         
+        /*
+        Este filtro tem a funcao de identificar quais arquivos listados jah 
+        possuem copias corrigidas no diretorio
+        */
         FixedFilter fixedFilter = new FixedFilter();
- 
+        
+        /*
+        Neste loop sao identificados quais arquivos da lista jah foram 
+        corrigidos
+        */
         for (File file: listFiles)
         {
             fileList.addNode
@@ -58,23 +89,42 @@ public final class FixGui
         
         frame.setVisible(true);
         
+        /*
+        loop infinito. A aplicacao se encerra com o botao Sair.
+        */
         while(true)
         {
             Global.LOCK.lock();
+            /*
+            Botoes Sair e Pau na Maquina sao ativados
+            */
             Global.BUTTON_HANDLERS_ACTIVE.set(true);
             try
             {
+                /*
+                Essa thread dorme ate que botao Pau na Maquina seja clicado
+                */
                 Global.FIX_AWAIT.await(); 
+                /*
+                Botoes Sair e Pau na Maquina estao inativos enquanto a aplicacao
+                corrige os arquivos selecionados na lista.
+                */
                 Global.BUTTON_HANDLERS_ACTIVE.set(false);
-
+                /*
+                Obtem uma lista soh com os arquivos com o checkbox selecionado
+                */
                 LinkedList<NodeList> listOfFilesToFixed = fileList.getList();
-                
+                /*
+                Configura a barra de progresso para a execucao
+                */
                 frame.setProgressBarVisible(listOfFilesToFixed.size());
                 
                 int count = 0;
                 
                 frame.setProgressBarValue(0);
-
+                /*
+                Corrige os arquivos da lista
+                */
                 for(NodeList node: listOfFilesToFixed)
                 {
                     WhatsAppEditor w = new WhatsAppEditor(node.getFile());

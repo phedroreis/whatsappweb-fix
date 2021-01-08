@@ -3,6 +3,7 @@ package br.com.hkp.whatsappwebfix;
 import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import static br.com.hkp.whatsappwebfix.global.Global.FILENAME_DIFF;
 import static br.com.hkp.whatsappwebfix.global.Global.PASTA_BASE;
+import static br.com.hkp.whatsappwebfix.global.Global.TARGET_ABSOLUTE_PATHNAME;
 import br.com.hkp.whatsappwebfix.util.FileTools;
 import static br.com.hkp.whatsappwebfix.util.FileTools.writeTextFile;
 import br.com.hkp.whatsappwebfix.util.Normalizer;
@@ -43,16 +44,10 @@ public final class WhatsAppEditor
         );
     
     /*
-    Aramazena todo o conteudo de um arquivo HTML
+    Aramazena todo o conteudo de um arquivo HTML que eh uma pagina zap salva
     */
     private String htmlContent;
-
-    
-    /*
-    O diretorio onde estao os arquivos HTML
-    */
-    private static String absolutePath;
-   
+  
     /*
     Arquivo que serah lido e arquivo que sera gravado e arquivo de relatorio
     */
@@ -81,10 +76,9 @@ public final class WhatsAppEditor
     public WhatsAppEditor(final File file) throws IOException
     {
         inputFile = file;
-            
-        absolutePath = inputFile.getParent() + '/';
-        
-        String absoluteFileName = absolutePath + inputFile.getName();
+           
+        String absoluteFileName = 
+            TARGET_ABSOLUTE_PATHNAME + '/' + inputFile.getName();
              
         htmlContent = FileTools.readTextFile(file);
         
@@ -109,7 +103,7 @@ public final class WhatsAppEditor
         String filename = 
             PASTA_BASE + '/' + EMOJIS_DIRNAME + '/' + codepoints + ".png";
         
-        File test = new File(absolutePath + filename);
+        File test = new File(TARGET_ABSOLUTE_PATHNAME + '/' +filename);
                
         if (test.exists())
         {
@@ -123,7 +117,7 @@ public final class WhatsAppEditor
         {
             filename = filename.replaceAll("-[-a-f0-9]+[.]png", ".png");
                                
-            test = new File(absolutePath + filename);
+            test = new File(TARGET_ABSOLUTE_PATHNAME + '/' + filename);
             
             if (test.exists())
             {

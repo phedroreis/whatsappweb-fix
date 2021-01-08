@@ -105,9 +105,14 @@ public final class Fix
    /*=========================================================================
                               Classe interna
     =========================================================================*/
+    /*-------------------------------------------------------------------------
+    Arquivos HTML que jah foram corrigidos possuem uma copia no diretorio com
+    o sufixo .fix acrescentado ao nome do arquivo. Este filtro retorna true 
+    apenas para arquivos HTML para os quais nao exista uma respectiva copia
+    corrigida.
+    --------------------------------------------------------------------------*/
     private static final class HtmlFilter implements FilenameFilter
     {
-        
         @Override
         public boolean accept(File dir, String filename)
         {

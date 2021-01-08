@@ -26,7 +26,10 @@ public final class DownloadPngs
     
     -------------------------------------------------------------------------*/
     /**
-     * Construtor da classe
+     * Construtor da classe. Configura a janela que exibe o progresso do 
+     * download.
+     * 
+     * O programa e encerrado com o fechamento desta janela.
      */
     public DownloadPngs()
     {
@@ -40,26 +43,44 @@ public final class DownloadPngs
      * Baixa os arquivos listados na pagina de WhatsApp emojis da Emojipedia.
      * 
      * @param emojipediaFile Arquivo com o fonte da pagina HTML da Emojipedia 
-     * que lista os emojis do whatsapp
+     * que lista os emojis do whatsapp. Nesta pagina ha a URL de cada arquivo
+     * PNG com a figura de cada emoji utilizado pelo Whatsapp.
      * 
      * @throws IOException Em caso de erro de IO
      */
     public void downloadPngs(final File emojipediaFile) throws IOException
     {
       
+        /*---------------------------------------------------------------------
+        Cria o diretorio para onde serao baixados os arquivos, se este ainda nao
+        existir
+        ----------------------------------------------------------------------*/
         File downloaDir = new File(TARGET_DIR);
         
         if ((!downloaDir.exists()) && (!downloaDir.mkdirs()))
             throw new IOException("Erro ao criar pasta " + TARGET_DIR); 
-               
+        /*--------------------------------------------------------------------*/
+        
+        /*
+        emojipediaFile eh o arquivo com o codigo fonte da pagina da Emojipedia.
+        Esse arquivo eh lido para a String emojipediaPage
+        */
         String emojipediaPage = FileTools.readTextFile(emojipediaFile);
-                 
+        
+        /*
+        Na classe Global esta definida a regex que localiza na pag. da Emojipeia
+        a URL dos arquivos que devem ser baixados
+        */
         Matcher m = Global.PNG_PATTERN.matcher(emojipediaPage);
         
         frame.setVisible(true);
         
         int count = 0;
         
+        /*
+        No loop while o objeto m localiza cada URL alvo na pagina e faz o 
+        download do arquivo para o diretorio TARGET_DIR
+        */
         while (m.find())
         {
             String url = m.group();
@@ -67,7 +88,7 @@ public final class DownloadPngs
             FileTools.downloadUrl(url, TARGET_DIR);
             
             frame.println(String.format("%04d - %s\n", ++count, url));
-        }
+        }//while
                   
         frame.setTitle("");
         

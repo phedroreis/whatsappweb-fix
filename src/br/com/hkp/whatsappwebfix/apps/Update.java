@@ -24,6 +24,7 @@ public final class Update
     
     -------------------------------------------------------------------------*/
     /**
+     * Atualiza o biblioteca com figuras de emojis.
      * 
      * @param args n/a
      */

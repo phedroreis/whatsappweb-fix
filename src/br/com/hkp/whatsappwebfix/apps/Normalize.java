@@ -116,6 +116,7 @@ public final class Normalize
     
     -------------------------------------------------------------------------*/
     /**
+     * Normaliza os nomes dos arquivos que foram baixados para a pasta png.
      * 
      * @param args n/a
      */

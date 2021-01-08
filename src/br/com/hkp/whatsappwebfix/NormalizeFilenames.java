@@ -124,17 +124,25 @@ public final class NormalizeFilenames
      * 
      * @param dir O diretorio onde estao os arquivo a serem normalizados
      * 
-     * @throws java.io.FileNotFoundException
+     * @throws java.io.FileNotFoundException Em caso de erro de IO
      */
     public void normalize(final File dir) throws IOException
     {
         ProgressFrame normalizeFrame = 
             new ProgressFrame("Normalizando...", 700, 450, JFrame.EXIT_ON_CLOSE);
         
+        /*
+        Obtem um array apenas com os arquivos no diretorio "dir" que sao 
+        PNGs de emojis. O filtro EmojiFileFilter garante que outros arquivos 
+        nao sejam incluidos no array.
+        */
         File[] fileList = dir.listFiles(new EmojiFileFilter());
         
         normalizeFrame.setVisible(true);
         
+        /*
+        Se nao houve arquivo a ser normalizado o metodo informa e encerra.
+        */
         if (fileList.length == 0)
         {
             normalizeFrame.setTitle("Arquivos n\u00e3o encontrados");
@@ -149,22 +157,25 @@ public final class NormalizeFilenames
         
         normalizeFrame.setProgressBarVisible(fileList.length);
          
-        /*--------------------------------------------------------------------
+        /*
         Cria um novo diretorio, de nome emoji-images, dentro do diretorio onde
         estao os arquivos PNG com as imagens do emojis.
-        ---------------------------------------------------------------------*/
+        */
         String emojisDirName = FileTools.makeSubDir(dir, EMOJIS_DIRNAME);
-       
-        /*--------------------------------------------------------------------*/
-      
+          
         int barValue = 0; //contador de num. de arquivos jah normalizados
         
+        /*
+        Essa estrutura irah associar cada nome original de arquivo ao nome 
+        normalizado que lhe serah atribuido. Serve para que estes dados sejam
+        gravados em um arquivo de log no encerramento deste metodo.
+        */
         TreeMap<String, String> map = new TreeMap<>();
         
-        /*--------------------------------------------------------------------
-         Normaliza os nomes dos arquivos PNG e os move para o diretorio recem-
-         criado
-        ---------------------------------------------------------------------*/ 
+        /*
+         O loop normaliza os nomes dos arquivos PNG e os move para o diretorio
+        recem-criado EMOJIS_DIRNAME (definido na classe Global).  
+        */ 
         for (File file: fileList)
         {
             String filename = file.getName();

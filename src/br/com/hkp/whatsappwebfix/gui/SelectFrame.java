@@ -27,6 +27,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 
+/******************************************************************************
+ * A janela de interface da aplicacao FixGui.
+ * 
+ * @author "Pedro Reis"
+ * @since 6 de janeiro de 2021 v1.0
+ * @version v1.0
+ *****************************************************************************/
 public final class SelectFrame extends JFrame
 {
     private final JPanel contentPane;
@@ -41,6 +48,9 @@ public final class SelectFrame extends JFrame
     /*[00]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Construtor da janela.
+     */
     public SelectFrame() 
     {
         super("Corrige os Selecionados");
@@ -122,6 +132,12 @@ public final class SelectFrame extends JFrame
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Assim que o programa tiver um listener de teclado ativo, ele eh passado
+     * a este frame, que com este metodo o repassa aos botoes da janela.
+     * 
+     * @param k Listener de teclado.
+     */
     public void addKeyListener(KeyListen k)
     {
        keyListen = k;
@@ -133,6 +149,11 @@ public final class SelectFrame extends JFrame
     /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Adiciona um checkBox a esta janela e repassa o listener de teclado a ele.
+     * 
+     * @param jc O checkBox.
+     */
     public void addCheckBox(JCheckBox jc)
     {
         panel.add(jc);
@@ -172,11 +193,14 @@ public final class SelectFrame extends JFrame
     }//setProgressBarVisible()
 
    /*=========================================================================
-    *                              Classes internas
+    *            Classes internas. Handlers dos botoes da janela.
     ==========================================================================*/
+    /*-------------------------------------------------------------------------
+    Envia o sinal para despertar a thread no prog. principal e ai...
+    Pau na Maquina!
+    -------------------------------------------------------------------------*/
     private class FixButtonHandler implements ActionListener
     {
-
         @Override
         public void actionPerformed(ActionEvent e)
         {
@@ -195,7 +219,9 @@ public final class SelectFrame extends JFrame
         }
     }//classe FixButtonHandler
     
-    /*************************************************************************/
+    /*------------------------------------------------------------------------
+                               Encerra o programa
+    ------------------------------------------------------------------------*/
     private class ExitButtonHandler implements ActionListener
     {
 
@@ -207,7 +233,10 @@ public final class SelectFrame extends JFrame
         }
     }//classe ExitButtonHandler
     
-    /*************************************************************************/
+    /*------------------------------------------------------------------------
+     cria e executa uma thread que atualiza a biblioteca de emojis em segundo
+     plano.
+    ------------------------------------------------------------------------*/
     private class UpdateButtonHandler implements ActionListener
     {
         private final File pastaBase;
@@ -219,6 +248,12 @@ public final class SelectFrame extends JFrame
         public UpdateButtonHandler(final File dir)
         {
             pastaBase = dir;
+            /*
+            O metodo estatico da classe Executors retorna um objeto 
+            ExecutorService, capaz de gerenciar um pool de threads. Aqui eh 
+            criado configurado para soh executar uma por vez. Impedindo que 
+            varios downloads simultaneos possam ser disparados.
+            */
             executorService = Executors.newFixedThreadPool(1);
         }//construtor
         
@@ -228,8 +263,6 @@ public final class SelectFrame extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            if (!Global.BUTTON_HANDLERS_ACTIVE.get()) return;
-                  
             executorService.execute
             (
                 new Runnable()
