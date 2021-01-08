@@ -32,12 +32,16 @@ public final class Updater
      * 
      * @param pastaBase PastaBase com arquivos comuns
      * 
+     * @param closeOperation Indica o que fazer ao fechar a janela
+     * 
      * @throws IOException Se o diretorio para baixar os emojis nao puder ser 
      * criado
      */
-    public Updater(final File pastaBase) throws IOException
+    public Updater(final File pastaBase, final int closeOperation) 
+        throws IOException
     {
-        frame = new ProgressFrame("Pesquisando...", 800, 450);
+        frame = 
+            new ProgressFrame("Pesquisando...", 800, 450, closeOperation);
         
         emojisAbsoluteDirName = FileTools.makeSubDir(pastaBase, EMOJIS_DIRNAME);
     }//construtor
@@ -69,6 +73,8 @@ public final class Updater
         File emojipediaFile = new File(emojisAbsoluteDirName + "/whatsapp");
         
         String emojipediaPage = FileTools.readTextFile(emojipediaFile);
+        
+        emojipediaFile.delete();
                          
         Matcher m = Global.PNG_PATTERN.matcher(emojipediaPage);
         
@@ -140,12 +146,10 @@ public final class Updater
                  )
             );
             
-            emojipediaFile.delete();
-            
             FileTools.writeLogFile(frame, mapUrl2filename, emojisAbsoluteDirName);
             
         }//if-else
-               
+                 
         java.awt.Toolkit.getDefaultToolkit().beep();
    
     }//downloadPngs()

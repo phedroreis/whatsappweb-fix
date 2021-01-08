@@ -35,16 +35,24 @@ public final class ProgressFrame extends JFrame
      * @param width Largura da janela
      * 
      * @param height Altura da janela
+     * 
+     * @param closeOperation Indica o que fazer ao fechar a janela
      */
-    public ProgressFrame(final String title, final int width, final int height)
+    public ProgressFrame
+    (
+        final String title,
+        final int width, 
+        final int height,
+        final int closeOperation
+    )
     {
         super(title);
         
         setSize(width, height);
         
-        setLocationRelativeTo(null);
+        if (closeOperation == JFrame.EXIT_ON_CLOSE) setLocationRelativeTo(null);
        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(closeOperation);
        
         setLayout(new BorderLayout());
         

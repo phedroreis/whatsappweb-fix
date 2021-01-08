@@ -3,6 +3,7 @@ package br.com.hkp.whatsappwebfix.apps;
 import br.com.hkp.whatsappwebfix.WhatsAppEditor;
 import br.com.hkp.whatsappwebfix.global.Global;
 import static br.com.hkp.whatsappwebfix.global.Global.FILENAME_DIFF;
+import static br.com.hkp.whatsappwebfix.global.Global.TARGET_ABSOLUTE_PATHNAME;
 import br.com.hkp.whatsappwebfix.gui.Error;
 import br.com.hkp.whatsappwebfix.gui.KeyListen;
 import br.com.hkp.whatsappwebfix.gui.SelectFrame;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.LinkedList;
+import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
@@ -23,15 +25,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *****************************************************************************/
 public final class FixGui
 {
-    private static String absolutePath;
-    
     /*[01]---------------------------------------------------------------------
          Corrige todos os arquivos HTML encontrados no diretorio dir
     -------------------------------------------------------------------------*/
     private void fix(File dir) throws IOException, InterruptedException
     {
-        absolutePath = dir.getAbsolutePath() + "/";
-        
         File[] listFiles = dir.listFiles(new HtmlFilter());
        
         if (listFiles.length == 0) 
@@ -112,11 +110,9 @@ public final class FixGui
             (
                 "Selecione a Pasta com os Arquivos a Serem Corrigidos",
                 filter,
-                true
+                JFileChooser.DIRECTORIES_ONLY
             );
-        
-        if (dir == null) System.exit(0);
-        
+            
         try
         {
             FixGui f = new FixGui();
@@ -124,7 +120,7 @@ public final class FixGui
         }
         catch (IOException | InterruptedException e)
         {
-            Error.showErrorMsg(e);
+            Error.showErrorMsg(e, true);
         }
        
     }//main()
@@ -132,16 +128,16 @@ public final class FixGui
    /*=========================================================================
                               Classes internas
     =========================================================================*/
+    private static final String FIXED = FILENAME_DIFF + ".html";
+    
     private static final class FixedFilter implements FilenameFilter
     {
+        private final String path = TARGET_ABSOLUTE_PATHNAME + '/';
+          
         @Override
         public boolean accept(File dir, String filename)
         {
-            return new File
-                   (
-                       absolutePath +
-                       filename.replace(".html", FILENAME_DIFF + ".html")
-                   ).exists();
+            return new File(path + filename.replace(".html", FIXED)).exists();
         }//accept()
 
     }//classe FixedFilter
@@ -149,16 +145,10 @@ public final class FixGui
     /*************************************************************************/
     private static final class HtmlFilter implements FilenameFilter
     {
-        String fixed = FILENAME_DIFF + ".html";
-        
         @Override
         public boolean accept(File dir, String filename)
         {
-           return
-           (
-               !(filename.endsWith(fixed)) &&
-               filename.endsWith(".html")
-           );
+           return (!filename.endsWith(FIXED)) && (filename.endsWith(".html"));
         }//accept()
     }//classe HtmlFilter
     

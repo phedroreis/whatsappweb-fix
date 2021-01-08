@@ -3,22 +3,25 @@ package br.com.hkp.whatsappwebfix.gui;
 
 import br.com.hkp.whatsappwebfix.Updater;
 import br.com.hkp.whatsappwebfix.global.Global;
+import static br.com.hkp.whatsappwebfix.global.Global.PASTA_BASE;
+import static br.com.hkp.whatsappwebfix.global.Global.TARGET_ABSOLUTE_PATHNAME;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JProgressBar;
@@ -26,7 +29,6 @@ import javax.swing.JScrollPane;
 
 public final class SelectFrame extends JFrame
 {
-
     private final JPanel contentPane;
     private final JPanel panel;
     private final JButton fixButton;
@@ -76,8 +78,17 @@ public final class SelectFrame extends JFrame
         updateButton = new JButton("Atualizar");
         updateButton.setMnemonic('a');
         updateButton.setFont(buttonFont);
-        //updateButton.addActionListener(new UpdateButtonHandler());
-        updateButton.setIcon(new ImageIcon(getClass().getResource("update.png")));
+        updateButton.addActionListener
+        (
+            new UpdateButtonHandler
+            (
+                new File(TARGET_ABSOLUTE_PATHNAME + '/' + PASTA_BASE)
+            )
+        );
+        updateButton.setIcon
+        (
+            new ImageIcon(getClass().getResource("update.png"))
+        );
              
         panelButtons.add(exitButton, BorderLayout.WEST);
         panelButtons.add(fixButton, BorderLayout.CENTER);
@@ -108,7 +119,7 @@ public final class SelectFrame extends JFrame
         }
     }//construtor
     
-    /*[00]---------------------------------------------------------------------
+    /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public void addKeyListener(KeyListen k)
@@ -116,9 +127,10 @@ public final class SelectFrame extends JFrame
        keyListen = k;
        exitButton.addKeyListener(keyListen);
        fixButton.addKeyListener(keyListen);
+       updateButton.addKeyListener(keyListen);
     }//addKeyListener()
     
-    /*[00]---------------------------------------------------------------------
+    /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public void addCheckBox(JCheckBox jc)
@@ -127,7 +139,7 @@ public final class SelectFrame extends JFrame
         jc.addKeyListener(keyListen);
     }//addCheckBox()
     
-    /*[02]---------------------------------------------------------------------
+    /*[03]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     /**
@@ -141,7 +153,7 @@ public final class SelectFrame extends JFrame
         jProgressBar.setString(String.valueOf(value));
     }//setProgressBarValue()
     
-    /*[03]---------------------------------------------------------------------
+    /*[04]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     /**
@@ -198,30 +210,50 @@ public final class SelectFrame extends JFrame
     /*************************************************************************/
     private class UpdateButtonHandler implements ActionListener
     {
-
+        private final File pastaBase;
+        private final ExecutorService executorService;
+        
+        /*[00]-----------------------------------------------------------------
+        
+        ---------------------------------------------------------------------*/
+        public UpdateButtonHandler(final File dir)
+        {
+            pastaBase = dir;
+            executorService = Executors.newFixedThreadPool(1);
+        }//construtor
+        
+        /*[01]-----------------------------------------------------------------
+        
+        ---------------------------------------------------------------------*/
         @Override
         public void actionPerformed(ActionEvent e)
         {
             if (!Global.BUTTON_HANDLERS_ACTIVE.get()) return;
-            new Runnable()
-            {
-                
-                @Override
-                public void run()
+                  
+            executorService.execute
+            (
+                new Runnable()
                 {
-                    try
+                    @Override
+                    public void run()
                     {
-                        Updater updater = new Updater(null /*pastaBase*/);
-                        updater.downloadPngs();
-                    }
-                    catch (IOException e)
-                    {
-                        Error.showErrorMsg(e);
-                    }
-                }
-            };
-        }
-    }//classe ExitButtonHandler
+                        try
+                        {
+                            Updater updater = 
+                                new Updater(pastaBase, JFrame.DISPOSE_ON_CLOSE);
+                            updater.downloadPngs();
+                        }
+                        catch (IOException e)
+                        {
+                            Error.showErrorMsg(e, false);
+                        }
+                    }//run()
+                }//classe Runnable
+            );
+            
+        }//actionPerformed()
+        
+    }//classe UpdateButtonHandler
     
-   
+  
 }//classe SelectFrame

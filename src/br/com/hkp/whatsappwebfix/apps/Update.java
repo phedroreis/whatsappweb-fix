@@ -5,6 +5,8 @@ import br.com.hkp.whatsappwebfix.global.Global;
 import br.com.hkp.whatsappwebfix.gui.Error;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*****************************************************************************
@@ -27,7 +29,6 @@ public final class Update
      */
     public static void main(String[] args)
     {
-        
         /*
         Obtem o diretorio PastaBase onde sao gravados os arquivos comuns
         */
@@ -39,19 +40,17 @@ public final class Update
             (
                 "Localize e Selecione a " + Global.PASTA_BASE,
                 filter,
-                true
+                JFileChooser.DIRECTORIES_ONLY
             );
-                
-        if (pastaBase == null) System.exit(0);
-        
+         
         try
         {
-            Updater updater = new Updater(pastaBase);
+            Updater updater = new Updater(pastaBase, JFrame.EXIT_ON_CLOSE);
             updater.downloadPngs();
         }
         catch (IOException e)
         {
-            Error.showErrorMsg(e);
+            Error.showErrorMsg(e, true);
         }
          
     }//main()

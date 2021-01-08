@@ -6,6 +6,7 @@ import br.com.hkp.whatsappwebfix.util.FileTools;
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
+import javax.swing.JFrame;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -29,7 +30,7 @@ public final class DownloadPngs
      */
     public DownloadPngs()
     {
-        frame = new ProgressFrame("Baixando...", 800, 450);
+        frame = new ProgressFrame("Baixando...", 800, 450, JFrame.EXIT_ON_CLOSE);
     }//construtor
     
     /*[01]---------------------------------------------------------------------

@@ -5,6 +5,7 @@ import br.com.hkp.whatsappwebfix.global.Global;
 import br.com.hkp.whatsappwebfix.gui.Error;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*****************************************************************************
@@ -42,20 +43,18 @@ public final class GetPngs
         
         File file = Global.choose
                     (
-                        "Selecione o arquivo whatsapp-emojis.html",
+                        "Selecione o arquivo HTML da p\u00e1gina da Emojipedia",
                         filter,
-                        false
+                        JFileChooser.FILES_ONLY
                     );
-                
-        if (file == null) System.exit(0);
-        
+          
         try
         {
             downloadPngs.downloadPngs(file);
         }
         catch (IOException e)
         {
-            Error.showErrorMsg(e);
+            Error.showErrorMsg(e, true);
         }
     }
     

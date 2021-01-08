@@ -8,6 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -43,6 +44,11 @@ public final class Global
     public static final String FILENAME_DIFF = ".fix";
     
     /**
+     * Nome com caminho absoluto do arquivo/diretorio selecionado pelo usuario
+     */
+    public static String TARGET_ABSOLUTE_PATHNAME;
+    
+    /**
      * Pattern para localizar URLs de arquivos PNG de emojis na pagina da 
      * emojipedia.
      */
@@ -60,6 +66,12 @@ public final class Global
      */
     public static final AtomicBoolean BUTTON_HANDLERS_ACTIVE = 
         new AtomicBoolean(false);
+    
+    /**
+    * JFrame para que JFileChooser e JOptionPane herdem o favicon da aplicacao
+    */
+    public static final ProgressFrame PARENT = 
+        new ProgressFrame("", 0, 0, JFrame.EXIT_ON_CLOSE);
        
             
     /*[01]---------------------------------------------------------------------
@@ -115,17 +127,17 @@ public final class Global
      * @param title Um titulo para a janela
      * 
      * @param filter Um filtro que determina que tipo de arquivo pode ser 
-     * selecionado
+     * selecionado. Se for diretorio eh passado "x".
      * 
-     * @param chooseDir Se true so seleciona diretorios. Se false, arquivos.
-     * 
+     * @param selectionMode Escolhe selecionar soh arquivos ou soh diretorios
+     *  
      * @return O diretorio ou o arquivo selecionado
      */
     public static File choose
     (
         final String title,
         final FileNameExtensionFilter filter, 
-        final boolean chooseDir
+        final int selectionMode
     )
     {
         fileChooserSettings(title);
@@ -134,19 +146,18 @@ public final class Global
         
         fc.setFileFilter(filter);
         
-        if (chooseDir)
-            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        else
-            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setFileSelectionMode(selectionMode);
+                    
+        if(fc.showOpenDialog(PARENT) == JFileChooser.APPROVE_OPTION)
+        {
+            File file = fc.getSelectedFile();
+            TARGET_ABSOLUTE_PATHNAME = file.getAbsolutePath();
+            return file;
+        }
         
-        ProgressFrame p = new ProgressFrame("",0,0);
-
-        int res = fc.showOpenDialog(p);
-
-        if(res == JFileChooser.APPROVE_OPTION)
-            return fc.getSelectedFile();
-        else
-            return null;
+        System.exit(0);
+        
+        return null;//instrucao inalcancavel
         
     }//choose()
     

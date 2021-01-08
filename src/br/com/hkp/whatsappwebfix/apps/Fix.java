@@ -8,6 +8,8 @@ import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
@@ -24,8 +26,13 @@ public final class Fix
     -------------------------------------------------------------------------*/
     private static void fixAll(File dir) throws IOException
     {
-        ProgressFrame frame = 
-            new ProgressFrame("Gerando arquivos corrigidos...", 700, 450);
+        ProgressFrame frame = new ProgressFrame
+                              (
+                                  "Gerando arquivos corrigidos...", 
+                                  700,
+                                  450,
+                                  JFrame.EXIT_ON_CLOSE
+                              );
 
         File[] listFiles = dir.listFiles(new HtmlFilter());
 
@@ -79,20 +86,18 @@ public final class Fix
         File dir = 
             Global.choose
             (
-                "Selecione o Diret\u00f3rio",
+                "Selecione a Pasta com os Arquivos a Serem Corrigidos",
                 filter,
-                true
+                JFileChooser.DIRECTORIES_ONLY
             );
-        
-        if (dir == null) System.exit(0);
-        
+           
         try
         {
             fixAll(dir);
         }
         catch (IOException e)
         {
-            Error.showErrorMsg(e);
+            Error.showErrorMsg(e, true);
         }
            
     }//main()

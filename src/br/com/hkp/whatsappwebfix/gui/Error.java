@@ -1,5 +1,6 @@
 package br.com.hkp.whatsappwebfix.gui;
 
+import static br.com.hkp.whatsappwebfix.global.Global.PARENT;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,19 +9,19 @@ import javax.swing.JOptionPane;
  */
 public final class Error
 {
-    public static void showErrorMsg(final Exception e)
+    public static void showErrorMsg(final Exception e, final boolean fatal)
     {
         e.printStackTrace();
         
         JOptionPane.showMessageDialog
         (
-            null,
+            PARENT,
             e.getMessage(),
-           "Erro Fatal!",
+           (fatal) ? "Erro Fatal!" : "Erro!",
             JOptionPane.ERROR_MESSAGE
         );
         
-        System.exit(1);
+        if (fatal) System.exit(1);
     }//showErrorMsg()
 
 }//classe Error

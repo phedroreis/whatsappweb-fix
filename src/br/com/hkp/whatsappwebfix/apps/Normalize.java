@@ -5,6 +5,7 @@ import br.com.hkp.whatsappwebfix.global.Global;
 import br.com.hkp.whatsappwebfix.gui.Error;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******************************************************************************
@@ -138,11 +139,9 @@ public final class Normalize
             (
                 "Selecione o Diret\u00f3rio com os Arquivos PNG",
                 filter,
-                true
+                JFileChooser.DIRECTORIES_ONLY
             );
-                
-        if (dir == null) System.exit(0);
-        
+      
         try
         {
             /*
@@ -154,7 +153,7 @@ public final class Normalize
         }
         catch (IOException e)
         {
-            Error.showErrorMsg(e);
+            Error.showErrorMsg(e, true);
         }
          
     }//main()

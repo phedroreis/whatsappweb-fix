@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.TreeMap;
+import javax.swing.JFrame;
 
 /******************************************************************************
  * O conjunto de arquivos PNG que se obtem na pagina 
@@ -128,7 +129,7 @@ public final class NormalizeFilenames
     public void normalize(final File dir) throws IOException
     {
         ProgressFrame normalizeFrame = 
-            new ProgressFrame("Normalizando...", 700, 450);
+            new ProgressFrame("Normalizando...", 700, 450, JFrame.EXIT_ON_CLOSE);
         
         File[] fileList = dir.listFiles(new EmojiFileFilter());
         
