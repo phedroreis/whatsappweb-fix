@@ -26,14 +26,8 @@ import java.util.regex.Pattern;
  *****************************************************************************/
 public final class WhatsAppEditor
 {
-    /*
-    Localiza o atributo alt na tag que insere emojis
-    */
-    private static final Pattern ALT_ATTR_PATTERN = 
-        Pattern.compile("alt\\s*=\\s*\".+?\"");
-    
-    /*
-    Localiza tags que inserem emojis
+   /*
+    Usado para localizar tags que inserem emojis
     */
     private static final Pattern EMOJI_TAG_PATTERN = 
         Pattern.compile
@@ -42,6 +36,13 @@ public final class WhatsAppEditor
             + PASTA_BASE + "\\/"
             + "d5fceb6532643d0d84ffe09c40c481ecdf59e15a\\.gif.+?>"
         );
+    
+    /*
+    Serah usado para localizar o atributo alt na tag que insere emojis. Do valor
+    deste atribuido eh extraido o emoji codificado em UTF8.
+    */
+    private static final Pattern ALT_ATTR_PATTERN = 
+        Pattern.compile("alt\\s*=\\s*\".+?\"");
     
     /*
     Aramazena todo o conteudo de um arquivo HTML que eh uma pagina zap salva
@@ -76,20 +77,36 @@ public final class WhatsAppEditor
     public WhatsAppEditor(final File file) throws IOException
     {
         inputFile = file;
-           
+        
+        /*
+        TARGET_ABSOLUTE_PATHNAME eh a string com o caminho absoluto do diretorio
+        onde estao os arquivos HTML a serem corrigidos. O caminho eh absoluto
+        porque essa aplicacao pode ser executada em qualquer diretorio, portanto
+        este caminho nao pode ser relativo ao diretorio da aplicacao.
+        */   
         String absoluteFileName = 
             TARGET_ABSOLUTE_PATHNAME + '/' + inputFile.getName();
              
-        htmlContent = FileTools.readTextFile(file);
+        htmlContent = FileTools.readTextFile(file);//Le o arquivo a ser corrigido.
         
+        /*
+        O arquivo de saida - com a correcao da pag. zap - tem o nome do original
+        acrescido do sufixo .fix, que eh informado pela constante FILENAME_DIFF
+        */
         outputFile = 
             new File
                 (
                     absoluteFileName.replace(".html", FILENAME_DIFF + ".html")
                 );
         
+        /*
+        Cria objeto para arquivo de relatorio.
+        */
         reportFile = new File(absoluteFileName.replace(".html",".report"));
         
+        /*
+        As linhas do arq. de relatorio inicialmente serao inseridas neste Hash
+        */
         emojisReport = new HashMap<>(1000);
     }//construtor
            
@@ -98,14 +115,27 @@ public final class WhatsAppEditor
     -------------------------------------------------------------------------*/
     private String utf8EmojiToFilename(final String utf8Emoji)
     {
+        /*
+        O metodo recebe a string UTF8 do emoji na forma como ela aparece na pag.
+        HTML do zap e retorna os codepoints do emoji no formato normalizado. 
+        */
         String codepoints = Normalizer.utf8ToCodepoints(utf8Emoji);
-               
+        
+        /*
+        Este eh o nome do arquivo com o PNG do emoji. Este nome serah gravado
+        na tag da pagina zap editada. O nome inclui a pasta onde o programa 
+        espera encontrar o arquivo.
+        */
         String filename = 
             PASTA_BASE + '/' + EMOJIS_DIRNAME + '/' + codepoints + ".png";
         
+        /*
+        Um objeto File para verificar se o arquivo existe ou nao no diretorio
+        EMOJIS_DIRNAME
+        */
         File test = new File(TARGET_ABSOLUTE_PATHNAME + '/' +filename);
                
-        if (test.exists())
+        if (test.exists())//Se o arq. PNG existe o emoji pode ser renderizado
         {
             emojisReport.put
             (
@@ -113,22 +143,22 @@ public final class WhatsAppEditor
                 "Renderizado                : " + codepoints
             );
         }
-        else
+        else//Se nao existe, tenta encontrar PNG do emoji raiz. Ou usa tag span.
         {
             filename = filename.replaceAll("-[-a-f0-9]+[.]png", ".png");
                                
             test = new File(TARGET_ABSOLUTE_PATHNAME + '/' + filename);
             
-            if (test.exists())
+            if (test.exists())//Existe PNG do emoji raiz
             {
                 emojisReport.put
                 (
                     utf8Emoji,
                     "Renderizado com emoji raiz : " + codepoints
                 );
-                return ("!" + filename);
+                return ("!" + filename);//A exclamacao informa que eh emoji raiz
             }
-            else
+            else//Terah que exibir o emoji como caractere com uma tag span
             {
                 emojisReport.put
                 (
@@ -151,10 +181,14 @@ public final class WhatsAppEditor
     {
         Matcher m = ALT_ATTR_PATTERN.matcher(oldTag);
         
-        if (m.find()) 
+        if (m.find())//Localiza o atributo alt na tag que insere emoji 
         {
             String utf8Emoji = m.group();
             
+            /*
+            Extrai o valor do atributo alt. Eh uma string com o emoji codificado
+            em UTF-8
+            */
             utf8Emoji = utf8Emoji.substring
                         (
                             utf8Emoji.indexOf('"') + 1, utf8Emoji.length() - 1
@@ -162,18 +196,18 @@ public final class WhatsAppEditor
             
             String filename = utf8EmojiToFilename(utf8Emoji);
             
-            if (filename == null)
+            if (filename == null)//Nao ha PNG para este emoji
             {
                 return "<span>" + utf8Emoji + "</span>";
             }
-            else if (filename.charAt(0) == '!')
+            else if (filename.charAt(0) == '!')//So tem PNG para emoji raiz
             {
                 return 
                     "<img src=\"" + filename.substring(1, filename.length()) +
                     "\" width=\"20px\" height=\"20px\"" +
                     "style=\"border: solid 1px red;\">";
             }
-            else
+            else//Existe o PNG com a figura deste emoji
             {
                 return 
                     "<img src=\"" + filename + "\" alt=\"" + utf8Emoji +
@@ -182,7 +216,7 @@ public final class WhatsAppEditor
        
         } 
         else
-            return oldTag;
+            return oldTag;//O metodo falhou ao tentar construir a nova tag.
   
     }//getNewTag()
     
@@ -214,11 +248,19 @@ public final class WhatsAppEditor
     {
         HashMap<String, String> tagMap = getMap();
         
+        /*
+        Edita o conteudo do arquivo original.
+        */
         for(String oldTag: tagMap.keySet())
             htmlContent = htmlContent.replace(oldTag, tagMap.get(oldTag));
         
-        writeTextFile(outputFile, htmlContent);
+        writeTextFile(outputFile, htmlContent);//Grava string editada no novo arq.
         
+        /*---------------------------------------------------------------------
+        Monta uma StringBuilder com todo o conteudo do arquivo de relatorio.
+        As linhas deste arq. de relatorio sao obtidas das entradas previamente 
+        inseridas no HashMap emojisReport
+        ---------------------------------------------------------------------*/
         StringBuilder sb = new StringBuilder(emojisReport.size() * 100);
         
         for (String utf8Emoji: emojisReport.keySet())
@@ -229,8 +271,9 @@ public final class WhatsAppEditor
             append(emojisReport.get(utf8Emoji)).
             append("\n");
         }
+        /*--------------------------------------------------------------------*/
         
-        writeTextFile(reportFile, sb.toString());
+        writeTextFile(reportFile, sb.toString());//Grava relatorio
                 
     }//createNewFile()
     

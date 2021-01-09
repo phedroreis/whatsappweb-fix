@@ -24,6 +24,16 @@ public final class FileTools
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Le um arquivo no sistema de arquivos para um objeto String e o retorna.
+     * Este arquivo deve estar codificado em UTF-8.
+     * 
+     * @param file O arquivo a ser lido.
+     * 
+     * @return Uma String com o conteudo do arquivo texto.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static String readTextFile(final File file) throws IOException
     {
         return 
@@ -34,6 +44,16 @@ public final class FileTools
     /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Le um arquivo no sistema de arquivos para um objeto String e o retorna.
+     * Este arquivo deve estar codificado em UTF-8.
+     * 
+     * @param filename O nome do arquivo a ser lido.
+     * 
+     * @return Uma String com o conteudo do arquivo texto.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static String readTextFile(final String filename) throws IOException
     {
         return readTextFile(new File(filename));
@@ -42,6 +62,17 @@ public final class FileTools
     /*[03]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Escreve o conteudo de uma String em um arquivo texto. Se o arquivo jah
+     * existir seu conteudo serah substituido por esta String, e se nao existir
+     * serah criado. A String deve ser UTF0.
+     * 
+     * @param file O arquivo.
+     * 
+     * @param content A String codificada em UTF-8.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static void writeTextFile(final File file, final String content)
         throws IOException
     {
@@ -56,6 +87,17 @@ public final class FileTools
     /*[04]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Escreve o conteudo de uma String em um arquivo texto. Se o arquivo jah
+     * existir seu conteudo serah substituido por esta String, e se nao existir
+     * serah criado. A String deve ser UTF0.
+     * 
+     * @param filename O arquivo.
+     * 
+     * @param content A String codificada em UTF-8.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static void writeTextFile(final String filename, final String content)
         throws IOException
     {
@@ -65,6 +107,17 @@ public final class FileTools
     /*[05]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Baixa um arquivo apontado por uma URL para um diretorio especificado que
+     * jah deve indicar tambem o nome do arquivo que serah gravado.
+     * 
+     * @param url A url do arquivo a ser baixado.
+     * 
+     * @param pathname Caminho absoluto ou relativo para onde gravar o arquivo,
+     * incluindo tambem o nome que serah dado ao arquivo baixado.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static void downloadUrl2Pathname
     (
         final String url, 
@@ -87,6 +140,13 @@ public final class FileTools
     /*[06]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Obtem apenas o nome de um arquivo a partir da sua URL.
+     * 
+     * @param url A URL. (A URL deve indicar um arquivo e nao um site somente)
+     * 
+     * @return O nome do arquivo.
+     */
     public static String extractFilenameFromUrl(final String url)
     {
         return url.substring(url.lastIndexOf('/') + 1, url.length());
@@ -95,6 +155,20 @@ public final class FileTools
     /*[07]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Baixa um arquivo para um diretorio especificado. O nome do arquivo serah
+     * mantido como o mesmo desta URL.
+     * Por exemplo: https://www.nomeDeDominio/caminho/nomeArquivo.txt este 
+     * arquivo seria gravado com nome "nomeArquivo.txt" no diretorio
+     * especificado.
+     * 
+     * @param url A URL do arquivo.
+     * 
+     * @param path O caminho do diretorio onde gravar o arquivo. Pode ser 
+     * relativo ou absoluto.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static void downloadUrl(final String url, final String path)
         throws IOException
     {
@@ -107,6 +181,18 @@ public final class FileTools
     /*[08]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Cria um subdiretorio no diretorio passado como parametro.
+     * 
+     * @param dir O diretorio onde serah criado o subdiretorio.
+     * 
+     * @param dirName Nome do subdiretorio.
+     * 
+     * @return Uma String com o caminho ABSOLUTO do diretorio que foi criado.
+     * 
+     * @throws IOException Se nao for possivel criar o subdiretorio.
+     * 
+     */
     public static String makeSubDir(final File dir, final String dirName)
         throws IOException
     {
@@ -164,6 +250,19 @@ public final class FileTools
     /*[09]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     * Grava um arquivo de log por solicitacao de um objeto da classe Normalize.
+     * 
+     * @param frame O frame que exibe o progresso da atividade de um objeto da
+     * classe Normalize. 
+     * 
+     * @param map Um TreeMap cujas entradas serao os registros gravados no 
+     * arquivo de log.
+     * 
+     * @param path O caminho do diretorio onde gravar o arquivo de log.
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */
     public static void writeLogFile
     (
         final ProgressFrame frame, 
@@ -175,8 +274,15 @@ public final class FileTools
         frame.setTitle("Gravando arquivo de log...");
         
         int barValue = 0;
-           
+        /*
+        Preve quanto de memoria a StringBuilder vai necessitar.
+        */  
         StringBuilder sb = new StringBuilder(map.size() * 400);
+        
+        /*---------------------------------------------------------------------
+         Monta uma StringBuilder com o conteudo que sera gravado no arquivo. 
+         Isso evita ter que gravar linha por linha, agilizando o processo.
+        ---------------------------------------------------------------------*/
         sb.append(HEAD).append("\n");
             
         for(String filename: map.keySet())
@@ -194,17 +300,21 @@ public final class FileTools
         }//for 
         
         sb.append(FOOTER).append("\n");
-        
+        /*-------------------------------------------------------------------
+           Se jah existir um arquivo de log previamente gravado com esse nome,
+           entao gera outro nome acrescentando indices como sufixo ao nome.
+        ----------------------------------------------------------------------*/
         String filename = path + "/_emoji-list.html";
+        
         
         int count = 0;
         while (new File(filename).exists())
             filename = path + "/_emoji-list_" + ++count + ".html";
-    
+        /*--------------------------------------------------------------------*/
         
-        writeTextFile(filename, sb.toString());
+        writeTextFile(filename, sb.toString());//Grava o arquivo.
         
-        frame.setTitle("");
+        frame.setTitle("");//Apaga o titulo "Gravando Arquivo de Log.." no frame
         
     }//writeLogFile()
     

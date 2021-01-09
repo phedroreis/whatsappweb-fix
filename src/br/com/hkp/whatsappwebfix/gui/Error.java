@@ -4,7 +4,8 @@ import static br.com.hkp.whatsappwebfix.global.Global.PARENT;
 import javax.swing.JOptionPane;
 
 /******************************************************************************
- * A funcao desta classe eh fornecer uma janela para mensagens de erro.
+ * A funcao desta classe eh fornecer uma janela de interface para mensagens de 
+ * erro.
  * 
  * @author "Pedro Reis"
  * @since 27 de novembro de 2020 v1.0
@@ -20,8 +21,8 @@ public final class Error
      * 
      * @param e A excecao que causou o problema.
      * 
-     * @param fatal Se for true encerra a aplicacao.
-     * Se false apenas exibe o erro.
+     * @param fatal Se for true encerra a aplicacao. Se false apenas exibe o
+     * erro.
      */
     public static void showErrorMsg(final Exception e, final boolean fatal)
     {

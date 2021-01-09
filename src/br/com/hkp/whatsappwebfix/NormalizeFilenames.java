@@ -124,10 +124,13 @@ public final class NormalizeFilenames
      * 
      * @param dir O diretorio onde estao os arquivo a serem normalizados
      * 
-     * @throws java.io.FileNotFoundException Em caso de erro de IO
+     * @throws IOException Em caso de erro de IO
      */
     public void normalize(final File dir) throws IOException
     {
+        /*
+        Cria a janela. 
+        */
         ProgressFrame normalizeFrame = 
             new ProgressFrame("Normalizando...", 700, 450, JFrame.EXIT_ON_CLOSE);
         
@@ -138,7 +141,7 @@ public final class NormalizeFilenames
         */
         File[] fileList = dir.listFiles(new EmojiFileFilter());
         
-        normalizeFrame.setVisible(true);
+        normalizeFrame.setVisible(true);//Abre a janela
         
         /*
         Se nao houve arquivo a ser normalizado o metodo informa e encerra.
@@ -155,11 +158,14 @@ public final class NormalizeFilenames
             return;
         }
         
+        /*
+        Configura barra de progresso informando quantos arqs. serao normalizados
+        */
         normalizeFrame.setProgressBarVisible(fileList.length);
          
         /*
-        Cria um novo diretorio, de nome emoji-images, dentro do diretorio onde
-        estao os arquivos PNG com as imagens do emojis.
+        Cria um novo subdiretorio, de nome emoji-images, dentro do diretorio 
+        onde estao os arquivos PNG com as imagens do emojis.
         */
         String emojisDirName = FileTools.makeSubDir(dir, EMOJIS_DIRNAME);
           
@@ -173,12 +179,13 @@ public final class NormalizeFilenames
         TreeMap<String, String> map = new TreeMap<>();
         
         /*
-         O loop normaliza os nomes dos arquivos PNG e os move para o diretorio
-        recem-criado EMOJIS_DIRNAME (definido na classe Global).  
+         O loop percorre a lista de arqs e normaliza os nomes dos arquivos PNG
+        e os move para o diretorio recem-criado EMOJIS_DIRNAME (definido na
+        classe Global).  
         */ 
         for (File file: fileList)
         {
-            String filename = file.getName();
+            String filename = file.getName();//Obtem o nome original do arq.
             
             String normalizedFilename = 
                 Normalizer.filenameToCodepoints(filename) + ".png";
@@ -202,7 +209,7 @@ public final class NormalizeFilenames
             );
         
                         
-            file.renameTo(newName); 
+            file.renameTo(newName);//Renomeia e move 
             /*----------------------------------------------------------------*/
                                                                      
             normalizeFrame.setProgressBarValue(++barValue);
@@ -214,7 +221,7 @@ public final class NormalizeFilenames
         ---------------------------------------------------------------------*/
         FileTools.writeLogFile(normalizeFrame, map, emojisDirName);
              
-        java.awt.Toolkit.getDefaultToolkit().beep();
+        java.awt.Toolkit.getDefaultToolkit().beep();//Beepa avisando termino
          
     }//normalize()
       

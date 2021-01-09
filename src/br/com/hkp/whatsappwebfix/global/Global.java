@@ -26,21 +26,20 @@ public final class Global
    /**
     * Diretorio comum para acesso de todos os arquivos salvos do WhatsApp Web.
     * Todos os arquivos compartilhados pelas paginas salvas do app devem ficar 
-    * aqui
+    * nesta pasta.
     */
     public static final String PASTA_BASE = "PastaBase";
     
     /**
      * Eh o nome do diretorio para onde serao movidos os arquivos PNG de imagem
-     * de emojis depois de normalizados.
+     * de emojis depois de normalizados. Esta pasta ficara dentro da PastaBase.
      */
     public static final String EMOJIS_DIRNAME = "emoji-images";
         
     /**
      * Esta string eh acrescentada a um arquivo HTML corrigido que seja copia do
-     * original.
-     * Se o original for, por exemplo, index.html, sua copia editada serah
-     * nomeada como index.fix.html
+     * original. Se o original for, por exemplo, index.html, sua copia editada 
+     * serah nomeada como index.fix.html
      */
     public static final String FILENAME_DIFF = ".fix";
     
@@ -164,9 +163,9 @@ public final class Global
             return file;
         }
         
-        System.exit(0);
+        System.exit(0);//Se nada foi selecionado aborta o programa.
         
-        return null;//instrucao inalcancavel
+        return null;//Instrucao inalcancavel mas exigida pelo compilador.
         
     }//choose()
     

@@ -29,15 +29,17 @@ public final class GetPngs
     
     -------------------------------------------------------------------------*/
     /**
+     * App que baixa PNGs no site da EmojiPedia.
+     * 
      * @param args n/a
      */
     public static void main(String[] args)
     {
         DownloadPngs downloadPngs = new DownloadPngs();
         
-        /*
-        Obtem o arquivo whatsapp-emojis.html
-        */
+        /*---------------------------------------------------------------------
+                       Obtem o arquivo whatsapp-emojis.html
+        ---------------------------------------------------------------------*/
         FileNameExtensionFilter filter = 
             new FileNameExtensionFilter("HTML", "html", "htm");
         
@@ -47,7 +49,8 @@ public final class GetPngs
                         filter,
                         JFileChooser.FILES_ONLY
                     );
-          
+        /*--------------------------------------------------------------------*/
+        
         try
         {
             downloadPngs.downloadPngs(file);

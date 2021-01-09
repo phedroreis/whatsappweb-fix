@@ -30,9 +30,9 @@ public final class Update
      */
     public static void main(String[] args)
     {
-        /*
-        Obtem o diretorio PastaBase onde sao gravados os arquivos comuns
-        */
+        /*---------------------------------------------------------------------
+           Obtem o diretorio PastaBase onde sao gravados os arquivos comuns
+        ----------------------------------------------------------------------*/
         FileNameExtensionFilter filter = 
             new FileNameExtensionFilter("Diret\u00f3rio", "x");
        
@@ -43,7 +43,8 @@ public final class Update
                 filter,
                 JFileChooser.DIRECTORIES_ONLY
             );
-         
+        /*--------------------------------------------------------------------*/
+        
         try
         {
             Updater updater = new Updater(pastaBase, JFrame.EXIT_ON_CLOSE);

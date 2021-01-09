@@ -9,6 +9,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 
 /******************************************************************************
  * Eh a janela da interface grafica dos apps que processam arquivos em lote.
@@ -20,9 +21,10 @@ import javax.swing.ScrollPaneConstants;
 
 public final class ProgressFrame extends JFrame
 {
-    private final JTextArea jTextArea;
-    private final JScrollPane jScrollPane;
-    private final JProgressBar jProgressBar;
+    private final JTextArea jTextArea;//Exibe as msgs de texto
+    private final JScrollPane jScrollPane;//Barra de rolagem da area de texto
+    private final JProgressBar jProgressBar;//Barra de progresso
+    private final int closeOperation;
     
     /*[00]---------------------------------------------------------------------
     
@@ -46,22 +48,36 @@ public final class ProgressFrame extends JFrame
         final int closeOperation
     )
     {
-        super(title);
+        super(title);//Titulo para a janela.
         
-        setSize(width, height);
+        setSize(width, height);//Dimensoes iniciais da janela.
         
+        this.closeOperation = closeOperation;
+        
+        /*
+        Quando esta janela estiver sendo usada por uma thread rodando em segundo
+        plano, nao encerra a aplicacao no fechamento desse frame e nem abre o 
+        o frame no centro da tela. Porque nesse caso a aplicacao principal jah
+        tem seu frame aberto no centro da tela.
+        */
         if (closeOperation == JFrame.EXIT_ON_CLOSE) setLocationRelativeTo(null);
        
+        /*
+        Define o que ocorrerah quando o frame for fechado.
+        */
         setDefaultCloseOperation(closeOperation);
        
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout());//Gerencia o layout da janela
         
-        jTextArea = new JTextArea();
+        jTextArea = new JTextArea();//Insere area para exibir texto
         
-        jTextArea.setEditable(false);
+        jTextArea.setEditable(false);//Nao editavel pelo usuario
         
-        jScrollPane = new JScrollPane(jTextArea);
+        jScrollPane = new JScrollPane(jTextArea);//Barras de rolagem na textarea
         
+        /*---------------------------------------------------------------------
+                  Barras de rolagem exibidas apenas quando necessario
+        ----------------------------------------------------------------------*/
         jScrollPane.setVerticalScrollBarPolicy
         (
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED
@@ -71,12 +87,13 @@ public final class ProgressFrame extends JFrame
         (
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
         );
+        /*--------------------------------------------------------------------*/
         
         jProgressBar = new JProgressBar();
         jProgressBar.setVisible(false);
         
-        add(jScrollPane, BorderLayout.CENTER);
-        add(jProgressBar, BorderLayout.SOUTH);
+        add(jScrollPane, BorderLayout.CENTER);//Insere area de texto
+        add(jProgressBar, BorderLayout.SOUTH);//Insere barra de progresso
         
         setVisible(false);
         
@@ -104,8 +121,27 @@ public final class ProgressFrame extends JFrame
      */
     public void setProgressBarValue(final int value)
     {
-        jProgressBar.setValue(value);
-        jProgressBar.setString(value + " arquivos");
+        if (closeOperation == JFrame.EXIT_ON_CLOSE)
+        {
+            jProgressBar.setValue(value);
+            jProgressBar.setString(value + " arquivos");
+        }
+        else
+        {
+            SwingUtilities.invokeLater
+            (
+                new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        jProgressBar.setValue(value);
+                        jProgressBar.setString(value + " arquivos");
+                    }
+
+                }
+            );
+        }
     }//setProgressBarValue()
     
     /*[03]---------------------------------------------------------------------
@@ -119,11 +155,32 @@ public final class ProgressFrame extends JFrame
      */
     public void setProgressBarVisible(final int maximumValue)
     {
-        jProgressBar.setStringPainted(true);
-        jProgressBar.setForeground(Color.BLACK);
-        jProgressBar.setValue(0);
-        jProgressBar.setMaximum(maximumValue);
-        jProgressBar.setVisible(true);
+        if (closeOperation == JFrame.EXIT_ON_CLOSE)
+        {
+            jProgressBar.setStringPainted(true);
+            jProgressBar.setForeground(Color.BLACK);
+            jProgressBar.setValue(0);
+            jProgressBar.setMaximum(maximumValue);
+            jProgressBar.setVisible(true);
+        }
+        else
+        {
+            SwingUtilities.invokeLater
+            (
+                new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        jProgressBar.setStringPainted(true);
+                        jProgressBar.setForeground(Color.BLACK);
+                        jProgressBar.setValue(0);
+                        jProgressBar.setMaximum(maximumValue);
+                        jProgressBar.setVisible(true);
+                    }
+                }
+            );
+        }
     }//setProgressBarVisible()
     
     /*[04]---------------------------------------------------------------------
@@ -136,8 +193,30 @@ public final class ProgressFrame extends JFrame
      */
     public void println(final String s)
     {
-        jTextArea.append(s + "\n\n");
-        jTextArea.setCaretPosition(jTextArea.getText().length()); 
+       
+        if (closeOperation == JFrame.EXIT_ON_CLOSE)
+        {
+             jTextArea.append(s + "\n\n");
+             jTextArea.setCaretPosition(jTextArea.getText().length()); 
+        }
+        else
+        {
+            SwingUtilities.invokeLater
+            (
+                new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                         jTextArea.append(s + "\n\n");
+                         jTextArea.setCaretPosition(jTextArea.getText().
+                         length()); 
+                    }
+
+                }
+            );
+        }
+        
     }//println()
       
     

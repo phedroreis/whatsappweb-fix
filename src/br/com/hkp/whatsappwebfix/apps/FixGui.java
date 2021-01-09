@@ -48,7 +48,7 @@ public final class FixGui
         SelectFrame frame = new SelectFrame();
         
         /*
-        Esta estrutura irah armazenar a lista de arquivos exibida por frame
+        Esta estrutura irah armazenar a lista de arquivos exibida pelo frame
         */
         FileList fileList = new FileList(frame);
         
@@ -65,7 +65,8 @@ public final class FixGui
         repassado para cada botao da interface e cada CheckBox na interface. Ou
         seja, para cada elemento GUI da janela de interface. Assim os comandos 
         de teclado funcionarao quando qualquer elemento da GUI estiver com o
-        foco.
+        foco. Pois todos enviarao as teclas pressionadas para o mesmo listener
+        de teclado.
         */
         frame.addKeyListener(keyListen);
         
@@ -95,25 +96,30 @@ public final class FixGui
         while(true)
         {
             Global.LOCK.lock();
+            
             /*
             Botoes Sair e Pau na Maquina sao ativados
             */
             Global.BUTTON_HANDLERS_ACTIVE.set(true);
+            
             try
             {
                 /*
                 Essa thread dorme ate que botao Pau na Maquina seja clicado
                 */
                 Global.FIX_AWAIT.await(); 
+                
                 /*
                 Botoes Sair e Pau na Maquina estao inativos enquanto a aplicacao
                 corrige os arquivos selecionados na lista.
                 */
                 Global.BUTTON_HANDLERS_ACTIVE.set(false);
+                
                 /*
                 Obtem uma lista soh com os arquivos com o checkbox selecionado
                 */
                 LinkedList<NodeList> listOfFilesToFixed = fileList.getList();
+                
                 /*
                 Configura a barra de progresso para a execucao
                 */
@@ -133,7 +139,7 @@ public final class FixGui
                     frame.setProgressBarValue(++count);
                 }
 
-                java.awt.Toolkit.getDefaultToolkit().beep();
+                java.awt.Toolkit.getDefaultToolkit().beep();//Beepa o termino
             }
             finally
             {
@@ -149,9 +155,9 @@ public final class FixGui
     -------------------------------------------------------------------------*/
     public static void main(String[] args) 
     {
-        /*
-        Obtem o diretorio onde estao os arquivo HTML
-        */
+        /*---------------------------------------------------------------------
+             Obtem o diretorio onde estao os arquivo HTML das pags. do zap  
+        ----------------------------------------------------------------------*/
         FileNameExtensionFilter filter = 
             new FileNameExtensionFilter("Diret\u00f3rio", "x");
         
@@ -162,6 +168,7 @@ public final class FixGui
                 filter,
                 JFileChooser.DIRECTORIES_ONLY
             );
+        /*--------------------------------------------------------------------*/
             
         try
         {
@@ -179,7 +186,9 @@ public final class FixGui
                               Classes internas
     =========================================================================*/
     private static final String FIXED = FILENAME_DIFF + ".html";
-    
+    /*-------------------------------------------------------------------------
+           Este filtro retorna true para arquivos que jah foram corrigidos
+    -------------------------------------------------------------------------*/
     private static final class FixedFilter implements FilenameFilter
     {
         private final String path = TARGET_ABSOLUTE_PATHNAME + '/';
@@ -193,6 +202,10 @@ public final class FixGui
     }//classe FixedFilter
     
     /*************************************************************************/
+     /*-------------------------------------------------------------------------
+        Este filtro retorna true para todos os arquivos HTML, exceto aqueles
+        que tenham o sufixo .fix no nome.
+    -------------------------------------------------------------------------*/
     private static final class HtmlFilter implements FilenameFilter
     {
         @Override
@@ -200,6 +213,7 @@ public final class FixGui
         {
            return (!filename.endsWith(FIXED)) && (filename.endsWith(".html"));
         }//accept()
+        
     }//classe HtmlFilter
     
 }//app FixGui

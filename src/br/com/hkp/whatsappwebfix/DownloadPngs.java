@@ -73,9 +73,9 @@ public final class DownloadPngs
         */
         Matcher m = Global.PNG_PATTERN.matcher(emojipediaPage);
         
-        frame.setVisible(true);
+        frame.setVisible(true);//Abre a janela
         
-        int count = 0;
+        int count = 0;//Contador para os arquivos que sao baixados
         
         /*
         No loop while o objeto m localiza cada URL alvo na pagina e faz o 
@@ -83,9 +83,9 @@ public final class DownloadPngs
         */
         while (m.find())
         {
-            String url = m.group();
+            String url = m.group();//Localiza a URL de um arq. PNG
                        
-            FileTools.downloadUrl(url, TARGET_DIR);
+            FileTools.downloadUrl(url, TARGET_DIR);//Baixa pra pasta TARGET_DIR
             
             frame.println(String.format("%04d - %s\n", ++count, url));
         }//while
@@ -94,7 +94,7 @@ public final class DownloadPngs
         
         frame.println("Arquivos baixados para a pasta " + TARGET_DIR);
                
-        java.awt.Toolkit.getDefaultToolkit().beep();
+        java.awt.Toolkit.getDefaultToolkit().beep();//Alerta sonoro de termino
    
     }//downloadPngs()
     

@@ -46,12 +46,21 @@ public final class KeyListen implements KeyListener
     {
         switch (e.getKeyChar())
         {
-            case 's', 'S' -> fileList.seletcAll();
-            case 'd', 'D' -> fileList.deselectAll();
-            case 'i', 'I' -> fileList.invert();
+            case 's':
+            case 'S':
+                fileList.seletcAll(); break;
+            case 'd':
+            case 'D':
+                fileList.deselectAll(); break;
+            case 'i':
+            case 'I':
+                fileList.toggleAll();
         }
     }//keyPressed()
     
+    /*[02]---------------------------------------------------------------------
+                     Metodos nao implementados da interface.
+    -------------------------------------------------------------------------*/
     @Override
     public void keyTyped(KeyEvent e){}
 

@@ -71,20 +71,30 @@ public final class SelectFrame extends JFrame
         JPanel panelButtons = new JPanel(new BorderLayout());
         panelButtons.setBorder(BorderFactory.createEtchedBorder());
         
+        /*
+        Fonte para os rotulos de botoes
+        */
         Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 12);
         
+        /*---------------------------------------------------------------------
+                                Configura botao Sair
+        ---------------------------------------------------------------------*/
         exitButton = new JButton("Sair    ");
         exitButton.setMnemonic('s');
         exitButton.setFont(buttonFont);
         exitButton.addActionListener(new ExitButtonHandler());
         exitButton.setIcon(new ImageIcon(getClass().getResource("exit.png")));
-           
+         /*---------------------------------------------------------------------
+                           Configura botao Pau na Maquina
+        ---------------------------------------------------------------------*/   
         fixButton = new JButton("Pau na M\u00e1quina!");
         fixButton.setMnemonic('p');
         fixButton.setFont(buttonFont);
         fixButton.addActionListener(new FixButtonHandler());
         fixButton.setIcon(new ImageIcon(getClass().getResource("gear.png")));
-        
+         /*---------------------------------------------------------------------
+                             Configura botao Atualizar
+        ---------------------------------------------------------------------*/
         updateButton = new JButton("Atualizar");
         updateButton.setMnemonic('a');
         updateButton.setFont(buttonFont);
@@ -99,6 +109,7 @@ public final class SelectFrame extends JFrame
         (
             new ImageIcon(getClass().getResource("update.png"))
         );
+        /*--------------------------------------------------------------------*/
              
         panelButtons.add(exitButton, BorderLayout.WEST);
         panelButtons.add(fixButton, BorderLayout.CENTER);
@@ -115,9 +126,11 @@ public final class SelectFrame extends JFrame
                   
         pack();
         
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);//Abre janela no centro da tela
         
-        //Insere o icone na janela
+        /*
+        Insere o icone na janela
+        */
         try
         {
             URL url = getClass().getResource("favicon.png");
@@ -234,7 +247,7 @@ public final class SelectFrame extends JFrame
     }//classe ExitButtonHandler
     
     /*------------------------------------------------------------------------
-     cria e executa uma thread que atualiza a biblioteca de emojis em segundo
+     Cria e executa uma thread que atualiza a biblioteca de emojis em segundo
      plano.
     ------------------------------------------------------------------------*/
     private class UpdateButtonHandler implements ActionListener
@@ -260,6 +273,11 @@ public final class SelectFrame extends JFrame
         /*[01]-----------------------------------------------------------------
         
         ---------------------------------------------------------------------*/
+        /**
+         * Atualiza os PNGs com uma thread separada rodando em segundo plano.
+         * 
+         * @param e Evento do botao Atualizar clicado.
+         */
         @Override
         public void actionPerformed(ActionEvent e)
         {

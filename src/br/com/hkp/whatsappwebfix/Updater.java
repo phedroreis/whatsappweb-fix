@@ -81,6 +81,9 @@ public final class Updater
             "https://emojipedia.org/whatsapp", emojisAbsoluteDirName
         );
         
+        /*
+        emojipediaFile eh um objeto de referencia ao arquivo que foi baixado
+        */
         File emojipediaFile = new File(emojisAbsoluteDirName + "/whatsapp");
         
         /*
@@ -102,13 +105,13 @@ public final class Updater
         /*
         Essa estrutura serve para associar cada URL localizada ao nome que sera
         dado ao arquivo que foi baixado com essa mesma URL. O nome do arquivo
-        serah normalizado
+        serah normalizado.
         */
         TreeMap<String, String> mapUrl2filename = new TreeMap<>();
        
         while (m.find())
         {
-            String url = m.group();
+            String url = m.group();//Localiza a URL de um PNG
             
             /*
             Eh obtido o nome normalizado que o arquivo linkado por esta URL 
@@ -129,7 +132,7 @@ public final class Updater
            
         }//while
         
-        int newEmojis = mapUrl2filename.size();
+        int newEmojis = mapUrl2filename.size();//Quantos arquivos serao baixados
         
         if (newEmojis == 0) //Se nenhuma entrada foi inserida no TreeMap
         {
@@ -143,9 +146,16 @@ public final class Updater
         else //Se foram encontrados novos arquivos PNG na EmojiPedia
         {
             frame.setTitle("Baixando...");
-        
+            
+            /*
+            Configura barra de progresso com num. de arqs. que serao baixados.
+            */
             frame.setProgressBarVisible(newEmojis);
             
+            /*-----------------------------------------------------------------
+            Informa na janela qtos. arqs. serao baixados. Se apenas 1, a msg eh
+            escrita no singular. Mais de um acrescenta S no final dos substant.
+            ------------------------------------------------------------------*/
             String s = (newEmojis > 1) ? "s" : "";   
             
             frame.println
@@ -156,20 +166,26 @@ public final class Updater
                     "Encontrado", s, newEmojis, "novo", s, "emoji", s
                 )
             );
+            /*----------------------------------------------------------------*/
 
             int count = 0;
             
-            /*
-            As URLs de arquivos que foram localizadas sao baixadas
-            */
+            /*-----------------------------------------------------------------
+                  As URLs de arquivos que foram localizadas sao baixadas
+            ------------------------------------------------------------------*/
             for(String url: mapUrl2filename.keySet())
             {
+                /*
+                Esse metodo estatico da classe FileTools baixa o arquivo e o
+                nomeia com o nome indicado.
+                */
                 FileTools.downloadUrl2Pathname(url, mapUrl2filename.get(url));
 
                 frame.println(String.format("%04d - %s\n", ++count, url));
 
-                frame.setProgressBarValue(count);
+                frame.setProgressBarValue(count);//Atualiza barra de progresso
             }//for
+            /*---------------------------------------------------------------*/
               
             frame.setTitle("");
 
@@ -190,7 +206,7 @@ public final class Updater
             
         }//if-else
                  
-        java.awt.Toolkit.getDefaultToolkit().beep();
+        java.awt.Toolkit.getDefaultToolkit().beep();//Beepa termino
    
     }//downloadPngs()
     

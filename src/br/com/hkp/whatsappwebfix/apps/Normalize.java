@@ -111,7 +111,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public final class Normalize
 {
-
    /*[00]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
@@ -128,10 +127,10 @@ public final class Normalize
         */
         NormalizeFilenames normalizeFilenames = new NormalizeFilenames();
         
-        /*
+        /*---------------------------------------------------------------------
         Obtem o diretorio onde estao os arquivo PNG cujos nomes serao
         normalizados
-        */
+        ----------------------------------------------------------------------*/
         FileNameExtensionFilter filter = 
             new FileNameExtensionFilter("Diret\u00f3rio", "x");
        
@@ -142,6 +141,7 @@ public final class Normalize
                 filter,
                 JFileChooser.DIRECTORIES_ONLY
             );
+        /*-------------------------------------------------------------------*/
       
         try
         {
