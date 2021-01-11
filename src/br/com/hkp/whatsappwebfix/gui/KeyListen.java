@@ -1,8 +1,8 @@
 package br.com.hkp.whatsappwebfix.gui;
 
 import br.com.hkp.whatsappwebfix.util.FileList;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /******************************************************************************
  * A funcao desta classe eh fornecer um listener para o teclado. 
@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
  * @since 7 de janeiro de 2021 v1.0
  * @version v1.0
  *****************************************************************************/
-public final class KeyListen implements KeyListener
+public final class KeyListen extends KeyAdapter
 {
     private final FileList fileList;
     
@@ -57,15 +57,6 @@ public final class KeyListen implements KeyListener
                 fileList.toggleAll();
         }
     }//keyPressed()
-    
-    /*[02]---------------------------------------------------------------------
-                     Metodos nao implementados da interface.
-    -------------------------------------------------------------------------*/
-    @Override
-    public void keyTyped(KeyEvent e){}
-
-    @Override
-    public void keyReleased(KeyEvent e){}
 
 }//classe KeyListen
     

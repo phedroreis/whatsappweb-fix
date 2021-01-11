@@ -5,11 +5,15 @@ import static br.com.hkp.whatsappwebfix.global.Global.EMOJIS_DIRNAME;
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import br.com.hkp.whatsappwebfix.util.FileTools;
 import br.com.hkp.whatsappwebfix.util.Normalizer;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -25,8 +29,8 @@ public final class Updater
     
     private final String emojisAbsoluteDirName;
     
-    private final int closeOperation;
-   
+    private final AtomicBoolean abort;
+    
     /*[00]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
@@ -35,7 +39,8 @@ public final class Updater
      * 
      * @param pastaBase PastaBase com arquivos comuns
      * 
-     * @param closeOperation Indica o que fazer ao fechar a janela 
+     * @param closeOperation O tipo de operacao quando o botao de fechar eh 
+     * clicado.
      * 
      * @throws IOException Se o diretorio para baixar os emojis nao puder ser 
      * criado
@@ -43,7 +48,6 @@ public final class Updater
     public Updater(final File pastaBase, final int closeOperation) 
         throws IOException
     {
-        this.closeOperation = closeOperation;
         /*
         Quando um objeto desta classe eh criado pelo app Update, o programa deve
         se encerrar com o fechamento desta janela. Mas quando o app FixGui usa
@@ -53,6 +57,11 @@ public final class Updater
         */
         frame = 
             new ProgressFrame("Pesquisando...", 800, 450, closeOperation);
+        
+        if (closeOperation == JFrame.DO_NOTHING_ON_CLOSE)
+            frame.addWindowListener(new CloseWindowHandler());
+        
+        abort = new AtomicBoolean(false);
         
         emojisAbsoluteDirName = FileTools.makeSubDir(pastaBase, EMOJIS_DIRNAME);
     }//construtor
@@ -84,7 +93,7 @@ public final class Updater
         (
             "https://emojipedia.org/whatsapp", emojisAbsoluteDirName
         );
-        
+         
         /*
         emojipediaFile eh um objeto de referencia ao arquivo que foi baixado
         */
@@ -94,11 +103,13 @@ public final class Updater
         Le o conteudo deste arquivo para a String emojipediaPage
         */
         String emojipediaPage = FileTools.readTextFile(emojipediaFile);
-        
+            
         /*
         Deleta o arquivo, jah que nao serah mais necessario
         */
         emojipediaFile.delete();
+        
+        if (abort.get()) return;//A janela foi fechada pelo usuario
         
         /*
         Na classe Global esta declarada a regex que localiza URLs de PNGs nesta
@@ -115,6 +126,8 @@ public final class Updater
        
         while (m.find())
         {
+            if (abort.get()) return;//A janela foi fechada pelo usuario
+            
             String url = m.group();//Localiza a URL de um PNG
             
             /*
@@ -179,6 +192,8 @@ public final class Updater
             ------------------------------------------------------------------*/
             for(String url: mapUrl2filename.keySet())
             {
+                if (abort.get()) return;//A janela foi fechada pelo usuario
+                
                 /*
                 Esse metodo estatico da classe FileTools baixa o arquivo e o
                 nomeia com o nome indicado.
@@ -195,16 +210,20 @@ public final class Updater
 
             frame.println
             (
-                 String.format
-                 (
-                     "%s%s %s%s %s %s.", 
-                     "Arquivo", s, "baixado", s, "para a pasta", 
-                     emojisAbsoluteDirName
-                 )
+                String.format
+                (
+                    "%s%s %s%s %s %s.", 
+                    "Arquivo", s, "baixado", s, "para a pasta", 
+                    emojisAbsoluteDirName
+                )
             );
             
+            if (abort.get()) return;//A janela foi fechada pelo usuario
+            
             /*
-            Um arquivo de log eh gravado com as entradas do TreeMap
+            Um arquivo de log eh gravado com as entradas do TreeMap. Se o 
+            processo for abortado pelo fechamento da janela, o arquivo de log 
+            nao eh gravado.
             */
             FileTools.writeLogFile(frame, mapUrl2filename, emojisAbsoluteDirName);
             
@@ -212,14 +231,51 @@ public final class Updater
                  
         java.awt.Toolkit.getDefaultToolkit().beep();//Beepa termino
         
-        /*
-        Se a classe eh uma thread do app FixGui fechar a janela nao encerra o
-        programa.
-        */
-        if (closeOperation == JFrame.DO_NOTHING_ON_CLOSE)
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-   
+        abort.set(true);
+     
     }//downloadPngs()
+    
+    /*=========================================================================
+    *            Classes interna. Handler do fechamento da janela.
+    ==========================================================================*/
+    /*-------------------------------------------------------------------------
+                    Encerra o update ao fechamento da janela
+     -------------------------------------------------------------------------*/
+    private final class CloseWindowHandler extends WindowAdapter
+    {
+        private final String[] options = {"Aborta", "Cancela"};
+        
+        /*[01]------------------------------------------------------------------
+        
+        ----------------------------------------------------------------------*/
+        /**
+         * Encerra o programa se nenhuma thread estiver executando.
+         * 
+         * @param e n/a
+         */
+        @Override
+        public void windowClosing(WindowEvent e)
+        {
+            if (!abort.get())
+            {
+                if 
+                (
+                    JOptionPane.showOptionDialog
+                    (
+                        frame, "Confirma abortar?", "",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.
+                        WARNING_MESSAGE,
+                        null, options, options[1]
+                    ) != 0
+                ) return;
+                
+                abort.set(true);
+            }//if
+            
+            frame.dispose();
+        }//windowClosing()
+           
+    }//classe CloseWindow
     
 }//classe Updater
 

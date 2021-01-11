@@ -17,8 +17,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -301,7 +301,7 @@ public final class SelectFrame extends JFrame
     /*-------------------------------------------------------------------------
                 Encerra o programa ao fechar a janela principal
     -------------------------------------------------------------------------*/
-    private final class CloseWindowHandler implements WindowListener
+    private final class CloseWindowHandler extends WindowAdapter
     {
         /*[01]------------------------------------------------------------------
         
@@ -316,22 +316,6 @@ public final class SelectFrame extends JFrame
         {
             exit();
         }//windowClosing()
-        
-        /*[02]-----------------------------------------------------------------
-                                 Nao implementados
-        ----------------------------------------------------------------------*/
-        @Override
-        public void windowOpened(WindowEvent e){}
-        @Override
-        public void windowClosed(WindowEvent e){}
-        @Override
-        public void windowIconified(WindowEvent e){}
-        @Override
-        public void windowDeiconified(WindowEvent e){}
-        @Override
-        public void windowActivated(WindowEvent e){}
-        @Override
-        public void windowDeactivated(WindowEvent e){}
         
     }//classe CloseWindow
 
