@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
+import javax.swing.JFrame;
 
 /*****************************************************************************
  * Baixa os arquivos PNG com figuras de Emojis estilo WhatsApp no site da 
@@ -23,6 +24,8 @@ public final class Updater
     private final ProgressFrame frame;
     
     private final String emojisAbsoluteDirName;
+    
+    private final int closeOperation;
    
     /*[00]---------------------------------------------------------------------
     
@@ -40,6 +43,7 @@ public final class Updater
     public Updater(final File pastaBase, final int closeOperation) 
         throws IOException
     {
+        this.closeOperation = closeOperation;
         /*
         Quando um objeto desta classe eh criado pelo app Update, o programa deve
         se encerrar com o fechamento desta janela. Mas quando o app FixGui usa
@@ -207,6 +211,13 @@ public final class Updater
         }//if-else
                  
         java.awt.Toolkit.getDefaultToolkit().beep();//Beepa termino
+        
+        /*
+        Se a classe eh uma thread do app FixGui fechar a janela nao encerra o
+        programa.
+        */
+        if (closeOperation == JFrame.DO_NOTHING_ON_CLOSE)
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
    
     }//downloadPngs()
     

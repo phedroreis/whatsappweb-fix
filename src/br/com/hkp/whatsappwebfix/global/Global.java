@@ -2,10 +2,6 @@ package br.com.hkp.whatsappwebfix.global;
 
 import br.com.hkp.whatsappwebfix.gui.ProgressFrame;
 import java.io.File;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -59,21 +55,7 @@ public final class Global
             "https://emojipedia-us[.]s3[.]dualstack[.]us-west-1[.]"
             + "amazonaws[.]com/thumbs/72/whatsapp/.+?[.]png"
         );
-    
-    /**
-     * Estes objetos possuem a funcao de pausar ou ativar a thread principal do
-     * app FixGui.
-     */
-    public static final Lock LOCK = new ReentrantLock();
-    public static final Condition FIX_AWAIT = LOCK.newCondition();
-    
-    /**
-     * Quando true, no app FixGui, os arquivos HTML estao sendo processados. E 
-     * os botoes Sair e Pau Na Maquina ficam com suas funcoes desativadas.
-     */
-    public static final AtomicBoolean BUTTON_HANDLERS_ACTIVE = 
-        new AtomicBoolean(false);
-    
+      
     /**
     * JFrame oculto. Serve para que JFileChooser e JOptionPane herdem o favicon
     * da aplicacao.
